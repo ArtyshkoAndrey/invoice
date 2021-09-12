@@ -1,18 +1,53 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
-    },
-    "devDependencies": {
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.12.1",
+    "@vue/compiler-sfc": "^3.2.11",
+    "axios": "^0.21",
+    "browser-sync": "^2.26.14",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.2",
+    "eslint-plugin-vue": "^7.1.0",
+    "laravel-mix": "^6.0.6",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "^1.39.2",
+    "sass-loader": "^12.1.0",
+    "sweetalert2": "^11.1.5",
+    "vue-loader": "^15.9.8",
+    "vue-meta": "^2.4.0",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-bundle-analyzer": "^3.9.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.1",
+    "boxicons": "^2.0.9",
+    "fs-extra": "^10.0.0",
+    "js-cookie": "^3.0.1",
+    "laravel-mix-versionhash": "^2.0.1",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.2",
+    "vuesax": "^4.0.1-alpha.25",
+    "vuex": "^3.6.2",
+    "vuex-router-sync": "^5.0.0"
+  }
 }
