@@ -19141,7 +19141,7 @@ body {
   top: 60px;
   height: calc(100vh - 60px);
   box-shadow: 0px 45px 25px 0px rgba(0, 0, 0, var(--vs-shadow-opacity));
-  transition: background-color 0.3s !important;
+  transition: background 0.3s, width 0.25s ease !important;
 }
 .vs-sidebar-content * {
   transition: background-color 0.3s !important;
