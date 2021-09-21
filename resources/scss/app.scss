@@ -1,13 +1,16 @@
 
-@import "~bootstrap/scss/bootstrap-reboot";
+//@import "~bootstrap/scss/bootstrap-reboot";
 
 @import "~vuesax/dist/vuesax.css";
+//
+//@import "~bootstrap/scss/bootstrap-grid";
+//
+//@import "~bootstrap/scss/bootstrap-utilities";
+//
+//@import "~bootstrap/scss/helpers";
+@import "bootstrap";
 
-@import "~bootstrap/scss/bootstrap-grid";
 
-@import "~bootstrap/scss/bootstrap-utilities";
-
-@import "~bootstrap/scss/helpers";
 body {
   margin: 0;
   padding: 0;
@@ -17,10 +20,66 @@ body {
   line-height: 1.5;
   background: rgb(var(--vs-background));
   color: rgb(var(--vs-text));
+
+  transition: .3s;
 }
 
 .theme-container {
   margin-left: 50px;
-  margin-top: 30px;
+  margin-top: 80px;
   margin-bottom: 30px;
+}
+
+
+.config {
+  transition: all .25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 12000;
+  border: 0;
+  border-radius: 0 20px 0 0;
+  outline: none;
+}
+
+.vs-sidebar-content {
+  top: 60px;
+  height: calc(100vh - 60px);
+  box-shadow:  0px 45px 25px 0px rgba(0, 0, 0, var(--vs-shadow-opacity));
+  transition: background-color .3s!important;
+
+  * {
+    transition: background-color .3s!important;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+body[vs-theme="dark"] {
+  .dropdown-menu {
+    background: rgb(var(--vs-background));
+    color: rgb(var(--vs-text)) !important;
+
+    .dropdown-item {
+      color: rgb(var(--vs-text)) !important;
+
+      &:hover {
+        background: rgb(14, 14, 14);
+      }
+    }
+  }
 }

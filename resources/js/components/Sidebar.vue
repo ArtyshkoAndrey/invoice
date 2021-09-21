@@ -1,44 +1,75 @@
 <template>
   <vs-sidebar
-      absolute
-      reduce
-      v-model="active"
-      open
-      hover-expand
+    v-model="active"
+    fixsed
+    hover-expand
+    open
+    reduce
+  >
+    <template #logo>
+      <!-- ...img logo -->
+    </template>
+
+    <vs-sidebar-item v-for="item in items.links"
+                     :id="item.name"
+                     :key="item.name"
+                     :to="item.path"
     >
-      <template #logo>
-        <!-- ...img logo -->
+      <template #icon>
+        <box-icon :name="item.icon.name"
+                  :type="item.icon.type"
+                  :color="color"
+        />
       </template>
+      {{ item.title }}
+    </vs-sidebar-item>
 
-      <vs-sidebar-item :id="item.name" v-for="item in menuItems">
-        <template #icon>
-          <box-icon :type="item.icon.type"
-                    :name="item.icon.name"
-                    color="white"
-          ></box-icon>
-        </template>
-        {{ item.title}}
-      </vs-sidebar-item>
-
-      <template #footer>
-        <vs-row justify="space-between">
-          <vs-avatar>
-            <img src="/avatars/avatar-5.png" alt="">
-          </vs-avatar>
-
-        </vs-row>
-      </template>
-</vs-sidebar>
+    <template #footer>
+      <vs-row justify="space-between">
+        <vs-avatar>
+          <img alt="" src="/avatars/avatar-5.png">
+        </vs-avatar>
+      </vs-row>
+    </template>
+  </vs-sidebar>
 </template>
 
 <script>
-import menuItems from '~/plugins/menu-items'
+import items from '~/plugins/menu-items'
+import store from '~/store'
+
 export default {
-  name: "Sidebar",
-  data:() => ({
+  name: 'Sidebar',
+  data: () => ({
     active: 'home',
-    menuItems
-  })
+    color: 'white',
+    items
+  }),
+  mounted () {
+    const unwatch = this.$watch(
+      () => this.$route,
+      (route, prevRoute) => {
+        this.active = route.name
+        unwatch()
+      })
+    console.log(store.state.theme.dark)
+    if (String(store.state.theme.dark) === 'true') {
+      this.color = 'white'
+    } else {
+      this.color = 'black'
+    }
+
+    store.watch(
+      state => state.theme.dark,
+      value => {
+        if (String(value) === 'true') {
+          this.color = 'white'
+        } else {
+          this.color = 'black'
+        }
+      }
+    )
+  }
 }
 </script>
 

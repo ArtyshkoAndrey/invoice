@@ -1,22 +1,23 @@
 
 <template>
   <div class="theme-container">
-    <Sidebar></Sidebar>
+    <Navbar />
+    <Sidebar />
+    <Config />
     <main class="container">
-      <Child></Child>
+      <Child />
     </main>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'default',
+  name: 'Default',
+  components: {
+  },
   data: () => {
     return {
     }
-  },
-  components: {
   }
 }
 </script>

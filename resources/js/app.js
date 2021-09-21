@@ -7,6 +7,7 @@ import '~/plugins'
 import store from '~/store'
 import router from '~/router'
 import '~/components'
+import 'bootstrap'
 
 Vue.use(Vuesax);
 Vue.use(Router);

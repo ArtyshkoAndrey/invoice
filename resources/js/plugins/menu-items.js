@@ -1,18 +1,41 @@
-export default [
-  {
-    title: 'Главная',
-    name: 'home',
-    icon: {
-      type: 'solid',
-      name: 'home'
-    }
-  },
-  {
-    title: 'Создать',
-    name: 'create',
-    icon: {
-      type: 'solid',
-      name: 'plus-square'
-    }
+class Items {
+  constructor () {
+    this.links = []
   }
-]
+
+  add (title, name, path, icon) {
+    const item = new Item(title, name, path, icon)
+    this.links.push(item)
+  }
+}
+
+class Item {
+  constructor (title, name, path, icon) {
+    this.title = title
+    this.name = name
+    this.path = path
+    this.icon = icon
+  }
+}
+
+const items = new Items()
+items.add(
+  'Главная',
+  'home',
+  '/',
+  {
+    type: 'solid',
+    name: 'home'
+  }
+)
+items.add(
+  'Создать',
+  'create',
+  '/create',
+  {
+    type: 'solid',
+    name: 'plus-square'
+  }
+)
+
+export default items

@@ -10,6 +10,7 @@
 
 <script>
 import Loading from './Loading'
+import store from '~/store'
 
 // Load layout components dynamically.
 const requireContext = require.context('~/layouts', false, /.*\.vue$/)
@@ -42,8 +43,22 @@ export default {
   },
   mounted () {
     this.$loading = this.$refs.loading
-    console.log( this.$vs)
-    this.$vs.setTheme('dark')
+    console.warn(store.state.theme.dark)
+    if (String(store.getters['theme/dark']) === 'true') {
+      this.$vs.setTheme('dark')
+    } else {
+      this.$vs.setTheme('light')
+    }
+    store.watch(
+      state => state.theme.dark,
+      value => {
+        if (String(value) === 'true') {
+          this.$vs.setTheme('dark')
+        } else {
+          this.$vs.setTheme('light')
+        }
+      }
+    )
   },
   methods: {
     /**

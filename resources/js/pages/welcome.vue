@@ -16,27 +16,28 @@
     </div>
 
     <div class="row mt-3">
-      <div class="col d-flex align-items-center">
-        <p class="mb-0">Показать по</p>
-        <vs-input shadow class="w-auto ms-3" v-model="value" placeholder="Кол-во" />
+      <div class="col-lg-6 col-xl-4 d-flex align-items-center">
+        <p class="mb-0">
+          Показать по
+        </p>
+        <vs-input v-model="value" dark shadow class="w-auto ms-3" type="number" placeholder="Кол-во" />
       </div>
-      <div class="col">
+      <div class="col-lg-6 col-xl-4 mt-3 mt-lg-0">
         <vs-input shadow
                   v-model="value"
                   icon-after
+                  dark
                   :loading="loading"
                   @change="value !== '' ? loading = true : loading = false"
                   @click-icon="loading = true"
                   placeholder="Поиск">
           <template #icon>
-            <box-icon v-if="!loading" name="search" color="white"></box-icon>
+            <i class="bx bx-search"></i>
           </template>
         </vs-input>
       </div>
-      <div class="col">
-        <div class="center">
-          <vs-pagination v-model="page" :length="20" />
-        </div>
+      <div class="col-lg-12 col-xl-4 mt-3 mt-xl-0">
+        <vs-pagination v-model="page" dark :length="20" :max="5" />
       </div>
     </div>
   </div>
