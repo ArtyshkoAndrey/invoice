@@ -8,6 +8,9 @@ export default [
     name: 'home',
     component: page('welcome.vue')
   },
+
+  { path: '/login', name: 'login', component: page('auth/login.vue') },
+  // { path: '/register', name: 'register', component: page('auth/register.vue') },
   {
     path: '/create',
     name: 'create',

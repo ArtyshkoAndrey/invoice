@@ -33,6 +33,7 @@
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0",
     "sweetalert2": "^11.1.5",
+    "vform": "^2.1.1",
     "vue-loader": "^15.9.8",
     "vue-meta": "^2.4.0",
     "vue-template-compiler": "^2.6.14",
