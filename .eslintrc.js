@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   root: true,
   parser: 'vue-eslint-parser',
@@ -8,7 +9,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/recommended',
-    'standard'
+    'eslint:recommended'
   ],
   rules: {
     'vue/max-attributes-per-line': 'off'
