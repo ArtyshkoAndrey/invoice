@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './components/App'
 import Router from 'vue-router'
 import Vuesax from 'vuesax'
+import i18n from '~/plugins/i18n'
 import 'boxicons'
 import '~/plugins'
 import store from '~/store'
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
+  i18n,
   store,
   router,
   ...App

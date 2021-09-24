@@ -1,3 +1,5 @@
+import i18n from './i18n'
+
 class Items {
   constructor () {
     this.links = []
@@ -20,7 +22,7 @@ class Item {
 
 const items = new Items()
 items.add(
-  'Главная',
+  'menu.index.title',
   'dashboard.index',
   '/index',
   {

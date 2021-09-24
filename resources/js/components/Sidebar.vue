@@ -22,7 +22,7 @@
                   :color="color"
         />
       </template>
-      {{ item.title }}
+      {{ $t(item.title) }}
     </vs-sidebar-item>
 
     <template #footer>
@@ -43,7 +43,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Sidebar',
   data: () => ({
-    active: 'home',
+    active: 'dashboard.home',
     color: 'white',
     items
   }),

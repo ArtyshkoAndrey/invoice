@@ -1,0 +1,37 @@
+{
+  "config": {
+    "theme": {
+      "dark": "Тёмная",
+      "light": "Светлая"
+    }
+  },
+  "menu": {
+    "index": {
+      "title": "Главная"
+    },
+    "project": {
+      "name" : "Название компании"
+    }
+  },
+  "auth": {
+    "login": "Вход",
+    "in_login": "Войти",
+    "logout": "Выйти",
+    "errors": {
+      "password": {
+        "length": {
+          "min": "Менее {length} символов",
+          "max": "Более {length} символов"
+        }
+      },
+      "email": {
+        "valid": "Email введён неправильно"
+      }
+    },
+    "success": {
+      "email": {
+        "valid": "Email введён правильно"
+      }
+    }
+  }
+}

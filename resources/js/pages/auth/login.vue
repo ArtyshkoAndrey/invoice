@@ -5,17 +5,17 @@
         <div class="col-md-auto col-10">
           <vs-input v-model="form.email" class="w-100" placeholder="Email">
             <template v-if="validEmail" #message-success>
-              Email введён правильно
+              {{ $t('auth.success.email.valid') }}
             </template>
             <template v-if="!validEmail && form.email !== ''" #message-danger>
-              Email введён неправильно
+              {{ $t('auth.errors.email.valid') }}
             </template>
           </vs-input>
         </div>
         <div class="col-md-auto col-10 mt-3 mt-md-0">
           <vs-input v-model="form.password" placeholder="Password" type="password">
             <template v-if="validPassword" #message-danger>
-              Менее 6 символов
+              {{ $t('auth.errors.password.length.min', { length: 6 }) }}
             </template>
           </vs-input>
         </div>
@@ -27,7 +27,7 @@
             style="margin: 0; padding: 4px 13px;"
             @click="login"
           >
-            Войти
+            {{ $t('auth.in_login') }}
           </vs-button>
         </div>
       </div>

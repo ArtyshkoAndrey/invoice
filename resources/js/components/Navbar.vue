@@ -14,19 +14,19 @@
 
     <template #right v-if="user">
       <vs-row justify="space-between" class="pointer" align="center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="fw-bolder me-3">Название компании</span>
+        <span class="fw-bolder me-3">{{ $t('menu.project.name')}}</span>
         <vs-avatar>
           <img alt="" :src="user.photo_url">
         </vs-avatar>
       </vs-row>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" @click="logout">Выйти</a></li>
+        <li><a class="dropdown-item" @click="logout">{{ $t('auth.logout') }}</a></li>
       </ul>
     </template>
     <template #right v-else>
       <vs-row justify="" align="center">
         <router-link class="login-link" :to="{ name: 'login' }">
-          Вход
+          {{ $t('auth.login') }}
         </router-link>
       </vs-row>
     </template>
