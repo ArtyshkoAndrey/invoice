@@ -3,18 +3,15 @@ function page (path) {
 }
 
 export default [
+  { path: '/login', name: 'login', component: page('auth/login.vue') },
+
   {
     path: '/',
-    name: 'home',
-    component: page('welcome.vue')
-  },
-
-  { path: '/login', name: 'login', component: page('auth/login.vue') },
-  // { path: '/register', name: 'register', component: page('auth/register.vue') },
-  {
-    path: '/create',
-    name: 'create',
-    component: page('welcome.vue')
+    component: page('dashboard/auth.vue'),
+    children: [
+      { path: '', redirect: { name: 'dashboard.index' } },
+      { path: 'index', name: 'dashboard.index', component: page('dashboard/index.vue') },
+    ]
   },
 
   { path: '*', component: page('errors/404.vue') }

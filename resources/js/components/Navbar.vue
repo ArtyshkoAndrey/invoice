@@ -12,26 +12,52 @@
       </vs-navbar-item>
     </template>
 
-    <template #right>
-      <vs-row justify="space-between" align="center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <template #right v-if="user">
+      <vs-row justify="space-between" class="pointer" align="center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="fw-bolder me-3">Название компании</span>
         <vs-avatar>
-          <img alt="" src="/avatars/avatar-5.png">
+          <img alt="" :src="user.photo_url">
         </vs-avatar>
       </vs-row>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Выйти</a></li>
+        <li><a class="dropdown-item" @click="logout">Выйти</a></li>
       </ul>
+    </template>
+    <template #right v-else>
+      <vs-row justify="" align="center">
+        <router-link class="login-link" :to="{ name: 'login' }">
+          Вход
+        </router-link>
+      </vs-row>
     </template>
   </vs-navbar>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
+  methods: {
+    async logout () {
+      // Log out the user.
+      await this.$store.dispatch('auth/logout')
+      // Redirect to login.
+      this.$router.push({ name: 'login' })
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .login-link {
+    color: rgb(var(--vs-text));
+    text-decoration: none;
+    margin-right: 50px;
+  }
+  .pointer, .dropdown-menu {
+    cursor: pointer;
+  }
 </style>

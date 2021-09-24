@@ -61,9 +61,17 @@ export default {
   methods: {
     async login() {
       // Submit the form.
-      const {data} = await this.form.post('/api/login')
-        .then(r => {
-          console.log(r.data)
+      await this.form.post('/api/login')
+        .then(({ data }) => {
+          // Save the token.
+          this.$store.dispatch('auth/saveToken', {
+            token: data.token,
+            remember: this.remember
+          })
+          // Fetch the user.
+          this.$store.dispatch('auth/fetchUser')
+          // Redirect home.
+          this.redirect()
         })
         .catch(e => {
           this.$vs.notification({
@@ -71,15 +79,6 @@ export default {
             text: 'Сервер не смог обработать ответ и выдал ошибку. Попробуйте войти снова или обратитесь к администратору'
           })
         })
-      // Save the token.
-      this.$store.dispatch('auth/saveToken', {
-        token: data.token,
-        remember: this.remember
-      })
-      // Fetch the user.
-      await this.$store.dispatch('auth/fetchUser')
-      // Redirect home.
-      this.redirect()
     },
     redirect() {
       const intendedUrl = Cookies.get('intended_url')
@@ -87,7 +86,7 @@ export default {
         Cookies.remove('intended_url')
         this.$router.push({path: intendedUrl})
       } else {
-        this.$router.push({name: 'home'})
+        this.$router.push({name: 'dashboard.index'})
       }
     }
   }

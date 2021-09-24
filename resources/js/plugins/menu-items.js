@@ -21,21 +21,21 @@ class Item {
 const items = new Items()
 items.add(
   'Главная',
-  'home',
-  '/',
+  'dashboard.index',
+  '/index',
   {
     type: 'solid',
     name: 'home'
   }
 )
-items.add(
-  'Создать',
-  'create',
-  '/create',
-  {
-    type: 'solid',
-    name: 'plus-square'
-  }
-)
+// items.add(
+//   'Создать',
+//   'create',
+//   '/create',
+//   {
+//     type: 'solid',
+//     name: 'plus-square'
+//   }
+// )
 
 export default items

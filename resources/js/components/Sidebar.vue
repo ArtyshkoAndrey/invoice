@@ -5,6 +5,7 @@
     hover-expand
     open
     reduce
+    v-if="user"
   >
     <template #logo>
       <!-- ...img logo -->
@@ -27,7 +28,7 @@
     <template #footer>
       <vs-row justify="space-between">
         <vs-avatar>
-          <img alt="" src="/avatars/avatar-5.png">
+          <img :alt="user.name" :src="user.photo_url">
         </vs-avatar>
       </vs-row>
     </template>
@@ -37,6 +38,7 @@
 <script>
 import items from '~/plugins/menu-items'
 import store from '~/store'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Sidebar',
@@ -44,6 +46,9 @@ export default {
     active: 'home',
     color: 'white',
     items
+  }),
+  computed: mapGetters({
+    user: 'auth/user'
   }),
   mounted () {
     const unwatch = this.$watch(
