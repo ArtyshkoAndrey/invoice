@@ -23,5 +23,12 @@ class DatabaseSeeder extends Seeder
       $user->password = Hash::make('241298art');
       $user->save();
     }
+
+    $this->call([
+      CompaneSeedTable::class,
+      HotelTableSeed::class,
+      RoomTypeTableSeed::class,
+      AirportTableSeed::class
+    ]);
   }
 }

@@ -12,9 +12,9 @@
       </vs-navbar-item>
     </template>
 
-    <template #right v-if="user">
+    <template v-if="user" #right>
       <vs-row justify="space-between" class="pointer" align="center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="fw-bolder me-3">{{ $t('menu.project.name')}}</span>
+        <span class="fw-bolder me-3">{{ $t('menu.project.name') }}</span>
         <vs-avatar>
           <img alt="" :src="user.photo_url">
         </vs-avatar>
@@ -23,7 +23,7 @@
         <li><a class="dropdown-item" @click="logout">{{ $t('auth.logout') }}</a></li>
       </ul>
     </template>
-    <template #right v-else>
+    <template v-else #right>
       <vs-row justify="" align="center">
         <router-link class="login-link" :to="{ name: 'login' }">
           {{ $t('auth.login') }}

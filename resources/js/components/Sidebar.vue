@@ -1,11 +1,11 @@
 <template>
   <vs-sidebar
+    v-if="user"
     v-model="active"
     fixsed
     hover-expand
     open
     reduce
-    v-if="user"
   >
     <template #logo>
       <!-- ...img logo -->
@@ -53,11 +53,10 @@ export default {
   mounted () {
     const unwatch = this.$watch(
       () => this.$route,
-      (route, prevRoute) => {
+      (route) => {
         this.active = route.name
         unwatch()
       })
-    console.log(store.state.theme.dark)
     if (String(store.state.theme.dark) === 'true') {
       this.color = 'white'
     } else {
