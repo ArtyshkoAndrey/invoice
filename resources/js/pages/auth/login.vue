@@ -54,33 +54,44 @@ export default {
     validEmail() {
       return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.form.email)
     },
-    validPassword() {
+    validPassword () {
       return this.form.password.length < 6 && this.form.password !== ''
     }
   },
   methods: {
-    async login() {
-      // Submit the form.
-      await this.form.post('/api/login')
-        .then(({ data }) => {
-          // Save the token.
-          this.$store.dispatch('auth/saveToken', {
-            token: data.token,
-            remember: this.remember
+    async login () {
+      if (this.validEmail && !this.validPassword) {
+        // Submit the form.
+        await this.form.post('/api/login')
+          .then(({ data }) => {
+            // Save the token.
+            this.$store.dispatch('auth/saveToken', {
+              token: data.token,
+              remember: this.remember
+            })
+            // Fetch the user.
+            this.$store.dispatch('auth/fetchUser')
+            // Redirect home.
+            this.redirect()
           })
-          // Fetch the user.
-          this.$store.dispatch('auth/fetchUser')
-          // Redirect home.
-          this.redirect()
-        })
-        .catch(e => {
-          this.$vs.notification({
-            title: 'Ошибка авторизации',
-            text: 'Сервер не смог обработать ответ и выдал ошибку. Попробуйте войти снова или обратитесь к администратору'
+          .catch(e => {
+            if (e.response.data) {
+              Object.keys(e.response.data.errors).forEach((key) => {
+                this.$vs.notification({
+                  title: key.capitalize(),
+                  text: e.response.data.errors[key]
+                })
+              })
+            } else {
+              this.$vs.notification({
+                title: 'Ошибка авторизации',
+                text: 'Сервер не смог обработать ответ и выдал ошибку. Попробуйте войти снова или обратитесь к администратору'
+              })
+            }
           })
-        })
+      }
     },
-    redirect() {
+    redirect () {
       const intendedUrl = Cookies.get('intended_url')
       if (intendedUrl) {
         Cookies.remove('intended_url')
