@@ -11,7 +11,6 @@
 <script>
 import Loading from './Loading'
 import store from '~/store'
-
 // Load layout components dynamically.
 const requireContext = require.context('~/layouts', false, /.*\.vue$/)
 const layouts = requireContext.keys()

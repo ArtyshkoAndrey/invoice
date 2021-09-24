@@ -86,4 +86,13 @@ body[vs-theme="dark"] {
 
 .login-form {
   height: calc(100vh - 120px);
+  .vs-input {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .h-md-100 {
+    height: 100%;
+  }
 }

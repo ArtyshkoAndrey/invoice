@@ -1,6 +1,6 @@
 
 <template>
-  <div class="theme-container">
+  <div class="theme-container" :style="!user ? 'margin-left: 0' : ''">
     <Navbar />
     <Sidebar />
     <Config />
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Default',
   components: {
@@ -18,7 +19,10 @@ export default {
   data: () => {
     return {
     }
-  }
+  },
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
 }
 </script>
 

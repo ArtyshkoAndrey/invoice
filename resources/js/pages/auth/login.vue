@@ -2,8 +2,8 @@
   <div class="row flex-row login-form align-items-center">
     <div class="col-12">
       <div class="row justify-content-center">
-        <div class="col-auto">
-          <vs-input v-model="form.email" placeholder="Email">
+        <div class="col-md-auto col-10">
+          <vs-input v-model="form.email" class="w-100" placeholder="Email">
             <template v-if="validEmail" #message-success>
               Email введён правильно
             </template>
@@ -12,17 +12,19 @@
             </template>
           </vs-input>
         </div>
-        <div class="col-auto">
+        <div class="col-md-auto col-10 mt-3 mt-md-0">
           <vs-input v-model="form.password" placeholder="Password" type="password">
             <template v-if="validPassword" #message-danger>
               Менее 6 символов
             </template>
           </vs-input>
         </div>
-        <div class="col-auto">
+        <div class="col-md-auto col-10">
           <vs-button
             :loading="form.busy"
             success
+            class="d-block w-100 mt-3 mt-md-auto"
+            style="margin: 0; padding: 4px 13px;"
             @click="login"
           >
             Войти
@@ -40,8 +42,8 @@ import Cookies from 'js-cookie'
 export default {
   name: 'Login',
   middleware: 'guest',
-  metaInfo() {
-    return {title: 'Вход в аккаунт'}
+  metaInfo () {
+    return { title: 'Вход в аккаунт' }
   },
   data: () => ({
     form: new Form({
@@ -51,7 +53,7 @@ export default {
     remember: false
   }),
   computed: {
-    validEmail() {
+    validEmail () {
       return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.form.email)
     },
     validPassword () {
@@ -95,9 +97,9 @@ export default {
       const intendedUrl = Cookies.get('intended_url')
       if (intendedUrl) {
         Cookies.remove('intended_url')
-        this.$router.push({path: intendedUrl})
+        this.$router.push({ path: intendedUrl })
       } else {
-        this.$router.push({name: 'dashboard.index'})
+        this.$router.push({ name: 'dashboard.index' })
       }
     }
   }
