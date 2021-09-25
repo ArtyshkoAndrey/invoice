@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
 export const state = {
-  dark: Cookies.get('dark') ?? true
+  dark: !(Cookies.get("dark") === 'false')
 }
 
 // getters

@@ -26,7 +26,7 @@ import { loadMessages } from '~/plugins/i18n'
 export default {
   name: 'Config',
   data: () => ({
-    active: String(store.getters['theme/dark']) === 'true',
+    active: store.getters['theme/dark'],
   }),
   computed: {
     ...mapGetters({

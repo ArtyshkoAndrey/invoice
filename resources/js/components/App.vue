@@ -11,6 +11,7 @@
 <script>
 import Loading from './Loading'
 import store from '~/store'
+import {mapGetters} from "vuex";
 // Load layout components dynamically.
 const requireContext = require.context('~/layouts', false, /.*\.vue$/)
 const layouts = requireContext.keys()
@@ -32,6 +33,11 @@ export default {
     layout: null,
     defaultLayout: 'default'
   }),
+  computed: {
+    ...mapGetters({
+      theme: 'theme/dark'
+    })
+  },
 
   metaInfo () {
     const { appName } = window.config
@@ -43,21 +49,20 @@ export default {
   mounted () {
     this.$loading = this.$refs.loading
     console.warn(store.state.theme.dark)
-    if (String(store.getters['theme/dark']) === 'true') {
+    if (this.theme) {
       this.$vs.setTheme('dark')
     } else {
       this.$vs.setTheme('light')
     }
-    store.watch(
-      state => state.theme.dark,
-      value => {
-        if (String(value) === 'true') {
-          this.$vs.setTheme('dark')
-        } else {
-          this.$vs.setTheme('light')
-        }
+  },
+  watch: {
+    theme: function (newVal) {
+      if (newVal) {
+        this.$vs.setTheme('dark')
+      } else {
+        this.$vs.setTheme('light')
       }
-    )
+    }
   },
   methods: {
     /**

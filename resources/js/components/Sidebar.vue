@@ -37,7 +37,6 @@
 
 <script>
 import items from '~/plugins/menu-items'
-import store from '~/store'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -47,32 +46,36 @@ export default {
     color: 'white',
     items
   }),
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
+  computed: {
+    ...mapGetters({
+      user: 'auth/user',
+      theme: 'theme/dark'
+    })
+  },
+  watch: {
+    theme: function (newVal) {
+      if (newVal) {
+        this.color = 'white'
+      } else {
+        this.color = 'black'
+      }
+    }
+  },
   mounted () {
+    console.log(this.theme)
     const unwatch = this.$watch(
       () => this.$route,
       (route) => {
         this.active = route.name
         unwatch()
       })
-    if (String(store.state.theme.dark) === 'true') {
+
+    if (this.theme) {
       this.color = 'white'
     } else {
       this.color = 'black'
     }
 
-    store.watch(
-      state => state.theme.dark,
-      value => {
-        if (String(value) === 'true') {
-          this.color = 'white'
-        } else {
-          this.color = 'black'
-        }
-      }
-    )
   }
 }
 </script>
