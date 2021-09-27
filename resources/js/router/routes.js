@@ -11,6 +11,15 @@ export default [
     children: [
       { path: '', redirect: { name: 'dashboard.index' } },
       { path: 'index', name: 'dashboard.index', component: page('dashboard/index.vue') },
+      {
+        path: '/resort',
+        component: { render: (c) => c('router-view') },
+        children: [
+          {
+            path: '', name: 'dashboard.resort.index', component: page('dashboard/resort/index.vue')
+          }
+        ]
+      }
     ]
   },
 

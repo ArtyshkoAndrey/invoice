@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
       CompaneSeedTable::class,
       HotelTableSeed::class,
       RoomTypeTableSeed::class,
-      AirportTableSeed::class
+      AirportTableSeed::class,
+      ResortTableSeed::class
     ]);
   }
 }
