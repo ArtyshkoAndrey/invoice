@@ -95,7 +95,7 @@ async function beforeEach (to, from, next) {
 async function afterEach (to, from, next) {
   await router.app.$nextTick()
 
-  router.app.$loading.finish()
+  // router.app.$loading.finish()
 }
 
 /**

@@ -52,6 +52,9 @@ export default {
     }),
     remember: false
   }),
+  mounted() {
+    this.$root.$loading.finish()
+  },
   computed: {
     validEmail () {
       return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.form.email)

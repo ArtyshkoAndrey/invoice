@@ -12,11 +12,12 @@ export default [
       { path: '', redirect: { name: 'dashboard.index' } },
       { path: 'index', name: 'dashboard.index', component: page('dashboard/index.vue') },
       {
-        path: '/resort',
+        path: 'resorts',
         component: { render: (c) => c('router-view') },
         children: [
+          { path: '', redirect: { name: 'dashboard.resorts.index' } },
           {
-            path: '', name: 'dashboard.resort.index', component: page('dashboard/resort/index.vue')
+            path: 'index', name: 'dashboard.resorts.index', component: page('dashboard/resorts/index.vue')
           }
         ]
       }
