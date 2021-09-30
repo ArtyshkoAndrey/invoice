@@ -29,8 +29,17 @@
     "search_placeholder": "Search"
   },
 
+  "comment_invoice": "Invoice pages",
   "invoice": {
     "history": "History"
+  },
+
+  "comment_resorts": "Resorts pages",
+  "resorts": {
+    "index": {
+      "title": "Resorts list",
+      "filter_title": "Resorts"
+    }
   },
 
   "comment_auth": "Buttons and label in auth routes",
@@ -52,6 +61,16 @@
     "success": {
       "email": {
         "valid": "Email is valid"
+      }
+    }
+  },
+
+  "comment_notification": "Translate Notify Text",
+  "notification": {
+    "delete": {
+      "success": {
+        "title": "{name} successfully deleted",
+        "text": "You have successfully deleted '{name}' from the database, no return possible"
       }
     }
   }

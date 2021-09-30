@@ -26,6 +26,7 @@
                 circle
                 danger
                 flat
+                @click="$emit('destroy', id)"
               >
                 <em class="bx bx-trash-alt" />
               </vs-button>
@@ -43,6 +44,10 @@ export default {
   props: {
     name: {
       type: String,
+      required: true
+    },
+    id: {
+      type: Number,
       required: true
     }
   }

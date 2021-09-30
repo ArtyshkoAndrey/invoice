@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ResortController extends Controller
 {
@@ -74,10 +75,17 @@ class ResortController extends Controller
    *
    * @param int $id
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function destroy (int $id)
+  public function destroy (int $id): \Illuminate\Http\JsonResponse
   {
-    //
+    try {
+      $resort = Resort::findOrFail($id);
+      $resort->delete();
+
+      return JsonResponse::success(['resort' => $resort]);
+    } catch (ModelNotFoundException $e) {
+      return JsonResponse::error(['error' => $e->getMessage()]);
+    }
   }
 }

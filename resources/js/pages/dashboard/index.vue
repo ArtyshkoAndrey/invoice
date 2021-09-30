@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderFilterInfo :values="['123', '12333']" />
+<!--    <HeaderFilterInfo :values="['123', '12333']" />-->
   </div>
 </template>
 

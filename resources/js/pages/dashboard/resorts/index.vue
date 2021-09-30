@@ -5,7 +5,7 @@
     <HeaderFilterInfo ref="filter"
                       :values="resorts"
                       :view-length="viewLength"
-                      :title="$t('invoice.history')"
+                      :title="$t('resorts.index.filter_title')"
                       :filter="filter"
                       @get="get"
                       @setViewLength="setViewLength"
@@ -13,7 +13,7 @@
 
     <div class="row gy-3 mt-3">
       <div v-for="item in resorts.data" :key="item.id" class="col-12">
-        <ItemCardOneField :name="item.name" />
+        <ItemCardOneField :id="item.id" :name="item.name" @destroy="deleteItem" />
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@ import Loader from '~/components/loader.vue'
 import HeaderFilterInfo from '~/components/HeaderFilterInfo.vue'
 import ItemCardOneField from '~/components/ItemCardOneField.vue'
 import Vue from "vue";
+import i18n from "~/plugins/i18n";
 export default {
   name: 'Index',
   components: {
@@ -33,13 +34,13 @@ export default {
     ItemCardOneField
   },
   data: () => ({
-    title: 'Список курортов',
+    title: i18n.t('resorts.index.title'),
     viewLength: 10,
     resorts: {},
     filter: new Vue()
   }),
   metaInfo: {
-    title: 'Список курортов'
+    title: i18n.t('resorts.index.title'),
   },
   async mounted () {
     await this.$root.$loading.set(50)
@@ -89,6 +90,32 @@ export default {
      */
     setViewLength (newLength) {
       this.viewLength = newLength
+    },
+
+    /**
+     * Delete select resort
+     *
+     * @param {number} id
+     */
+    deleteItem (id) {
+      axios.delete('/api/resorts/' + id)
+      .then(r => {
+        this.$vs.notification({
+          duration: 2000,
+          sticky: true,
+          position: 'top-right',
+          color: 'success',
+          title: this.$t('notification.delete.success.title', {name: r.data.payload.resort.name}),
+          text: this.$t('notification.delete.success.text', {name: r.data.payload.resort.name})
+        })
+        this.get({
+          page: this.$refs.filter.page,
+          search: this.$refs.filter.value
+        })
+      })
+      .catch(e => {
+        console.log(e)
+      })
     }
   }
 }

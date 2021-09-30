@@ -29,8 +29,17 @@
     "search_placeholder": "Поиск"
   },
 
+  "comment_invoice": "Invoice pages",
   "invoice": {
     "history": "История"
+  },
+
+  "comment_resorts": "Resorts pages",
+  "resorts": {
+    "index": {
+      "title": "Список курортов",
+      "filter_title": "Курорты"
+    }
   },
 
   "comment_auth": "Buttons and label in auth routes",
@@ -52,6 +61,16 @@
     "success": {
       "email": {
         "valid": "Email введён правильно"
+      }
+    }
+  },
+
+  "comment_notification": "Translate Notify Text",
+  "notification": {
+    "delete": {
+      "success": {
+        "title": "{name} успешно удалён",
+        "text": "Вы успешно удалили '{name}' из базы данных, возврат действий невозможен"
       }
     }
   }

@@ -147,6 +147,9 @@ export default {
      */
     getSuccess (data) {
       this.maxPage = data.last_page
+      if (this.maxPage < this.page) {
+        this.page = this.maxPage
+      }
       this.loadingSearch = false
       this.loadingValue = false
     }
