@@ -10,6 +10,9 @@
 //@import "~bootstrap/scss/helpers";
 @import "bootstrap";
 
+html {
+  min-height: -webkit-fill-available;
+}
 
 body {
   margin: 0;
@@ -20,6 +23,9 @@ body {
   line-height: 1.5;
   background: rgb(var(--vs-background));
   color: rgb(var(--vs-text));
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
 
   transition: .3s;
 }

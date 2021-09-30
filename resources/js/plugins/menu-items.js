@@ -1,5 +1,3 @@
-import i18n from './i18n'
-
 class Items {
   constructor () {
     this.links = []
