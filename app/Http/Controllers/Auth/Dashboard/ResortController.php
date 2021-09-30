@@ -20,8 +20,14 @@ class ResortController extends Controller
    */
   public function index (Request $request): \Illuminate\Http\JsonResponse
   {
-    $paginate = $request->get('per_page', 5);
-    $resorts = Resort::orderBy('id')->paginate($paginate);
+    $query = Resort::query();
+
+    if (($search = $request->get('search', '')) !== '') {
+      $query = $query->where('name', 'like', "%{$search}%");
+    }
+
+    $paginate = $request->get('per_page', 10);
+    $resorts = $query->paginate($paginate);
 
     return JsonResponse::success(['resorts' => $resorts]);
   }

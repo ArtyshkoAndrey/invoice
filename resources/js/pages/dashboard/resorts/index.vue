@@ -6,6 +6,7 @@
                       :values="resorts"
                       :view-length="viewLength"
                       :title="$t('invoice.history')"
+                      :filter="filter"
                       @get="get"
                       @setViewLength="setViewLength"
     />
@@ -23,6 +24,7 @@ import axios from 'axios'
 import Loader from '~/components/loader.vue'
 import HeaderFilterInfo from '~/components/HeaderFilterInfo.vue'
 import ItemCardOneField from '~/components/ItemCardOneField.vue'
+import Vue from "vue";
 export default {
   name: 'Index',
   components: {
@@ -33,7 +35,8 @@ export default {
   data: () => ({
     title: 'Список курортов',
     viewLength: 10,
-    resorts: {}
+    resorts: {},
+    filter: new Vue()
   }),
   metaInfo: {
     title: 'Список курортов'
@@ -59,22 +62,22 @@ export default {
     /**
      * update new Date
      *
-     * @param {number} current_page
+     * @param {object} settings
+     * @param {number} settings.page
+     * @param {string} settings.search
      */
-    get (current_page) {
-      // this.$root.$loading.start().set(50)
+    get (settings) {
       axios.get('/api/resorts', {
         params: {
           per_page: this.viewLength,
-          page: current_page
+          page: settings.page,
+          search: settings.search
         }
       })
       .then(r => {
         this.resorts = r.data.payload.resorts
-        console.log(this.$refs.filter)
-        this.$refs.filter.maxPage = r.data.payload.resorts.last_page
+        this.filter.$emit('updateData', r.data.payload.resorts)
         console.log('new data', r.data)
-        // this.$root.$loading.set(80).finish()
       })
 
     },

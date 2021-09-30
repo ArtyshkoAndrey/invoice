@@ -30,25 +30,23 @@
                   :value="viewLength"
                   class="w-auto ms-3"
                   dark
+                  :loading="loadingValue"
                   :placeholder="$t('header_filter.length_placeholder')"
                   shadow
                   type="number"
         />
       </div>
       <div class="col-lg-6 col-xl-4 mt-3 mt-lg-0">
-        <vs-input v-model="value"
-                  :loading="loading"
+        <vs-input id="search"
+                  v-model="value"
+                  class="w-100"
+                  :loading="loadingSearch"
                   dark
                   icon-after
                   :placeholder="$t('header_filter.search_placeholder')"
                   shadow
-                  @change="value !== '' ? loading = true : loading = false"
-                  @click-icon="loading = true"
-        >
-          <template #icon>
-            <i v-if="!loading" class="bx bx-search" aria-hidden="true" />
-          </template>
-        </vs-input>
+                  type="search"
+        />
       </div>
       <div class="col-lg-12 col-xl-4 mt-3 mt-xl-0 justify-content-center d-block justify-content-xl-end d-xl-flex">
         <transition name="slide-fade" mode="out-in">
@@ -60,6 +58,8 @@
 </template>
 
 <script>
+
+import Vue from "vue";
 
 export default {
   name: 'HeaderFilterInfo',
@@ -75,34 +75,81 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    filter: {
+      type: Vue,
+      required: true
     }
   },
   data: () => ({
-    loading: false,
+    loadingSearch: false,
+    loadingValue: false,
     value: '',
     page: null,
     maxPage: null,
-    length: null
+    length: null,
+    searchable: false,
+    handleValueSearch: null,
+    handleLengthSearch: null
   }),
   watch: {
     'page': function (newPage) {
-      this.$emit('get', newPage)
+      this.$emit('get', {
+        page: newPage,
+        search: this.value
+      })
     },
-    'length': function (newLength) {
-     if (newLength !== '') {
-       this.$emit('setViewLength', newLength)
-       if (this.page !== 1) {
-         this.page = 1
-       } else {
-         this.$emit('get', this.page)
-       }
-     }
+    'length': function () {
+      this.loadingValue = true
+      clearTimeout(this.handleLengthSearch)
+      this.handleLengthSearch = setTimeout(this.setNewLength, 500)
+    },
+    'value': function () {
+      this.loadingSearch = true
+      clearTimeout(this.handleValueSearch)
+      this.handleValueSearch = setTimeout(this.search, 500)
     }
   },
   created () {
     this.page = this.values.current_page
     this.maxPage = this.values.last_page
     this.length = this.viewLength
+
+    this.filter.$on('updateData', this.getSuccess)
+  },
+  methods: {
+    search () {
+      if (this.page > 1) {
+        this.page = 1
+      } else {
+        this.$emit('get', {
+          page: this.page,
+          search: this.value
+        })
+      }
+    },
+    setNewLength () {
+      if (this.length !== '') {
+        this.$emit('setViewLength', this.length)
+        if (this.page !== 1) {
+          this.page = 1
+        } else {
+          this.$emit('get', {
+            page: this.page,
+            search: this.value
+          })
+        }
+      }
+    },
+    /**
+     * @param {object} data
+     * @param {number} data.last_page
+     */
+    getSuccess (data) {
+      this.maxPage = data.last_page
+      this.loadingSearch = false
+      this.loadingValue = false
+    }
   }
 }
 </script>

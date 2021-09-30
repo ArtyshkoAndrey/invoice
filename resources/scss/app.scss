@@ -75,6 +75,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+input[type=search]::-webkit-search-cancel-button{
+  display: none;
+}
+
 body[vs-theme="dark"] {
   .dropdown-menu {
     background: rgb(var(--vs-background));
@@ -95,6 +99,10 @@ body[vs-theme="dark"] {
   .vs-input {
     width: 100%;
   }
+}
+
+.vs-input {
+  width: 100%;
 }
 
 .card {
