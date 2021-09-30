@@ -42,7 +42,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Sidebar',
   data: () => ({
-    active: 'dashboard.home',
+    active: 'dashboard.index',
     color: 'white',
     items
   }),

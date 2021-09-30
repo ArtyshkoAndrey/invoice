@@ -1,9 +1,20 @@
 <template>
-
-  <Loader v-if="$root.$loading.show"/>
+  <Loader v-if="$root.$loading.show" />
 
   <div v-else>
-    <HeaderFilterInfo ref="filter" :values="resorts"/>
+    <HeaderFilterInfo ref="filter"
+                      :values="resorts"
+                      :view-length="viewLength"
+                      :title="$t('invoice.history')"
+                      @get="get"
+                      @setViewLength="setViewLength"
+    />
+
+    <div class="row gy-3 mt-3">
+      <div v-for="item in resorts.data" :key="item.id" class="col-12">
+        <ItemCardOneField :name="item.name" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,8 +22,14 @@
 import axios from 'axios'
 import Loader from '~/components/loader.vue'
 import HeaderFilterInfo from '~/components/HeaderFilterInfo.vue'
+import ItemCardOneField from '~/components/ItemCardOneField.vue'
 export default {
   name: 'Index',
+  components: {
+    Loader,
+    HeaderFilterInfo,
+    ItemCardOneField
+  },
   data: () => ({
     title: 'Список курортов',
     viewLength: 10,
@@ -20,10 +37,6 @@ export default {
   }),
   metaInfo: {
     title: 'Список курортов'
-  },
-  components: {
-    Loader,
-    HeaderFilterInfo
   },
   async mounted () {
     await this.$root.$loading.set(50)
@@ -43,24 +56,71 @@ export default {
     })
   },
   methods: {
-    get () {
-      this.$root.$loading.start().set(50)
+    /**
+     * update new Date
+     *
+     * @param {number} current_page
+     */
+    get (current_page) {
+      // this.$root.$loading.start().set(50)
       axios.get('/api/resorts', {
         params: {
           per_page: this.viewLength,
-          page: this.current_page
+          page: current_page
         }
       })
       .then(r => {
         this.resorts = r.data.payload.resorts
-        this.$root.$loading.set(80).finish()
+        console.log(this.$refs.filter)
+        this.$refs.filter.maxPage = r.data.payload.resorts.last_page
+        console.log('new data', r.data)
+        // this.$root.$loading.set(80).finish()
       })
 
+    },
+
+    /**
+     * new view items count
+     *
+     * @param {number} newLength
+     */
+    setViewLength (newLength) {
+      this.viewLength = newLength
     }
   }
 }
 </script>
 
 <style scoped>
+.fruit-list-item {
+  transition: all 1s;
+}
+.fruit-list-enter,
+.fruit-list-leave-to {
+  max-height: 0px;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  overflow: hidden;
+}
+.fruit-list-enter-to,
+.fruit-list-leave {
+  max-height: 80px;
+}
 
+.fruit-table-item {
+  transition: all 1s;
+}
+.fruit-table-item > * {
+  transition: all 1s;
+  overflow: hidden;
+}
+.fruit-table-enter,
+.fruit-table-leave-to {
+  line-height: 0;
+}
+.fruit-table-enter > *,
+.fruit-table-leave-to > * {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
 </style>

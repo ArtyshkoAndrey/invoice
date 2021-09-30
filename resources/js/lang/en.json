@@ -1,4 +1,5 @@
 {
+  "comment_config": "Config - language and theme switcher",
   "config": {
     "theme": {
       "dark": "Dark",
@@ -6,14 +7,33 @@
     },
     "loading": "Loading..."
   },
+
+  "comment_menu": "Items in menu",
   "menu": {
     "index": {
       "title": "Home"
+    },
+    "resorts": {
+      "title": "Resorts"
     },
     "project": {
       "name" : "Company name"
     }
   },
+
+  "comment_header_filter": "Header Filter components",
+  "header_filter": {
+    "length_label": "Show by",
+    "length_placeholder": "Amount",
+    "create_button": "Create",
+    "search_placeholder": "Search"
+  },
+
+  "invoice": {
+    "history": "History"
+  },
+
+  "comment_auth": "Buttons and label in auth routes",
   "auth": {
     "login": "Login",
     "in_login": "Login",

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[519],{6519:(e,t,n)=>{n.r(t),n.d(t,{default:()=>u});const s={name:"Auth",middleware:"auth"};const u=(0,n(1900).Z)(s,(function(){var e=this.$createElement,t=this._self._c||e;return t("transition",{attrs:{name:"fade",mode:"out-in"}},[t("router-view")],1)}),[],!1,null,"73245290",null).exports}}]);

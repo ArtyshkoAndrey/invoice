@@ -30,6 +30,16 @@ items.add(
     name: 'home'
   }
 )
+
+items.add(
+  'menu.resorts.title',
+  'dashboard.resorts.index',
+  '/resorts/index',
+  {
+    type: 'regular',
+    name: 'home-circle'
+  }
+)
 // items.add(
 //   'Создать',
 //   'create',
