@@ -24,12 +24,14 @@
     </div>
     <div class="row mt-3 mx-0">
       <div class="col-lg-6 col-xl-4 d-flex align-items-center">
-        <p class="mb-0">
+        <p class="mb-0 w-25">
           {{ $t('header_filter.length_label') }}
         </p>
         <vs-input v-model.number="length"
+                  min="1"
+                  max="20"
                   :value="viewLength"
-                  class="w-auto ms-3"
+                  class="w-75 ms-3"
                   dark
                   :loading="loadingValue"
                   :placeholder="$t('header_filter.length_placeholder')"

@@ -47,6 +47,16 @@ items.add(
     name: 'plane-alt'
   }
 )
+
+items.add(
+  'menu.room_types.title',
+  'dashboard.room_types.index',
+  '/room_types/index',
+  {
+    type: 'regular',
+    name: 'hotel'
+  }
+)
 // items.add(
 //   'Создать',
 //   'create',

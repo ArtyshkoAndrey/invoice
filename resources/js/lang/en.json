@@ -19,6 +19,9 @@
     "airports": {
       "title": "Airports"
     },
+    "room_types": {
+      "title": "Room Types"
+    },
     "project": {
       "name" : "Company name"
     }
@@ -61,7 +64,21 @@
       "title": "Airport editing"
     },
     "create-modal": {
-        "title": "Adding an airport"
+      "title": "Adding an airport"
+    }
+  },
+
+  "comment_room_types": "Airports pages",
+  "room_types": {
+    "index": {
+      "title": "List of Type",
+      "filter_title": "Room type"
+    },
+    "edit-modal": {
+      "title": "Room type editing"
+    },
+    "create-modal": {
+      "title": "Adding an Room type"
     }
   },
 

@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <router-view class="mb-5 pb-3" />
+    <router-view class="mb-5 pb-5" />
   </transition>
 </template>
 

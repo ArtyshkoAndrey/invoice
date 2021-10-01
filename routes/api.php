@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\Dashboard\ResortController;
 use App\Http\Controllers\Auth\Dashboard\AirportController;
+use App\Http\Controllers\Auth\Dashboard\RoomTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::apiResources([
     'resorts' => ResortController::class,
     'airports' => AirportController::class,
+    'room_types' => RoomTypeController::class
   ]);
 });
 Route::group(['middleware' => 'guest:api'], function () {

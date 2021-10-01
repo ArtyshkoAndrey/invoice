@@ -19,6 +19,9 @@
     "airports": {
       "title": "Аэропорты"
     },
+    "room_types": {
+      "title": "Типы комнат"
+    },
     "project": {
       "name" : "Название компании"
     }
@@ -62,6 +65,20 @@
     },
     "create-modal": {
       "title": "Добавление аэропорта"
+    }
+  },
+
+  "comment_room_types": "Airports pages",
+  "room_types": {
+    "index": {
+      "title": "Список типов комнат",
+      "filter_title": "Типы комнат"
+    },
+    "edit-modal": {
+      "title": "Тип комнаты "
+    },
+    "create-modal": {
+      "title": "Добавление нового типа комнаты"
     }
   },
 

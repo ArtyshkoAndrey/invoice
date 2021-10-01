@@ -67,7 +67,7 @@ export default {
       () => this.$route,
       (route) => {
         this.active = route.name
-        unwatch()
+        // unwatch()
       })
 
     if (this.theme) {

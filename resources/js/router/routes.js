@@ -30,6 +30,16 @@ export default [
             path: 'index', name: 'dashboard.airports.index', component: page('dashboard/airports/index.vue')
           }
         ]
+      },
+      {
+        path: 'room_types',
+        component: { render: (c) => c('router-view') },
+        children: [
+          { path: '', redirect: { name: 'dashboard.room_types.index' } },
+          {
+            path: 'index', name: 'dashboard.room_types.index', component: page('dashboard/room_types/index.vue')
+          }
+        ]
       }
     ]
   },
