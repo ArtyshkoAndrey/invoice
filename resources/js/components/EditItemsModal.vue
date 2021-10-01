@@ -2,7 +2,7 @@
   <vs-dialog v-model="active" :loading="loading" not-center width="300px">
     <template #header>
       <h4 class="not-margin">
-        {{ title }} <strong v-if="nameTitle">{{ nameTitle }}</strong>
+        {{ translateTitle }} <strong v-if="nameTitle">{{ nameTitle }}</strong>
       </h4>
     </template>
 
@@ -45,7 +45,7 @@ export default {
     title: {
       type: String,
       required: false,
-      default: i18n.t('resorts.edit-modal.title')
+      default: ''
     }
   },
   data: () => ({
@@ -59,6 +59,15 @@ export default {
   mounted() {
     // Listen parent to open Modal
     this.bus.$on('openModal', this.openModal)
+  },
+  computed: {
+    translateTitle () {
+      if (this.title === '') {
+        return this.$t('form.title.edit')
+      }
+
+      return this.$t(this.title)
+    }
   },
   methods: {
     /**

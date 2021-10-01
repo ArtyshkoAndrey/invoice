@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <EditItemsModal :bus="bus" />
+    <EditItemsModal :bus="bus" :title="updateModalTitle" />
 
   </div>
 
@@ -62,6 +62,11 @@ export default {
     id: {
       type: Number,
       required: true
+    },
+    updateModalTitle: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data: () => ({

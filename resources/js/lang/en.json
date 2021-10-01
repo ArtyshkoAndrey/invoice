@@ -105,6 +105,9 @@
       "name": {
         "placeholder": "Name"
       }
+    },
+    "title": {
+      "edit": "Обновить "
     }
   }
 }

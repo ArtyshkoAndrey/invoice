@@ -105,6 +105,9 @@
       "name": {
         "placeholder": "Наименование"
       }
+    },
+    "title": {
+      "edit": "Update item"
     }
   }
 }

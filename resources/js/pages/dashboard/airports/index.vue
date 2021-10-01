@@ -14,12 +14,12 @@
 
     <div class="row gy-3 mt-3">
       <div v-for="item in airports.data" :key="item.id" class="col-12">
-        <ItemCardOneField :id="item.id" :name="item.name" @update="update" @destroy="deleteItem" />
+        <ItemCardOneField :id="item.id" :name="item.name" :updateModalTitle="'airports.edit-modal.title'" @update="update" @destroy="deleteItem" />
       </div>
     </div>
 
     <EditItemsModal :bus="busCreateAirport"
-                    :title="$t('airports.create-modal.title')"
+                    :title="'airports.create-modal.title'"
     />
 
   </div>
