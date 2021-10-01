@@ -39,6 +39,9 @@
     "index": {
       "title": "Resorts list",
       "filter_title": "Resorts"
+    },
+    "edit-modal": {
+      "title": "Editing a Resort"
     }
   },
 
@@ -71,6 +74,16 @@
       "success": {
         "title": "{name} successfully deleted",
         "text": "You have successfully deleted '{name}' from the database, no return possible"
+      }
+    }
+  },
+
+  "form": {
+    "save": "Save",
+    "cancel" : "Cancel",
+    "inputs": {
+      "name": {
+        "placeholder": "Name"
       }
     }
   }

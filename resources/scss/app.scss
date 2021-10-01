@@ -10,6 +10,28 @@
 //@import "~bootstrap/scss/helpers";
 @import "bootstrap";
 
+:root {
+  --vs-scrollbar: #ffffff;
+  --vs-scroll: #2c3034;
+}
+
+// Scroll
+html::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  display: block;
+  background: var(--vs-scrollbar);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--vs-scroll);
+  border-radius: 5px;
+}
+
+html::selection {
+  background: rgba(37,100,255,.15);
+}
+
 html {
   min-height: -webkit-fill-available;
 }

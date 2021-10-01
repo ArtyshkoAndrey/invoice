@@ -63,11 +63,24 @@ class ResortController extends Controller
    * @param Request $request
    * @param int     $id
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function update (Request $request, int $id)
+  public function update (Request $request, int $id): \Illuminate\Http\JsonResponse
   {
-    //
+    try {
+      $resort = Resort::findOrFail($id);
+
+      $request->validate([
+        'name' => 'required|string|unique:resorts,name,' . $id
+      ]);
+
+      $resort->update($request->all());
+      $resort->save();
+
+      return JsonResponse::success(['resort' => $resort]);
+    } catch (ModelNotFoundException $exception) {
+      return JsonResponse::error(['model' => $exception->getMessage()]);
+    }
   }
 
   /**

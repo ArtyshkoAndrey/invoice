@@ -13,7 +13,7 @@
 
     <div class="row gy-3 mt-3">
       <div v-for="item in resorts.data" :key="item.id" class="col-12">
-        <ItemCardOneField :id="item.id" :name="item.name" @destroy="deleteItem" />
+        <ItemCardOneField :id="item.id" :name="item.name" @update="update" @destroy="deleteItem" />
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
   components: {
     Loader,
     HeaderFilterInfo,
-    ItemCardOneField
+    ItemCardOneField,
   },
   data: () => ({
     title: i18n.t('resorts.index.title'),
@@ -75,6 +75,12 @@ export default {
           search: settings.search
         }
       })
+        /**
+         * @var {object} r
+         * @var {object} r.data
+         * @var {object} r.data.payload
+         * @var {array} r.data.payload.resorts
+         */
       .then(r => {
         this.resorts = r.data.payload.resorts
         this.filter.$emit('updateData', r.data.payload.resorts)
@@ -99,6 +105,12 @@ export default {
      */
     deleteItem (id) {
       axios.delete('/api/resorts/' + id)
+        /**
+         * @var {object} r
+         * @var {object} r.data
+         * @var {object} r.data.payload
+         * @var {object} r.data.payload.resort
+         */
       .then(r => {
         this.$vs.notification({
           duration: 2000,
@@ -115,6 +127,39 @@ export default {
       })
       .catch(e => {
         console.log(e)
+      })
+    },
+
+    /**
+     *
+     * @param {object} params
+     * @var {function} params.callbackSuccess
+     * @var {function} params.callbackError
+     * @var {number} params.id
+     * @var {string} params.name
+     */
+    update (params) {
+
+      axios.put('/api/resorts/' + params.id, {
+        name: params.name
+      })
+      .then(r => {
+        if(r.data.success) {
+          params.callbackSuccess()
+          this.get({
+            page: this.$refs.filter.page,
+            search: this.$refs.filter.value
+          })
+        } else {
+          params.callbackError('Не предвиденная ошибка')
+        }
+      })
+      .catch(e => {
+        if (e.response.data.errors.name) {
+          params.callbackError(e.response.data.errors.name[0])
+        } else {
+          params.callbackError(e.response.data.message)
+        }
       })
     }
   }
