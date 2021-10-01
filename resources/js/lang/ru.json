@@ -16,6 +16,9 @@
     "resorts": {
       "title": "Курорты"
     },
+    "airports": {
+      "title": "Аэропорты"
+    },
     "project": {
       "name" : "Название компании"
     }
@@ -45,6 +48,20 @@
     },
     "create-modal": {
       "title": "Создание курорта"
+    }
+  },
+
+  "comment_airports": "Airports pages",
+  "airports": {
+    "index": {
+      "title": "Список Аэропортов",
+      "filter_title": "Аэропорты"
+    },
+    "edit-modal": {
+      "title": "Редактирование аэропорта"
+    },
+    "create-modal": {
+      "title": "Добавление аэропорта"
     }
   },
 

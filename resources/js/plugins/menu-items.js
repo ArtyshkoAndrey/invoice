@@ -38,6 +38,15 @@ items.add(
     name: 'home-circle'
   }
 )
+items.add(
+  'menu.airports.title',
+  'dashboard.airports.index',
+  '/airports/index',
+  {
+    type: 'solid',
+    name: 'plane-alt'
+  }
+)
 // items.add(
 //   'Создать',
 //   'create',

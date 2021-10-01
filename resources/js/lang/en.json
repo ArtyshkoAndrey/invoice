@@ -16,6 +16,9 @@
     "resorts": {
       "title": "Resorts"
     },
+    "airports": {
+      "title": "Airports"
+    },
     "project": {
       "name" : "Company name"
     }
@@ -45,6 +48,20 @@
     },
     "create-modal": {
       "title": "Create Resort"
+    }
+  },
+
+  "comment_airports": "Airports pages",
+  "airports": {
+    "index": {
+      "title": "List of Airports",
+      "filter_title": "Airports"
+    },
+    "edit-modal": {
+      "title": "Airport editing"
+    },
+    "create-modal": {
+        "title": "Adding an airport"
     }
   },
 

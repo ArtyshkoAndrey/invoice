@@ -20,6 +20,16 @@ export default [
             path: 'index', name: 'dashboard.resorts.index', component: page('dashboard/resorts/index.vue')
           }
         ]
+      },
+      {
+        path: 'airports',
+        component: { render: (c) => c('router-view') },
+        children: [
+          { path: '', redirect: { name: 'dashboard.airports.index' } },
+          {
+            path: 'index', name: 'dashboard.airports.index', component: page('dashboard/airports/index.vue')
+          }
+        ]
       }
     ]
   },
