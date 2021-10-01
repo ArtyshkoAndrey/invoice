@@ -68,7 +68,7 @@ export default {
     bus: new Vue()
   }),
   mounted() {
-    this.bus.$on('update', this.update)
+    this.bus.$on('save', this.update)
   },
   methods: {
     openModal() {

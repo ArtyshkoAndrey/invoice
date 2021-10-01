@@ -23,6 +23,8 @@ class ResortController extends Controller
   {
     $query = Resort::query();
 
+    $query = $query->orderByDesc('updated_at');
+
     if (($search = $request->get('search', '')) !== '') {
       $query = $query->where('name', 'like', "%{$search}%");
     }
@@ -38,11 +40,20 @@ class ResortController extends Controller
    *
    * @param Request $request
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function store (Request $request)
+  public function store (Request $request): \Illuminate\Http\JsonResponse
   {
-    //
+    $request->validate([
+      'name' => 'required|string|unique:resorts,name'
+    ]);
+
+    $resort = new Resort($request->all());
+    $resort->save();
+
+    return JsonResponse::success([
+      'resort' => $resort
+    ]);
   }
 
   /**

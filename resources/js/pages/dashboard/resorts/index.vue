@@ -7,6 +7,7 @@
                       :view-length="viewLength"
                       :title="$t('resorts.index.filter_title')"
                       :filter="filter"
+                      @create="busCreateResort.$emit('openModal')"
                       @get="get"
                       @setViewLength="setViewLength"
     />
@@ -16,6 +17,11 @@
         <ItemCardOneField :id="item.id" :name="item.name" @update="update" @destroy="deleteItem" />
       </div>
     </div>
+
+    <EditItemsModal :bus="busCreateResort"
+                    :title="$t('resorts.create-modal.title')"
+    />
+
   </div>
 </template>
 
@@ -24,6 +30,7 @@ import axios from 'axios'
 import Loader from '~/components/loader.vue'
 import HeaderFilterInfo from '~/components/HeaderFilterInfo.vue'
 import ItemCardOneField from '~/components/ItemCardOneField.vue'
+import EditItemsModal from "~/components/EditItemsModal";
 import Vue from "vue";
 import i18n from "~/plugins/i18n";
 export default {
@@ -32,17 +39,21 @@ export default {
     Loader,
     HeaderFilterInfo,
     ItemCardOneField,
+    EditItemsModal
   },
   data: () => ({
     title: i18n.t('resorts.index.title'),
     viewLength: 10,
     resorts: {},
-    filter: new Vue()
+    filter: new Vue(),
+    busCreateResort: new Vue()
   }),
   metaInfo: {
     title: i18n.t('resorts.index.title'),
   },
   async mounted () {
+    await this.busCreateResort.$on('save', this.store)
+
     await this.$root.$loading.set(50)
     await axios.get('/api/resorts', {
       params: {
@@ -161,41 +172,44 @@ export default {
           params.callbackError(e.response.data.message)
         }
       })
+    },
+
+    /**
+     *
+     * @param {object} params
+     * @var {function} params.callbackSuccess
+     * @var {function} params.callbackError
+     * @var {null} params.id
+     * @var {string} params.name
+     */
+    store (params) {
+      axios.post('/api/resorts/', {
+        name: params.name
+      })
+      .then(r => {
+        if (r.data.success) {
+          params.callbackSuccess()
+
+          this.get({
+            page: this.$refs.filter.page,
+            search: this.$refs.filter.value
+          })
+        } else {
+          params.callbackError('Server return Error')
+        }
+      })
+      .catch(e => {
+        if (e.response.data.errors) {
+          params.callbackError(e.response.data.errors.name[0])
+        } else {
+          params.callbackError('Server return Error')
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped>
-.fruit-list-item {
-  transition: all 1s;
-}
-.fruit-list-enter,
-.fruit-list-leave-to {
-  max-height: 0px;
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  overflow: hidden;
-}
-.fruit-list-enter-to,
-.fruit-list-leave {
-  max-height: 80px;
-}
 
-.fruit-table-item {
-  transition: all 1s;
-}
-.fruit-table-item > * {
-  transition: all 1s;
-  overflow: hidden;
-}
-.fruit-table-enter,
-.fruit-table-leave-to {
-  line-height: 0;
-}
-.fruit-table-enter > *,
-.fruit-table-leave-to > * {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-}
 </style>

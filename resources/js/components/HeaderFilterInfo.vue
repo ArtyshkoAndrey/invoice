@@ -16,6 +16,7 @@
                    class="px-5 py-1 fw-bold"
                    flat
                    success
+                   @click="$emit('create')"
         >
           {{ $t('header_filter.create_button') }}
         </vs-button>

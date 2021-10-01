@@ -42,6 +42,9 @@
     },
     "edit-modal": {
       "title": "Editing a Resort"
+    },
+    "create-modal": {
+      "title": "Create Resort"
     }
   },
 
