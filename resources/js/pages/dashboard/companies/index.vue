@@ -3,28 +3,28 @@
 
   <div v-else>
     <HeaderFilterInfo ref="filter"
-                      :values="room_types"
+                      :values="companies"
                       :view-length="viewLength"
-                      :title="$t('room_types.index.filter_title')"
+                      :title="$t('companies.index.filter_title')"
                       :filter="filter"
-                      @create="busCreateRoomTypes.$emit('openModal')"
+                      @create="busCreateCompanies.$emit('openModal')"
                       @get="get"
                       @setViewLength="setViewLength"
     />
 
     <div class="row gy-3 mt-3">
-      <div v-for="item in room_types.data" :key="item.id" class="col-12">
+      <div v-for="item in companies.data" :key="item.id" class="col-12">
         <ItemCardOneField :item="item"
                           :fields="inputs"
-                          :updateModalTitle="'room_types.edit-modal.title'"
+                          :updateModalTitle="'companies.edit-modal.title'"
                           @update="update"
                           @destroy="deleteItem"
         />
       </div>
     </div>
 
-    <EditItemsModal :bus="busCreateRoomTypes"
-                    :title="'room_types.create-modal.title'"
+    <EditItemsModal :bus="busCreateCompanies"
+                    :title="'companies.create-modal.title'"
                     :fields="inputs"
                     :inputs="{}"
     />
@@ -49,30 +49,30 @@ export default {
     EditItemsModal
   },
   data: () => ({
-    title: i18n.t('room_types.index.title'),
+    title: i18n.t('companies.index.title'),
     viewLength: 10,
-    room_types: {},
+    companies: {},
     filter: new Vue(),
-    busCreateRoomTypes: new Vue(),
+    busCreateCompanies: new Vue(),
     inputs: [
-      'id', 'name'
+      'id', 'name', 'code'
     ]
   }),
   metaInfo: {
-    title: i18n.t('room_types.index.title'),
+    title: i18n.t('companies.index.title'),
   },
   async mounted () {
-    await this.busCreateRoomTypes.$on('save', this.store)
+    await this.busCreateCompanies.$on('save', this.store)
 
     await this.$root.$loading.set(50)
-    await axios.get('/api/room_types', {
+    await axios.get('/api/companies', {
       params: {
         per_page: this.viewLength,
       }
     })
       .then(r => {
         console.log(r.data)
-        this.room_types = r.data.payload.room_types
+        this.companies = r.data.payload.companies
         this.$root.$loading.finish()
       })
       .catch(e => {
@@ -89,7 +89,7 @@ export default {
      * @param {string} settings.search
      */
     get (settings) {
-      axios.get('/api/room_types', {
+      axios.get('/api/companies', {
         params: {
           per_page: this.viewLength,
           page: settings.page,
@@ -100,11 +100,11 @@ export default {
          * @var {object} r
          * @var {object} r.data
          * @var {object} r.data.payload
-         * @var {array} r.data.payload.room_types
+         * @var {array} r.data.payload.companies
          */
         .then(r => {
-          this.room_types = r.data.payload.room_types
-          this.filter.$emit('updateData', r.data.payload.room_types)
+          this.companies = r.data.payload.companies
+          this.filter.$emit('updateData', r.data.payload.companies)
           console.log('new data', r.data)
         })
 
@@ -125,12 +125,12 @@ export default {
      * @param {number} id
      */
     deleteItem (id) {
-      axios.delete('/api/room_types/' + id)
+      axios.delete('/api/companies/' + id)
         /**
          * @var {object} r
          * @var {object} r.data
          * @var {object} r.data.payload
-         * @var {object} r.data.payload.room_type
+         * @var {object} r.data.payload.company
          */
         .then(r => {
           this.$vs.notification({
@@ -138,8 +138,8 @@ export default {
             sticky: true,
             position: 'top-right',
             color: 'success',
-            title: this.$t('notification.delete.success.title', {name: r.data.payload.room_type.name}),
-            text: this.$t('notification.delete.success.text', {name: r.data.payload.room_type.name})
+            title: this.$t('notification.delete.success.title', {name: r.data.payload.company.name}),
+            text: this.$t('notification.delete.success.text', {name: r.data.payload.company.name})
           })
           this.get({
             page: this.$refs.filter.page,
@@ -169,11 +169,13 @@ export default {
      * @var {function} params.callbackError
      * @var {number} params.id
      * @var {string} params.name
+     * @var {string} params.code
      */
     update (params) {
 
-      axios.put('/api/room_types/' + params.id, {
-        name: params.name
+      axios.put('/api/companies/' + params.id, {
+        name: params.name,
+        code: params.code
       })
         .then(r => {
           if(r.data.success) {
@@ -204,10 +206,12 @@ export default {
      * @var {function} params.callbackError
      * @var {null} params.id
      * @var {string} params.name
+     * @var {string} params.code
      */
     store (params) {
-      axios.post('/api/room_types/', {
-        name: params.name
+      axios.post('/api/companies/', {
+        name: params.name,
+        code: params.code
       })
         .then(r => {
           if (r.data.success) {

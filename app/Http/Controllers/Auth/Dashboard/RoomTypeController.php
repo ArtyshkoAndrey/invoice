@@ -90,7 +90,7 @@ class RoomTypeController extends Controller
 
       return JsonResponse::success(['room_type' => $room_type]);
     } catch (ModelNotFoundException $exception) {
-      return JsonResponse::error(['model' => $exception->getMessage()]);
+      return response()->json(['message' => $exception->getMessage()], 400);
     }
   }
 
@@ -109,7 +109,7 @@ class RoomTypeController extends Controller
 
       return JsonResponse::success(['room_type' => $room_type]);
     } catch (ModelNotFoundException $e) {
-      return JsonResponse::error(['error' => $e->getMessage()]);
+      return response()->json(['message' => $e->getMessage()], 400);
     }
   }
 }

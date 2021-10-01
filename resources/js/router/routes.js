@@ -40,6 +40,16 @@ export default [
             path: 'index', name: 'dashboard.room_types.index', component: page('dashboard/room_types/index.vue')
           }
         ]
+      },
+      {
+        path: 'companies',
+        component: { render: (c) => c('router-view') },
+        children: [
+          { path: '', redirect: { name: 'dashboard.companies.index' } },
+          {
+            path: 'index', name: 'dashboard.companies.index', component: page('dashboard/companies/index.vue')
+          }
+        ]
       }
     ]
   },

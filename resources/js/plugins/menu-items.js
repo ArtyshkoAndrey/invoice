@@ -57,6 +57,16 @@ items.add(
     name: 'hotel'
   }
 )
+
+items.add(
+  'menu.companies.title',
+  'dashboard.companies.index',
+  '/companies/index',
+  {
+    type: 'regular',
+    name: 'diamond'
+  }
+)
 // items.add(
 //   'Создать',
 //   'create',

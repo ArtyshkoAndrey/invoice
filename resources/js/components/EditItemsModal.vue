@@ -8,11 +8,21 @@
 
 
     <div class="con-content">
-      <vs-input v-model="name" :placeholder="$t('form.inputs.name.placeholder')">
-        <template v-if="error" #message-danger>
-          {{ error }}
+      <vs-input v-for="field in fields"
+                :key="field"
+                class="mt-2"
+                v-model="data[field]"
+                v-if="field !== 'id'"
+                :placeholder="$t('form.inputs.' + field + '.placeholder')"
+      >
+        <template v-if="error[field]" #message-danger>
+          {{ error[field][0] }}
         </template>
       </vs-input>
+
+      <span class="text-danger" v-if="error.message">
+        {{ error.message }}
+      </span>
     </div>
 
     <template #footer>
@@ -34,7 +44,6 @@
 
 <script>
 import Vue from "vue";
-import i18n from "~/plugins/i18n"
 export default {
   name: 'EditItemsModal',
   props: {
@@ -46,17 +55,30 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+    fields: {
+      type: Array,
+      required: true
+    },
+    inputs: {
+      type: Object,
+      default: new Object()
     }
   },
   data: () => ({
     active: false,
-    name: '',
+    data: {},
     nameTitle: '',
-    id: null,
     loading: false,
-    error: null
+    error: {}
   }),
   mounted() {
+
+    this.data = this.inputs
+    if (this.data.name) {
+      this.nameTitle = this.data.name
+    }
+
     // Listen parent to open Modal
     this.bus.$on('openModal', this.openModal)
   },
@@ -72,24 +94,8 @@ export default {
   methods: {
     /**
      * Open modal dialog
-     *
-     * @param {object?} params
-     * @var {string?} params.name
-     * @var {number?} params.id
      */
-    openModal(params) {
-      if (params) {
-        if (typeof params.name !== 'undefined') {
-          this.name = params.name
-          this.nameTitle = params.name
-        }
-        if (typeof params.id !== 'undefined') {
-          this.id = params.id
-        }
-      } else {
-        this.name = ''
-        this.nameTitle = ''
-      }
+    openModal() {
       this.active = true
     },
 
@@ -101,8 +107,7 @@ export default {
       this.loading = true
 
       this.bus.$emit('save', {
-        id: this.id,
-        name: this.name,
+        ...this.data,
         callbackSuccess: this.callbackSuccess,
         callbackError: this.callbackError
       })
@@ -116,14 +121,14 @@ export default {
     callbackSuccess() {
       this.active = false
       this.loading = false
-      this.error = null
+      this.error = {}
     },
 
     /**
      * Callback if backend return 400 error
      * Viewed error for user and clear loading
      *
-     * @param {string} error
+     * @param {object} error
      */
     callbackError(error) {
       this.loading = false

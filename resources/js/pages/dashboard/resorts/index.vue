@@ -14,12 +14,19 @@
 
     <div class="row gy-3 mt-3">
       <div v-for="item in resorts.data" :key="item.id" class="col-12">
-        <ItemCardOneField :id="item.id" :name="item.name" :updateModalTitle="'resorts.edit-modal.title'" @update="update" @destroy="deleteItem" />
+        <ItemCardOneField :item="item"
+                          :fields="inputs"
+                          :updateModalTitle="'resorts.edit-modal.title'"
+                          @update="update"
+                          @destroy="deleteItem"
+        />
       </div>
     </div>
 
     <EditItemsModal :bus="busCreateResort"
                     :title="'resorts.create-modal.title'"
+                    :fields="inputs"
+                    :inputs="{}"
     />
 
   </div>
@@ -46,7 +53,10 @@ export default {
     viewLength: 10,
     resorts: {},
     filter: new Vue(),
-    busCreateResort: new Vue()
+    busCreateResort: new Vue(),
+    inputs: [
+      'id', 'name'
+    ]
   }),
   metaInfo: {
     title: i18n.t('resorts.index.title'),
@@ -137,7 +147,18 @@ export default {
         })
       })
       .catch(e => {
-        console.log(e)
+        this.$vs.notification({
+          duration: 2000,
+          sticky: true,
+          position: 'top-right',
+          color: 'danger',
+          title: this.$t('notification.delete.danger.title'),
+          text: this.$t('notification.delete.danger.text')
+        })
+        this.get({
+          page: this.$refs.filter.page,
+          search: this.$refs.filter.value
+        })
       })
     },
 
@@ -166,10 +187,12 @@ export default {
         }
       })
       .catch(e => {
-        if (e.response.data.errors.name) {
-          params.callbackError(e.response.data.errors.name[0])
+        if (e.response.data.errors) {
+          params.callbackError(e.response.data.errors)
         } else {
-          params.callbackError(e.response.data.message)
+          params.callbackError({
+            message: e.response.data.message
+          })
         }
       })
     },
@@ -200,9 +223,11 @@ export default {
       })
       .catch(e => {
         if (e.response.data.errors) {
-          params.callbackError(e.response.data.errors.name[0])
+          params.callbackError(e.response.data.errors)
         } else {
-          params.callbackError('Server return Error')
+          params.callbackError({
+            message: e.response.data.message
+          })
         }
       })
     }

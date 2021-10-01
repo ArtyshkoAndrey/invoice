@@ -22,6 +22,9 @@
     "room_types": {
       "title": "Room Types"
     },
+    "companies": {
+      "title": "Companies"
+    },
     "project": {
       "name" : "Company name"
     }
@@ -68,7 +71,7 @@
     }
   },
 
-  "comment_room_types": "Airports pages",
+  "comment_room_types": "Room Types pages",
   "room_types": {
     "index": {
       "title": "List of Type",
@@ -79,6 +82,20 @@
     },
     "create-modal": {
       "title": "Adding an Room type"
+    }
+  },
+
+  "comment_companies": "Companies pages",
+  "companies": {
+    "index": {
+      "title": "List of companies",
+      "filter_title": "Companies"
+    },
+    "edit-modal": {
+      "title": "Company "
+    },
+    "create-modal": {
+      "title": "Adding a new company"
     }
   },
 
@@ -111,6 +128,10 @@
       "success": {
         "title": "{name} successfully deleted",
         "text": "You have successfully deleted '{name}' from the database, no return possible"
+      },
+      "danger": {
+        "title": "Deleted error",
+        "text": "The server was unable to delete the selected data. Contact the administrator, or refresh the pages"
       }
     }
   },
@@ -121,6 +142,9 @@
     "inputs": {
       "name": {
         "placeholder": "Name"
+      },
+      "code": {
+        "placeholder": "Code"
       }
     },
     "title": {

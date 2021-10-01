@@ -4,13 +4,17 @@
 
       <div class="card-body">
         <div class="row align-items-center mx-0">
-          <div class="col">
+          <div class="col-auto"
+               v-for="field in fields"
+               :key="field"
+               :class="field === 'id' && hideId ? 'd-none' : ''"
+          >
             <h6 class="mb-0">
-              {{ name }}
+              {{ inputs[field] }}
             </h6>
           </div>
 
-          <div class="col-auto">
+          <div class="col-auto ms-auto">
             <div class="row gx-0">
               <div class="col">
                 <vs-button
@@ -29,7 +33,7 @@
                   circle
                   danger
                   flat
-                  @click="$emit('destroy', id)"
+                  @click="$emit('destroy', inputs.id)"
                 >
                   <em class="bx bx-trash-alt" />
                 </vs-button>
@@ -40,7 +44,11 @@
       </div>
     </div>
 
-    <EditItemsModal :bus="bus" :title="updateModalTitle" />
+    <EditItemsModal :bus="bus"
+                    :title="updateModalTitle"
+                    :fields="fields"
+                    :inputs="inputs"
+    />
 
   </div>
 
@@ -55,18 +63,22 @@ export default {
     EditItemsModal
   },
   props: {
-    name: {
-      type: String,
+    item: {
+      type: Object,
       required: true
     },
-    id: {
-      type: Number,
+    fields: {
+      type: Array,
       required: true
     },
     updateModalTitle: {
       type: String,
       required: false,
       default: ''
+    },
+    hideId: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -74,6 +86,15 @@ export default {
   }),
   mounted() {
     this.bus.$on('save', this.update)
+  },
+  computed: {
+    inputs () {
+      let inputs = {}
+      this.fields.forEach(field => {
+        inputs[field] = this.item[field]
+      })
+      return inputs;
+    }
   },
   methods: {
     openModal() {

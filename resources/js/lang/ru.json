@@ -22,6 +22,9 @@
     "room_types": {
       "title": "Типы комнат"
     },
+    "companies": {
+      "title": "Компании"
+    },
     "project": {
       "name" : "Название компании"
     }
@@ -68,7 +71,7 @@
     }
   },
 
-  "comment_room_types": "Airports pages",
+  "comment_room_types": "Room Types pages",
   "room_types": {
     "index": {
       "title": "Список типов комнат",
@@ -79,6 +82,20 @@
     },
     "create-modal": {
       "title": "Добавление нового типа комнаты"
+    }
+  },
+
+  "comment_companies": "Companies pages",
+  "companies": {
+    "index": {
+      "title": "Список компаний",
+      "filter_title": "Компании"
+    },
+    "edit-modal": {
+      "title": "Компания "
+    },
+    "create-modal": {
+      "title": "Добавление новой компании"
     }
   },
 
@@ -111,6 +128,10 @@
       "success": {
         "title": "{name} успешно удалён",
         "text": "Вы успешно удалили '{name}' из базы данных, возврат действий невозможен"
+      },
+      "danger": {
+        "title": "Ошибка при удалении",
+        "text": "Сервер не смог удалить выбранные данные. Обратитесь к администратора, или обновите страницу"
       }
     }
   },
@@ -121,6 +142,9 @@
     "inputs": {
       "name": {
         "placeholder": "Наименование"
+      },
+      "code": {
+        "placeholder": "Код"
       }
     },
     "title": {

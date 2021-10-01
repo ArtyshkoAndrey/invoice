@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth\Dashboard;
 
-use App\Models\Airport;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class AirportController extends Controller
+class CompaniesController extends Controller
 {
 
   /**
@@ -21,7 +21,7 @@ class AirportController extends Controller
    */
   public function index (Request $request): \Illuminate\Http\JsonResponse
   {
-    $query = Airport::query();
+    $query = Company::query();
 
     $query = $query->orderByDesc('updated_at');
 
@@ -30,9 +30,9 @@ class AirportController extends Controller
     }
 
     $paginate = $request->get('per_page', 10);
-    $airports = $query->paginate($paginate);
+    $companies = $query->paginate($paginate);
 
-    return JsonResponse::success(['airports' => $airports]);
+    return JsonResponse::success(['companies' => $companies]);
   }
 
   /**
@@ -45,14 +45,15 @@ class AirportController extends Controller
   public function store (Request $request): \Illuminate\Http\JsonResponse
   {
     $request->validate([
-      'name' => 'required|string|unique:airports,name'
+      'name' => 'required|string|unique:companies,name',
+      'code' => 'required|string|unique:companies,code'
     ]);
 
-    $airport = new Airport($request->all());
-    $airport->save();
+    $company = new Company($request->all());
+    $company->save();
 
     return JsonResponse::success([
-      'airport' => $airport
+      'company' => $company
     ]);
   }
 
@@ -79,18 +80,19 @@ class AirportController extends Controller
   public function update (Request $request, int $id): \Illuminate\Http\JsonResponse
   {
     try {
-      $airport = Airport::findOrFail($id);
+      $company = Company::findOrFail($id);
 
       $request->validate([
-        'name' => 'required|string|unique:airports,name,' . $id
+        'name' => 'required|string|unique:companies,name,' . $id,
+        'code' => 'required|string|unique:companies,code,' . $id
       ]);
 
-      $airport->update($request->all());
-      $airport->save();
+      $company->update($request->all());
+      $company->save();
 
-      return JsonResponse::success(['airport' => $airport]);
+      return JsonResponse::success(['company' => $company]);
     } catch (ModelNotFoundException $exception) {
-      return response()->json(['message' => $e->getMessage()], 400);
+      return response()->json(['message' => $exception->getMessage()], 400);
     }
   }
 
@@ -104,10 +106,10 @@ class AirportController extends Controller
   public function destroy (int $id): \Illuminate\Http\JsonResponse
   {
     try {
-      $airport = Airport::findOrFail($id);
-      $airport->delete();
+      $company = Company::findOrFail($id);
+      $company->delete();
 
-      return JsonResponse::success(['airport' => $airport]);
+      return JsonResponse::success(['company' => $company]);
     } catch (ModelNotFoundException $e) {
       return response()->json(['message' => $e->getMessage()], 400);
     }
