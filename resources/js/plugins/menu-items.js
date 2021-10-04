@@ -20,9 +20,9 @@ class Item {
 
 const items = new Items()
 items.add(
-  'menu.index.title',
-  'dashboard.index',
-  '/index',
+  'menu.invoice.title',
+  'dashboard.invoice.index',
+  '/invoice/index',
   {
     type: 'solid',
     name: 'home'

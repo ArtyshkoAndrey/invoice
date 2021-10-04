@@ -10,8 +10,8 @@
 
   "comment_menu": "Items in menu",
   "menu": {
-    "index": {
-      "title": "Главная"
+    "invoice": {
+      "title": "Заявки"
     },
     "resorts": {
       "title": "Курорты"
@@ -43,7 +43,11 @@
 
   "comment_invoice": "Invoice pages",
   "invoice": {
-    "history": "История"
+    "history": "История",
+    "index": {
+      "title": "Список заявок",
+      "filter_title": "Заявки"
+    }
   },
 
   "comment_resorts": "Resorts pages",
@@ -109,7 +113,10 @@
       "filter_title": "Шаблоны"
     },
     "edit": {
-      "title": "Редактирование шаблона"
+      "title": "Редактирование шаблона",
+      "day": "День {number}",
+      "free_day": "Free",
+      "add_day": "Добавить день"
     },
     "edit-modal": {
       "title": "Шаблон "
@@ -159,6 +166,7 @@
   "form": {
     "save": "Сохранить",
     "cancel" : "Отмена",
+    "delete": "Удалить",
     "inputs": {
       "name": {
         "placeholder": "Наименование"

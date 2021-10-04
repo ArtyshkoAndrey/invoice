@@ -1,41 +1,44 @@
 <template>
   <div>
     <transition name="fade" appear>
-      <Loader v-if="$root.$loading.show" key="1" />
+      <Loader v-if="$root.$loading.show && loading" key="1" />
 
       <div v-else key="2">
         <div class="card p-4">
           <div class="card-title">
-            <h3>{{ title }} "{{ sample.name }}"</h3>
+            <h3>{{ $t('samples.edit.title') }} "{{ sample.name }}"</h3>
           </div>
           <div class="card-body px-0">
             
-            <div v-for="(day, index) in sample.days" :key="index" class="row align-items-center">
-              <div class="col-auto">
-                <p class="mb-0">День {{ index + 1 }}</p>
+            <div v-for="(day, index) in sample.days" :key="index" class="row align-items-center my-2">
+              <div class="col-lg-auto col-sm-2 col-4">
+                <p class="mb-0">{{ $t('samples.edit.day', {number: index + 1}) }}</p>
               </div>
-              <div class="col-auto">
+              <div class="col-lg-auto col-sm-4 col-8">
                 <vs-select v-model="day.resort.id" placeholder="Курорты">
                   <vs-option v-for="resort in resorts" :key="resort.id" :label="resort.name" :value="resort.id">
                     {{ resort.name }}
                   </vs-option>
                 </vs-select>
               </div>
-              <div class="col-auto">
+              <div class="col-lg-auto col-sm-2 col-6 mt-2 mt-lg-0">
                 <vs-checkbox v-model="day.free">
-                  Free day
+                  {{ $t('samples.edit.free_day') }}
                 </vs-checkbox>
               </div>
-              <div class="col-auto">
+              <div class="col-lg-auto col-sm col-6 mt-2 mt-lg-0">
                 <vs-button
-                  icon
                   circle
                   danger
                   flat
                   @click="removeDay(index)"
                 >
-                  <em class="bx bx-trash-alt" />
+                  <em class="bx bx-trash-alt d-none d-lg-block" />
+                  <span class="d-block d-lg-none">{{ $t('form.delete') }}</span>
                 </vs-button>
+              </div>
+              <div class="col-12">
+                <hr class="d-block d-lg-none">
               </div>
             </div>
 
@@ -45,7 +48,7 @@
                   gradient
                   @click="addDay"
                 >
-                  Добавить день
+                  {{ $t('samples.edit.add_day') }}
                 </vs-button>
               </div>
               <div class="col-auto">
@@ -79,7 +82,8 @@ export default {
   data: () => ({
     title: i18n.t('samples.edit.title'),
     sample: {},
-    resorts: []
+    resorts: [],
+    loading: true
   }),
   computed: {
     id () {
@@ -87,8 +91,6 @@ export default {
     }
   },
   async mounted() {
-
-
     await axios.get('/api/samples/' + this.id)
     .then(r => {
       this.sample = r.data.payload.sample
@@ -111,6 +113,7 @@ export default {
     })
 
     await this.$root.$loading.finish()
+    this.loading = false
   },
   methods: {
     addDay () {
@@ -129,7 +132,38 @@ export default {
       this.sample.days = this.sample.days.filter((el, i) => i !== index)
     },
     save () {
-      this.$router.go(-1)
+      this.$root.$loading.start()
+      axios.put('/api/days', {
+        sample: this.sample
+      })
+      .then(r => {
+        this.$root.$loading.finish()
+        console.log('save data', r.data.payload)
+        this.$router.go(-1)
+
+      })
+      .catch(e => {
+        this.$root.$loading.finish()
+        if (e.response.status === 422) {
+          this.$vs.notification({
+            title: 'Ошибка',
+            text: e.response.data.message
+          })
+
+          Object.keys(e.response.data.errors).forEach((key) => {
+            this.$vs.notification({
+              title: key.capitalize(),
+              text: e.response.data.errors[key]
+            })
+          })
+        }
+        else if (e.response.status === 404) {
+          this.$vs.notification({
+            title: 'Ошибка',
+            text: e.response.data.message
+          })
+        }
+      })
     }
   }
 }

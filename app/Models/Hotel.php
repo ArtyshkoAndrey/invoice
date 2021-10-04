@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Hotel whereName($value)
  * @method static Builder|Hotel whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static \Database\Factories\HotelFactory factory(...$parameters)
  */
 class Hotel extends Model
 {

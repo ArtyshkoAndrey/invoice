@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Company whereId($value)
  * @method static Builder|Company whereName($value)
  * @method static Builder|Company whereUpdatedAt($value)
+ * @method static \Database\Factories\CompanyFactory factory(...$parameters)
  */
 class Company extends Model
 {

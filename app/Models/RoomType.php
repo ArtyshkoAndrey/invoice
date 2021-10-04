@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|RoomType whereName($value)
  * @method static Builder|RoomType whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static \Database\Factories\RoomTypeFactory factory(...$parameters)
  */
 class RoomType extends Model
 {

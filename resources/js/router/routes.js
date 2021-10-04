@@ -9,8 +9,18 @@ export default [
     path: '/',
     component: page('dashboard/auth.vue'),
     children: [
-      { path: '', redirect: { name: 'dashboard.index' } },
-      { path: 'index', name: 'dashboard.index', component: page('dashboard/index.vue') },
+      { path: '', redirect: { name: 'dashboard.invoice.index' } },
+      { path: 'index', name: 'dashboard.index',  redirect: { name: 'dashboard.invoice.index' } },
+      {
+        path: 'invoice',
+        component: { render: (c) => c('router-view') },
+        children: [
+          { path: '', redirect: { name: 'dashboard.invoice.index' } },
+          {
+            path: 'index', name: 'dashboard.invoice.index', component: page('dashboard/invoice/index.vue')
+          }
+        ]
+      },
       {
         path: 'resorts',
         component: { render: (c) => c('router-view') },

@@ -10,8 +10,8 @@
 
   "comment_menu": "Items in menu",
   "menu": {
-    "index": {
-      "title": "Home"
+    "invoice": {
+      "title": "Invoice"
     },
     "resorts": {
       "title": "Resorts"
@@ -43,7 +43,11 @@
 
   "comment_invoice": "Invoice pages",
   "invoice": {
-    "history": "History"
+    "history": "History",
+    "index": {
+      "title": "Invoice list",
+      "filter_title": "Invoice"
+    }
   },
 
   "comment_resorts": "Resorts pages",
@@ -109,7 +113,10 @@
       "filter_title": "Samples"
     },
     "edit": {
-      "title": "Editing sample"
+      "title": "Editing sample",
+      "day": "Day {number}",
+      "free_day": "Free day",
+      "add_day": "Add Day"
     },
     "edit-modal": {
       "title": "Sample "
@@ -159,6 +166,7 @@
   "form": {
     "save": "Save",
     "cancel" : "Cancel",
+    "delete": "Delete",
     "inputs": {
       "name": {
         "placeholder": "Name"

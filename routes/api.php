@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\Dashboard\DayController;
 use App\Http\Controllers\Auth\Dashboard\ResortController;
 use App\Http\Controllers\Auth\Dashboard\SampleController;
 use App\Http\Controllers\Auth\Dashboard\AirportController;
@@ -31,6 +32,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     'companies'   => CompanyController::class,
     'samples'     => SampleController::class,
   ]);
+
+  Route::put('days', [DayController::class, 'save']);
 });
 Route::group(['middleware' => 'guest:api'], function () {
   Route::post('login', [LoginController::class, 'login']);
