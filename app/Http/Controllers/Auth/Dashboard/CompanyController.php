@@ -9,7 +9,7 @@ use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class CompaniesController extends Controller
+class CompanyController extends Controller
 {
 
   /**

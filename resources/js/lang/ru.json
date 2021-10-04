@@ -25,6 +25,9 @@
     "companies": {
       "title": "Компании"
     },
+    "samples": {
+      "title" : "Шаблоны"
+    },
     "project": {
       "name" : "Название компании"
     }
@@ -96,6 +99,23 @@
     },
     "create-modal": {
       "title": "Добавление новой компании"
+    }
+  },
+
+  "comment_samples": "Companies pages",
+  "samples": {
+    "index": {
+      "title": "Список шаблонов",
+      "filter_title": "Шаблоны"
+    },
+    "edit": {
+      "title": "Редактирование шаблона"
+    },
+    "edit-modal": {
+      "title": "Шаблон "
+    },
+    "create-modal": {
+      "title": "Добавление нового шаблона"
     }
   },
 

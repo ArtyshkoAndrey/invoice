@@ -4,12 +4,15 @@
 
       <div class="card-body">
         <div class="row align-items-center mx-0">
-          <div class="col-auto"
-               v-for="field in fields"
+          <div v-for="(field, index) in fields"
                :key="field"
+               class="col-auto"
                :class="field === 'id' && hideId ? 'd-none' : ''"
           >
-            <h6 class="mb-0">
+            <h6 class="mb-0"
+                :style="checkTitleRouter ? 'cursor: pointer' : '' "
+                @click="routePush(index)"
+            >
               {{ inputs[field] }}
             </h6>
           </div>
@@ -49,9 +52,7 @@
                     :fields="fields"
                     :inputs="inputs"
     />
-
   </div>
-
 </template>
 
 <script>
@@ -84,9 +85,6 @@ export default {
   data: () => ({
     bus: new Vue()
   }),
-  mounted() {
-    this.bus.$on('save', this.update)
-  },
   computed: {
     inputs () {
       let inputs = {}
@@ -94,7 +92,13 @@ export default {
         inputs[field] = this.item[field]
       })
       return inputs;
+    },
+    checkTitleRouter () {
+      return typeof this.$attrs['title-router'] !== 'undefined'
     }
+  },
+  mounted() {
+    this.bus.$on('save', this.update)
   },
   methods: {
     openModal() {
@@ -103,12 +107,26 @@ export default {
         id: this.id
       })
     },
+
     /**
      *
      * @param {object} params
      */
     update (params) {
       this.$emit('update', params)
+    },
+
+    routePush (index) {
+      console.log(typeof this.$attrs['title-router'] !== 'undefined')
+      if (typeof this.$attrs['title-router'] !== 'undefined') {
+        if (index === 0 && !this.hideId) {
+          this.$emit('title-route')
+        }
+
+        if (index === 1 && this.hideId) {
+          this.$emit('title-route')
+        }
+      }
     }
   }
 }

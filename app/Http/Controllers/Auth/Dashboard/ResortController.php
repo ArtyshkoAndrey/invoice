@@ -29,8 +29,12 @@ class ResortController extends Controller
       $query = $query->where('name', 'like', "%{$search}%");
     }
 
-    $paginate = $request->get('per_page', 10);
-    $resorts = $query->paginate($paginate);
+    $paginate = $request->get('per_page', null);
+    if ($paginate) {
+      $resorts = $query->paginate($paginate);
+    } else {
+      $resorts = $query->get();
+    }
 
     return JsonResponse::success(['resorts' => $resorts]);
   }
@@ -78,20 +82,16 @@ class ResortController extends Controller
    */
   public function update (Request $request, int $id): \Illuminate\Http\JsonResponse
   {
-    try {
-      $resort = Resort::findOrFail($id);
+    $resort = Resort::findOrFail($id);
 
-      $request->validate([
-        'name' => 'required|string|unique:resorts,name,' . $id
-      ]);
+    $request->validate([
+      'name' => 'required|string|unique:resorts,name,' . $id
+    ]);
 
-      $resort->update($request->all());
-      $resort->save();
+    $resort->update($request->all());
+    $resort->save();
 
-      return JsonResponse::success(['resort' => $resort]);
-    } catch (ModelNotFoundException $exception) {
-      return response()->json(['message' => $exception->getMessage()], 400);
-    }
+    return JsonResponse::success(['resort' => $resort]);
   }
 
   /**
@@ -103,13 +103,9 @@ class ResortController extends Controller
    */
   public function destroy (int $id): \Illuminate\Http\JsonResponse
   {
-    try {
-      $resort = Resort::findOrFail($id);
-      $resort->delete();
+    $resort = Resort::findOrFail($id);
+    $resort->delete();
 
-      return JsonResponse::success(['resort' => $resort]);
-    } catch (ModelNotFoundException $e) {
-      return response()->json(['message' => $e->getMessage()], 400);
-    }
+    return JsonResponse::success(['resort' => $resort]);
   }
 }

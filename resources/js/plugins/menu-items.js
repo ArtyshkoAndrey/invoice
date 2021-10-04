@@ -67,6 +67,16 @@ items.add(
     name: 'diamond'
   }
 )
+
+items.add(
+    'menu.samples.title',
+    'dashboard.samples.index',
+    '/samples/index',
+    {
+        type: 'solid',
+        name: 'compass'
+    }
+)
 // items.add(
 //   'Создать',
 //   'create',

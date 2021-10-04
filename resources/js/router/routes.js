@@ -50,6 +50,19 @@ export default [
             path: 'index', name: 'dashboard.companies.index', component: page('dashboard/companies/index.vue')
           }
         ]
+      },
+      {
+        path: 'samples',
+        component: { render: (c) => c('router-view') },
+        children: [
+          { path: '', redirect: { name: 'dashboard.samples.index' } },
+          {
+            path: 'index', name: 'dashboard.samples.index', component: page('dashboard/samples/index.vue')
+          },
+          {
+            path: 'edit/:id', name: 'dashboard.samples.edit', component: page('dashboard/samples/edit.vue')
+          }
+        ]
       }
     ]
   },

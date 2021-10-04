@@ -153,7 +153,7 @@ export default {
           position: 'top-right',
           color: 'danger',
           title: this.$t('notification.delete.danger.title'),
-          text: this.$t('notification.delete.danger.text')
+          text: e.response.data.message
         })
         this.get({
           page: this.$refs.filter.page,

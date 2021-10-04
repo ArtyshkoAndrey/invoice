@@ -52,9 +52,6 @@ export default {
     }),
     remember: false
   }),
-  mounted() {
-    this.$root.$loading.finish()
-  },
   computed: {
     validEmail () {
       return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.form.email)
@@ -62,6 +59,9 @@ export default {
     validPassword () {
       return this.form.password.length < 6 && this.form.password !== ''
     }
+  },
+  mounted() {
+    this.$root.$loading.finish()
   },
   methods: {
     async login () {

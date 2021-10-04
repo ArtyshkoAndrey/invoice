@@ -25,6 +25,9 @@
     "companies": {
       "title": "Companies"
     },
+    "samples": {
+      "title" : "Samples"
+    },
     "project": {
       "name" : "Company name"
     }
@@ -96,6 +99,23 @@
     },
     "create-modal": {
       "title": "Adding a new company"
+    }
+  },
+
+  "comment_samples": "Companies pages",
+  "samples": {
+    "index": {
+      "title": "List of samples",
+      "filter_title": "Samples"
+    },
+    "edit": {
+      "title": "Editing sample"
+    },
+    "edit-modal": {
+      "title": "Sample "
+    },
+    "create-modal": {
+      "title": "Adding a new sample"
     }
   },
 
