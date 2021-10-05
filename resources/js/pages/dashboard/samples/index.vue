@@ -39,7 +39,7 @@
 
 <script>
 import axios from 'axios'
-import Loader from '~/components/loader.vue'
+import Loader from '~/components/Loader.vue'
 import HeaderFilterInfo from '~/components/HeaderFilterInfo.vue'
 import ItemCardOneField from '~/components/ItemCardOneField.vue'
 import EditItemsModal from "~/components/EditItemsModal";

@@ -75,8 +75,8 @@ class Invoice extends Model
 
   protected $casts = [
     'gid' => 'boolean',
-    'departure_time' => 'datetime',
-    'arrival_time' => 'datetime',
+    'departure_time'  => 'datetime:d.m.Y, H:i',
+    'arrival_time'    => 'datetime:d.m.Y, H:i',
   ];
 
   /**

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\Dashboard\ResortController;
 use App\Http\Controllers\Auth\Dashboard\SampleController;
 use App\Http\Controllers\Auth\Dashboard\AirportController;
 use App\Http\Controllers\Auth\Dashboard\CompanyController;
+use App\Http\Controllers\Auth\Dashboard\InvoiceController;
 use App\Http\Controllers\Auth\Dashboard\RoomTypeController;
 
 /*
@@ -26,11 +27,12 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('user', [UserController::class, 'current']);
 
   Route::apiResources([
-    'resorts'     => ResortController::class,
-    'airports'    => AirportController::class,
-    'room_types'  => RoomTypeController::class,
-    'companies'   => CompanyController::class,
-    'samples'     => SampleController::class,
+    'resorts' => ResortController::class,
+    'airports' => AirportController::class,
+    'room_types' => RoomTypeController::class,
+    'companies' => CompanyController::class,
+    'samples' => SampleController::class,
+    'invoices' => InvoiceController::class,
   ]);
 
   Route::put('days', [DayController::class, 'save']);

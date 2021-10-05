@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import loader from './loader'
+import Loader from './Loader'
 import Child from './Child'
 import Sidebar from './Sidebar'
 import Config from './Config'
@@ -9,7 +9,7 @@ import HeaderFilterInfo from "./HeaderFilterInfo";
 [
   Child,
   Sidebar,
-  loader,
+  Loader,
   Config,
   Navbar,
   HeaderFilterInfo
