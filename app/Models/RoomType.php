@@ -5,14 +5,15 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\RoomTypeFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\RoomType
  *
- * @property int                             $id
- * @property string                          $name
+ * @property int         $id
+ * @property string      $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|RoomType newModelQuery()
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|RoomType whereName($value)
  * @method static Builder|RoomType whereUpdatedAt($value)
  * @mixin Eloquent
- * @method static \Database\Factories\RoomTypeFactory factory(...$parameters)
+ * @method static RoomTypeFactory factory(...$parameters)
  */
 class RoomType extends Model
 {

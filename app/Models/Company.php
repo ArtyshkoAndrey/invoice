@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Support\Carbon;
+use Database\Factories\CompanyFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,9 +16,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Company newQuery()
  * @method static Builder|Company query()
  * @mixin Eloquent
- * @property int                             $id
- * @property string                          $name
- * @property string                          $code
+ * @property int         $id
+ * @property string      $name
+ * @property string      $code
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|Company whereCode($value)
@@ -25,7 +26,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Company whereId($value)
  * @method static Builder|Company whereName($value)
  * @method static Builder|Company whereUpdatedAt($value)
- * @method static \Database\Factories\CompanyFactory factory(...$parameters)
+ * @method static CompanyFactory factory(...$parameters)
  */
 class Company extends Model
 {

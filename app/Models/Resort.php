@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Туры, которые добавляют в дни
  *
- * @property int                             $id
- * @property string                          $name
+ * @property int         $id
+ * @property string      $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static ResortFactory factory(...$parameters)

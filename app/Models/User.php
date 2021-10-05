@@ -82,7 +82,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
    *
    * @return string
    */
-  public function getPhotoUrlAttribute (): string
+  public function getPhotoUrlAttribute(): string
   {
     return vsprintf('https://www.gravatar.com/avatar/%s.jpg?s=200&d=%s', [md5(strtolower($this->email)), $this->name ? urlencode("https://ui-avatars.com/api/$this->name") : 'mp',]);
   }
@@ -94,7 +94,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
    *
    * @return void
    */
-  public function sendPasswordResetNotification ($token): void
+  public function sendPasswordResetNotification($token): void
   {
     $this->notify(new ResetPassword($token));
   }
@@ -104,7 +104,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
    *
    * @return void
    */
-  public function sendEmailVerificationNotification (): void
+  public function sendEmailVerificationNotification(): void
   {
     $this->notify(new VerifyEmail);
   }
@@ -112,7 +112,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
   /**
    * @return int
    */
-  public function getJWTIdentifier (): int
+  public function getJWTIdentifier(): int
   {
     return $this->getKey();
   }
@@ -120,7 +120,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
   /**
    * @return array
    */
-  public function getJWTCustomClaims (): array
+  public function getJWTCustomClaims(): array
   {
     return [];
   }
