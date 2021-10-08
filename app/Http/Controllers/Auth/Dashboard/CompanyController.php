@@ -29,8 +29,12 @@ class CompanyController extends Controller
       $query = $query->where('name', 'like', "%{$search}%");
     }
 
-    $paginate = $request->get('per_page', 10);
-    $companies = $query->paginate($paginate);
+    $paginate = $request->get('per_page', null);
+    if ($paginate) {
+      $companies = $query->paginate($paginate);
+    } else {
+      $companies= $query->get();
+    }
 
     return JsonResponse::success(['companies' => $companies]);
   }

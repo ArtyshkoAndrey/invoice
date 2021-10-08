@@ -47,6 +47,28 @@
     "index": {
       "title": "Invoice list",
       "filter_title": "Invoice"
+    },
+    "buttons": {
+      "next": "Next"
+    },
+    "inputs": {
+      "company_name": "Company name",
+      "company_ref": "Reference",
+      "user": {
+        "name": "User name",
+        "nationality": "Nationality"
+      }
+    },
+    "errors": {
+      "company": "You need to choose a company",
+      "user": {
+        "name": "You must enter the user name",
+        "nationality": "It is necessary to enter the nationality of the user"
+      },
+      "validateInputs": {
+        "title": "Error of entered data",
+        "text": "You have not entered all the data to proceed to the next step"
+      }
     }
   },
 
@@ -159,6 +181,12 @@
       "danger": {
         "title": "Deleted error",
         "text": "The server was unable to delete the selected data. Contact the administrator, or refresh the pages"
+      }
+    },
+    "get": {
+      "danger": {
+        "title": "Error in receiving data",
+        "text": "The server was unable to answer your question. Reload the page"
       }
     }
   },
