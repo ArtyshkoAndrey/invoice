@@ -1,15 +1,15 @@
 <template>
   <div>
     <transition appear mode="out-in" name="fade">
-<!--      <Loader v-if="$root.$loading.show" key="1" />-->
+      <Loader v-if="$root.$loading.show" key="1" />
 
-      <div key="2">
+      <div v-else key="2">
         <HeaderFilterInfo ref="filter"
                           :filter="filter"
                           :title="$t('invoice.index.filter_title')"
                           :values="{}"
                           :view-length="viewLength"
-                          @create="busCreatorInvoice.$emit('openModal')"
+                          @create="creating"
                           @get="get"
                           @setViewLength="setViewLength"
         />
@@ -123,6 +123,10 @@ export default {
      */
     setViewLength(newLength) {
       this.viewLength = newLength
+    },
+
+    creating () {
+      this.$router.push({name: 'dashboard.invoice.create'})
     },
 
     /**

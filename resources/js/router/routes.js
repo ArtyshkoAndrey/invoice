@@ -18,6 +18,9 @@ export default [
           { path: '', redirect: { name: 'dashboard.invoice.index' } },
           {
             path: 'index', name: 'dashboard.invoice.index', component: page('dashboard/invoice/index.vue')
+          },
+          {
+            path: 'create', name: 'dashboard.invoice.create', component: page('dashboard/invoice/create.vue')
           }
         ]
       },

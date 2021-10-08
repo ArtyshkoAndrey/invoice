@@ -43,7 +43,7 @@ class Handler extends ExceptionHandler
     });
   }
 
-  public function render($request, Throwable $e): \Illuminate\Http\Response|JsonResponse|Response
+  public function render($request, Throwable $e)
   {
     if ($e instanceof ModelNotFoundException) {
       $e = new NotFoundHttpException(__('model.errors.notFound'), $e);
