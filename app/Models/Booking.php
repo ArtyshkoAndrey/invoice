@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string            $bb
  * @property Carbon            $check_in
  * @property Carbon            $check_out
- * @property int               $booking_number
+ * @property string            $booking_number
  * @property int               $invoice_id
  * @property Carbon|null       $created_at
  * @property Carbon|null       $updated_at

@@ -48,8 +48,14 @@
       "title": "Список заявок",
       "filter_title": "Заявки"
     },
+    "create": {
+      "step_3": {
+        "date_title": "Время проживания"
+      }
+    },
     "buttons": {
-      "next": "Далее"
+      "next": "Далее",
+      "add_hotel": "Добавить отель"
     },
     "inputs": {
       "company_name": "Название компании",
@@ -60,7 +66,7 @@
       },
       "hotel_name": "Наименование отеля",
       "room_type": "Тип комнаты",
-      "count": "Кол-во",
+      "countable": "Кол-во",
       "extra_bed": "Extra bed",
       "adults": "Взрослые",
       "children": "Дети",

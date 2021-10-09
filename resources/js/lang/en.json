@@ -48,8 +48,14 @@
       "title": "Invoice list",
       "filter_title": "Invoice"
     },
+    "create": {
+      "step_3": {
+        "date_title": "Time of stay"
+      }
+    },
     "buttons": {
-      "next": "Next"
+      "next": "Next",
+      "add_hotel": "Add Hotel"
     },
     "inputs": {
       "company_name": "Company name",
@@ -60,7 +66,7 @@
       },
       "hotel_name": "Name of the hotel",
       "room_type": "Room type",
-      "count": "Qty",
+      "countable": "Qty",
       "extra_bed": "Extra bed",
       "adults": "Adults",
       "children": "Children",

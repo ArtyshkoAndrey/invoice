@@ -39,7 +39,7 @@ class CreateBookingsTable extends Migration
       $table->date('check_in');
       $table->date('check_out');
 //    Номер бронирования
-      $table->bigInteger('booking_number');
+      $table->string('booking_number');
 
       $table->foreignId('invoice_id')
         ->constrained('invoices')
