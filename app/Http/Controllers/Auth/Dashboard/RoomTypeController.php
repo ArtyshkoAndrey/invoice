@@ -29,8 +29,12 @@ class RoomTypeController extends Controller
       $query = $query->where('name', 'like', "%{$search}%");
     }
 
-    $paginate = $request->get('per_page', 10);
-    $room_types = $query->paginate($paginate);
+    $paginate = $request->get('per_page', null);
+    if ($paginate) {
+      $room_types = $query->paginate($paginate);
+    } else {
+      $room_types = $query->get();
+    }
 
     return JsonResponse::success(['room_types' => $room_types]);
   }

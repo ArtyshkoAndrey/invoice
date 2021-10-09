@@ -13,121 +13,10 @@
       <div class="row mx-0">
         <div class="col-12">
           <transition name="slide-fade" appear mode="out-in">
-            <div v-if="stepForm === 1" key="1" class="card">
-              <div class="card-title px-3 pb-2 pt-4">
-                <h6 class="fw-light text-reset">Шаг 1 из 5 <span class="fw-bolder">Компания</span></h6>
-              </div>
 
-              <div class="card-body p-0 pb-3">
-                <div class="mx-3 my-2">
-                  <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4">
-
-                        <vs-select class="mw-100" :placeholder="$t('invoice.inputs.company_name')" v-model="form.company">
-                          <template #message-danger v-if="companyError">
-                            {{ companyError }}
-                          </template>
-                          <vs-option v-for="c in companies"
-                                     :label="c.name"
-                                     :value="c.id"
-                                     :key="c.id"
-                          >
-                            {{ c.name }}
-                          </vs-option>
-                        </vs-select>
-
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                      <vs-select class="mw-100"
-                                 :placeholder="$t('invoice.inputs.company_ref')"
-                                 v-model="form.company"
-                      >
-                        <template #message-danger v-if="companyError">
-                          {{ companyError }}
-                        </template>
-                        <vs-option v-for="c in companies" :key="c.id" :label="c.code" :value="c.id">
-                          {{ c.code }}
-                        </vs-option>
-                      </vs-select>
-                    </div>
-                  </div>
-                  <div class="row justify-content-end">
-                    <div class="col-auto">
-                      <vs-button
-                        flat
-                        @click="next"
-                      >
-                        {{ $t('invoice.buttons.next')}}
-
-                        <template #animate v-if="companyError === false">
-                          <i class='bx bx-right-arrow-alt fs-2'  aria-hidden="true"></i>
-                        </template>
-                        <template #animate v-else>
-                          <i class='bx bx-x fs-2'  aria-hidden="true"></i>
-                        </template>
-                      </vs-button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div v-else-if="stepForm === 2" key="2" class="card">
-              <div class="card-title px-3 pb-2 pt-4">
-                <h6 class="fw-light text-reset">Шаг 2 из 5 <span class="fw-bolder">Данные пользователя</span></h6>
-              </div>
-
-              <div class="card-body p-0 pb-3">
-                <div class="mx-3 my-2">
-                  <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4">
-                      <vs-input v-model="form.user.name"
-                                shadow
-                                :placeholder="$t('invoice.inputs.user.name')"
-                      >
-                        <template #icon>
-                          <i class='bx bx-user' aria-hidden="true"></i>
-                        </template>
-                        <template #message-danger v-if="userNameError">
-                          {{ userNameError }}
-                        </template>
-                      </vs-input>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                      <vs-input v-model="form.user.nationality"
-                                shadow
-                                :placeholder="$t('invoice.inputs.user.nationality')"
-                      >
-                        <template #icon>
-                          <i class='bx bx-globe' aria-hidden="true"></i>
-                        </template>
-                        <template #message-danger v-if="userNationalityError">
-                          {{ userNationalityError }}
-                        </template>
-                      </vs-input>
-                    </div>
-                  </div>
-                  <div class="row justify-content-end">
-                    <div class="col-auto">
-                      <vs-button
-                          flat
-                          @click="next"
-                      >
-                        {{ $t('invoice.buttons.next')}}
-
-                        <template #animate v-if="companyError === false">
-                          <i class='bx bx-right-arrow-alt fs-2'  aria-hidden="true"></i>
-                        </template>
-                        <template #animate v-else>
-                          <i class='bx bx-x fs-2'  aria-hidden="true"></i>
-                        </template>
-                      </vs-button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Step_1 v-if="stepForm === 1" key="1" :companies="companies" />
+            <Step_2 v-if="stepForm === 2" key="2" />
+            <Step_3 v-if="stepForm === 3" key="3" />
           </transition>
 
 
@@ -141,11 +30,14 @@
 import Vue from 'vue'
 import axios from 'axios'
 import Stepper from '~/components/Stepper.vue'
+import Step_1 from "~/components/Steps/Step_1.vue";
+import Step_2 from "~/components/Steps/Step_2.vue";
+import Step_3 from "~/components/Steps/Step_3.vue";
 export default {
   name: "create",
   data: () => ({
     value1: '',
-    stepForm: 1,
+    stepForm: 3,
     bus: new Vue(),
     companies: [],
     form: {
@@ -153,11 +45,15 @@ export default {
       user: {
         name: '',
         nationality: ''
-      }
+      },
+     hotels: []
     }
   }),
   components: {
-    Stepper
+    Stepper,
+    Step_1,
+    Step_2,
+    Step_3
   },
   async mounted() {
 
@@ -199,6 +95,7 @@ export default {
         }
       }
     },
+
     companyError () {
       if (this.form.company === '' || this.form.company === null) {
         return this.$t('invoice.errors.company')

@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -49,5 +52,20 @@ class Handler extends ExceptionHandler
       $e = new NotFoundHttpException(__('model.errors.notFound'), $e);
     }
     return parent::render($request, $e);
+  }
+
+  /**
+   * Convert an authentication exception into a response.
+   *
+   * @param Request $request
+   * @param AuthenticationException $exception
+   *
+   * @return JsonResponse
+   */
+  protected function unauthenticated($request, AuthenticationException $exception)
+  {
+    return $request->expectsJson()
+      ? response()->json(['message' => $exception->getMessage()], 401)
+      : redirect()->guest(url('/login'));
   }
 }

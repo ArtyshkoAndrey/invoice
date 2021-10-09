@@ -57,7 +57,17 @@
       "user": {
         "name": "Имя клиента",
         "nationality": "Национальность"
-      }
+      },
+      "hotel_name": "Наименование отеля",
+      "room_type": "Тип комнаты",
+      "count": "Кол-во",
+      "extra_bed": "Extra bed",
+      "adults": "Взрослые",
+      "children": "Дети",
+      "bb": "BB",
+      "check_in": "Чек ин",
+      "check_out": "Чек аут",
+      "booking_number": "Номер бронирования"
     },
     "errors": {
       "company": "Необходимо выбрать компанию",

@@ -57,7 +57,17 @@
       "user": {
         "name": "User name",
         "nationality": "Nationality"
-      }
+      },
+      "hotel_name": "Name of the hotel",
+      "room_type": "Room type",
+      "count": "Qty",
+      "extra_bed": "Extra bed",
+      "adults": "Adults",
+      "children": "Children",
+      "bb": "BB",
+      "check_in": "Check in",
+      "check_out": "Check out",
+      "booking_number": "Booking number"
     },
     "errors": {
       "company": "You need to choose a company",
