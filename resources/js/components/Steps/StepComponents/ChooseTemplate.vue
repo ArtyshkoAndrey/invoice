@@ -97,6 +97,7 @@ export default {
         if (r.data.success) {
           sample = r.data.payload.sample
           this.bus.$emit('setTemplate', sample)
+          this.active = false
         } else {
           this.error = r.data.message
         }
