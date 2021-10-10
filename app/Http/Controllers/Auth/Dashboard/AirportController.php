@@ -29,8 +29,12 @@ class AirportController extends Controller
       $query = $query->where('name', 'like', "%{$search}%");
     }
 
-    $paginate = $request->get('per_page', 10);
-    $airports = $query->paginate($paginate);
+    $paginate = $request->get('per_page', null);
+    if ($paginate) {
+      $airports = $query->paginate($paginate);
+    } else {
+      $airports = $query->get();
+    }
 
     return JsonResponse::success(['airports' => $airports]);
   }

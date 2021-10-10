@@ -9,7 +9,6 @@
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4">
             <vs-input v-model="$parent.form.user.name"
-                      shadow
                       :placeholder="$t('invoice.inputs.user.name')"
             >
               <template #icon>
@@ -23,7 +22,6 @@
 
           <div class="col-12 col-md-6 col-lg-4">
             <vs-input v-model="$parent.form.user.nationality"
-                      shadow
                       :placeholder="$t('invoice.inputs.user.nationality')"
             >
               <template #icon>

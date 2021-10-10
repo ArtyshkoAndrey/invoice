@@ -73,7 +73,17 @@
       "bb": "BB",
       "check_in": "Чек ин",
       "check_out": "Чек аут",
-      "booking_number": "Номер бронирования"
+      "booking_number": "Номер бронирования",
+      "arrival_time": "Время прилёта",
+      "arrival_flight_code": "Код полёта",
+      "departure_time": "Время отлёта",
+      "departure_flight_code": "Код полёта",
+      "driver_number": "Номер водителя",
+      "driver_name": "Имя водителя",
+      "passengers": "Пассажиры",
+      "airport": "Аэропорт",
+      "gid": "Гид",
+      "transport": "Транспорт"
     },
     "errors": {
       "company": "Необходимо выбрать компанию",

@@ -73,7 +73,17 @@
       "bb": "BB",
       "check_in": "Check in",
       "check_out": "Check out",
-      "booking_number": "Booking number"
+      "booking_number": "Booking number",
+      "arrival_time": "Arrival time",
+      "arrival_flight_code": "Flight code",
+      "departure_time": "Departure time",
+      "departure_flight_code": "Flight code",
+      "driver_number": "Driver's number",
+      "driver_name": "Driver's name",
+      "passengers": "Passengers",
+      "airport": "Airport",
+      "gid": "Guide",
+      "transport": "Transport"
     },
     "errors": {
       "company": "You need to choose a company",

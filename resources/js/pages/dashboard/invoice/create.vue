@@ -13,10 +13,10 @@
       <div class="row mx-0">
         <div class="col-12">
           <transition name="slide-fade" appear mode="out-in">
-
             <Step_1 v-if="stepForm === 1" key="1" :companies="companies" />
             <Step_2 v-if="stepForm === 2" key="2" />
             <Step_3 v-if="stepForm === 3" key="3" />
+            <Step_4 v-if="stepForm === 4" key="4" />
           </transition>
 
 
@@ -33,11 +33,12 @@ import Stepper from '~/components/Stepper.vue'
 import Step_1 from "~/components/Steps/Step_1.vue";
 import Step_2 from "~/components/Steps/Step_2.vue";
 import Step_3 from "~/components/Steps/Step_3.vue";
+import Step_4 from "~/components/Steps/Step_4.vue";
 export default {
   name: "create",
   data: () => ({
     value1: '',
-    stepForm: 3,
+    stepForm: 4,
     bus: new Vue(),
     companies: [],
     form: {
@@ -46,14 +47,15 @@ export default {
         name: '',
         nationality: ''
       },
-     hotels: []
+      hotels: []
     }
   }),
   components: {
     Stepper,
     Step_1,
     Step_2,
-    Step_3
+    Step_3,
+    Step_4
   },
   async mounted() {
 
@@ -136,7 +138,7 @@ export default {
       })
     },
 
-    next () {
+    next (callback) {
       if (this.step === 1) {
         if (this.companyError) {
          this.notifyError()
@@ -158,6 +160,14 @@ export default {
           step: this.step,
           status: 'success'
         })
+      } else if (this.step === 3) {
+        this.bus.$emit('setStatus',{
+          step: this.step,
+          status: 'success'
+        })
+      }
+      if (typeof callback === 'function') {
+        callback()
       }
     }
   }

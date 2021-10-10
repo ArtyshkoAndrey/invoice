@@ -137,7 +137,7 @@
 
         <div class="row justify-content-end">
           <div class="col-auto">
-            <vs-button>
+            <vs-button :disabled="disabledNext" @click="next">
               {{ $t('invoice.buttons.next') }}
             </vs-button>
           </div>
@@ -159,6 +159,13 @@ export default {
   components: {
     Loader
   },
+  props: {
+    hotelsOnw: {
+      type: Array,
+      require: false,
+      default: null
+    }
+  },
   data: () =>({
     hotels: [],
     rooms: [],
@@ -168,9 +175,45 @@ export default {
   async mounted () {
     await this.getHotels()
     await this.getRooms()
-    await this.createNewHotel()
+    if (this.hotelsOnw instanceof Array) {
+      if (this.hotelsOnw.length > 0) {
+        this.h = this.hotelsOnw
+      } else {
+        await this.createNewHotel()
+      }
+    } else {
+      await this.createNewHotel()
+    }
+  },
+  computed: {
+    disabledNext () {
+      let status = false
+
+      this.h.length === 0 ? status = true : null;
+
+      this.h.forEach(hotel => {
+        if (hotel.hotel_id === '' ||
+            hotel.room_type_id === '' ||
+            hotel.count === '' ||
+            hotel.adults === '' ||
+            hotel.children === '' ||
+            hotel.check_in === '' ||
+            hotel.check_out === '' ||
+            hotel.booking_number === ''
+        ) {
+          status = true
+        }
+      })
+
+      return status
+    }
   },
   methods: {
+    /**
+     * Get all Hotels in project
+     *
+     * @returns {Promise<void>}
+     */
     async getHotels () {
       await axios.get("/api/hotels")
         .then (r => {
@@ -191,6 +234,11 @@ export default {
           })
         })
     },
+    /**
+     * get all Rooms in project
+     *
+     * @returns {Promise<void>}
+     */
     async getRooms () {
       await axios.get("/api/room_types")
         .then (r => {
@@ -212,6 +260,10 @@ export default {
         })
     },
 
+    /**
+     * Create a new empty Booking
+     *
+     */
     createNewHotel () {
       this.h.push({
         hotel_id: '',
@@ -229,8 +281,19 @@ export default {
       this.loading = false
     },
 
+    /**
+     * Remove one Booking
+     *
+     * @param index
+     */
     removeHotel (index) {
       this.h.splice(index, 1)
+    },
+
+    next () {
+      this.$parent.next(() => {
+        this.$parent.form.hotels = this.h
+      })
     }
   }
 }
