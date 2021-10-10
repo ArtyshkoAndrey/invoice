@@ -17,12 +17,10 @@
             <Step_2 v-if="stepForm === 2" key="2" />
             <Step_3 v-if="stepForm === 3" key="3" />
             <Step_4 v-if="stepForm === 4" key="4" />
+            <Step_5 v-if="stepForm === 5" key="5" />
           </transition>
-
-
         </div>
       </div>
-
     </div>
   </transition>
 </template>
@@ -30,15 +28,25 @@
 import Vue from 'vue'
 import axios from 'axios'
 import Stepper from '~/components/Stepper.vue'
-import Step_1 from "~/components/Steps/Step_1.vue";
-import Step_2 from "~/components/Steps/Step_2.vue";
-import Step_3 from "~/components/Steps/Step_3.vue";
-import Step_4 from "~/components/Steps/Step_4.vue";
+import Step_1 from "~/components/Steps/Step_1.vue"
+import Step_2 from "~/components/Steps/Step_2.vue"
+import Step_3 from "~/components/Steps/Step_3.vue"
+import Step_4 from "~/components/Steps/Step_4.vue"
+import Step_5 from "~/components/Steps/Step_5.vue"
+import Loader from "~/components/Loader.vue"
 export default {
-  name: "create",
+  name: "Create",
+  components: {
+    Stepper,
+    Step_1,
+    Step_2,
+    Step_3,
+    Step_4,
+    Step_5,
+    Loader
+  },
   data: () => ({
-    value1: '',
-    stepForm: 4,
+    stepForm: 5,
     bus: new Vue(),
     companies: [],
     form: {
@@ -47,33 +55,10 @@ export default {
         name: '',
         nationality: ''
       },
-      hotels: []
+      hotels: [],
+      transfer: {}
     }
   }),
-  components: {
-    Stepper,
-    Step_1,
-    Step_2,
-    Step_3,
-    Step_4
-  },
-  async mounted() {
-
-    this.bus.$on('changeStep', this.changeStep)
-
-    await axios.get('/api/companies')
-    .then(r => {
-      this.companies = r.data.payload.companies
-    })
-    .catch(e => {
-      this.$vs.notification({
-        title: this.$t('notification.get.danger.title'),
-        text: this.$t('notification.get.danger.text')
-      })
-    })
-
-    await this.$root.$loading.finish()
-  },
   computed: {
     step: {
       get: function () {
@@ -121,6 +106,23 @@ export default {
       return false
     }
   },
+  async mounted() {
+
+    this.bus.$on('changeStep', this.changeStep)
+
+    await axios.get('/api/companies')
+    .then(r => {
+      this.companies = r.data.payload.companies
+    })
+    .catch(e => {
+      this.$vs.notification({
+        title: this.$t('notification.get.danger.title'),
+        text: this.$t('notification.get.danger.text')
+      })
+    })
+
+    await this.$root.$loading.finish()
+  },
   methods: {
     changeStep (index) {
       console.log('changeStep', index)
@@ -161,6 +163,11 @@ export default {
           status: 'success'
         })
       } else if (this.step === 3) {
+        this.bus.$emit('setStatus',{
+          step: this.step,
+          status: 'success'
+        })
+      } else if (this.step === 4) {
         this.bus.$emit('setStatus',{
           step: this.step,
           status: 'success'

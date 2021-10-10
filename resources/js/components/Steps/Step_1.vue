@@ -40,10 +40,10 @@
         <div class="row justify-content-end">
           <div class="col-auto">
             <vs-button
-                flat
-                @click="$parent.next"
+              flat
+              @click="$parent.next"
             >
-              {{ $t('invoice.buttons.next')}}
+              {{ $t('invoice.buttons.next') }}
 
               <template #animate v-if="$parent.companyError === false">
                 <i class='bx bx-right-arrow-alt fs-2'  aria-hidden="true"></i>
@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  name: "Step_1",
+  name: "Step1",
   props: {
     companies: {
       required: true,

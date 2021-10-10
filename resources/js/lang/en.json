@@ -51,11 +51,19 @@
     "create": {
       "step_3": {
         "date_title": "Time of stay"
+      },
+      "step_5": {
+        "template": {
+          "title": "Select a template",
+          "done": "Done"
+        }
       }
     },
     "buttons": {
       "next": "Next",
-      "add_hotel": "Add Hotel"
+      "add_hotel": "Add Hotel",
+      "choose_template": "Add from Template",
+      "create_new_template": "Create a new one"
     },
     "inputs": {
       "company_name": "Company name",

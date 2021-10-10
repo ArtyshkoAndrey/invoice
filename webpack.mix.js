@@ -40,7 +40,7 @@ mix.then(() => {
   }
 })
 
-mix.browserSync('http://0.0.0.0:3000')
+mix.browserSync('http://localhost')
 
 function publishAseets () {
   const publicDir = path.resolve(__dirname, './public')

@@ -27,8 +27,12 @@ class SampleController extends Controller
       $query = $query->where('name', 'like', "%{$search}%");
     }
 
-    $paginate = $request->get('per_page', 10);
-    $samples = $query->paginate($paginate);
+    $paginate = $request->get('per_page', null);
+    if ($paginate) {
+      $samples = $query->paginate($paginate);
+    } else {
+      $samples = $query->get();
+    }
 
     return JsonResponse::success(['samples' => $samples]);
   }

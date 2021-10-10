@@ -51,11 +51,19 @@
     "create": {
       "step_3": {
         "date_title": "Время проживания"
+      },
+      "step_5": {
+        "template": {
+          "title": "Выберите шаблон",
+          "done": "Готово"
+        }
       }
     },
     "buttons": {
       "next": "Далее",
-      "add_hotel": "Добавить отель"
+      "add_hotel": "Добавить отель",
+      "choose_template": "Добавить из шаблона",
+      "create_new_template": "Создать новый"
     },
     "inputs": {
       "company_name": "Название компании",
