@@ -45,7 +45,7 @@ export default {
     Loader
   },
   data: () => ({
-    stepForm: 5,
+    stepForm: 1,
     bus: new Vue(),
     companies: [],
     form: {
