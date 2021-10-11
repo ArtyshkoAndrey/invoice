@@ -40,7 +40,7 @@ mix.then(() => {
   }
 })
 
-mix.browserSync('http://localhost')
+mix.browserSync('http://invoice')
 
 function publishAseets () {
   const publicDir = path.resolve(__dirname, './public')

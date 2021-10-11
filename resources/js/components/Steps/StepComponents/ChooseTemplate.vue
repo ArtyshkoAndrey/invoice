@@ -96,6 +96,15 @@ export default {
       .then(r => {
         if (r.data.success) {
           sample = r.data.payload.sample
+
+          sample.days.forEach(day => {
+            if (day.resort === null) {
+              day.resort = {
+                id: ''
+              }
+            }
+          })
+
           this.bus.$emit('setTemplate', sample)
           this.active = false
         } else {

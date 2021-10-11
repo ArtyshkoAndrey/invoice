@@ -119,6 +119,7 @@
           <div class="col-auto">
             <vs-button
               :disabled="disabledNext"
+              @click="next"
             >
               {{ $t('invoice.buttons.next') }}
             </vs-button>
@@ -170,12 +171,6 @@ export default {
       });
 
       return status
-    },
-
-    next () {
-      this.$parent.next(() => {
-        this.$parent.form.transfer = this.transfer
-      })
     }
   },
   mounted () {
@@ -191,6 +186,13 @@ export default {
     .catch(e => {
       this.$router.push({name: 'dashboard.invoice.index'})
     })
+  },
+  methods: {
+    next () {
+      this.$parent.next(() => {
+        this.$parent.form.transfer = this.transfer
+      })
+    }
   }
 }
 </script>

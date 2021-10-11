@@ -27,14 +27,17 @@
             </vs-button>
           </div>
         </div>
+        <!-- Вывод шаблона -->
         <div v-else>
           <div v-for="(day, index) in template.days" :key="index" class="row align-items-center my-2">
             <div class="col-lg-auto col-sm-2 col-4">
-              <p class="mb-0">{{ $t('samples.edit.day', {number: index + 1}) }}</p>
+              <p class="mb-0">
+                {{ $t('samples.edit.day', {number: index + 1}) }}
+              </p>
             </div>
             <div class="col-lg-auto col-sm-4 col-8">
-              <vs-select v-model="day.resort.id" placeholder="Курорты">
-                <vs-option v-for="resort in resorts" :key="resort.id" :label="resort.name" :value="resort.id">
+              <vs-select v-model="day.resort.id" placeholder="Курорты" :disabled="day.free">
+                <vs-option v-for="resort in resorts" :key="resort.id" :label="resort.name" :value="resort.id" :disabled="day.free">
                   {{ resort.name }}
                 </vs-option>
               </vs-select>
@@ -49,6 +52,7 @@
                 circle
                 danger
                 flat
+                @click="removeDay(index)"
               >
                 <em class="bx bx-trash-alt d-none d-lg-block" />
                 <span class="d-block d-lg-none">{{ $t('form.delete') }}</span>
@@ -56,6 +60,25 @@
             </div>
             <div class="col-12">
               <hr class="d-block d-lg-none">
+            </div>
+          </div>
+
+          <div class="row justify-content-between align-items-center mt-3">
+            <div class="col-auto">
+              <vs-button
+                gradient
+                @click="addDay"
+              >
+                {{ $t('samples.edit.add_day') }}
+              </vs-button>
+            </div>
+            <div class="col-auto">
+              <vs-button
+                :disabled="disabledNext"
+                @click="$parent.next"
+              >
+                {{ $t('invoice.buttons.next') }}
+              </vs-button>
             </div>
           </div>
         </div>
@@ -79,6 +102,13 @@ export default {
     Loader,
     ChooseTemplate
   },
+  props: {
+    sample: {
+      type: Object,
+      require: true,
+      default: null
+    }
+  },
   data: () => ({
     bus: new Vue(),
     loading: false,
@@ -86,17 +116,50 @@ export default {
     setTemplateFlag: false,
     resorts: []
   }),
+  computed: {
+    disabledNext () {
+      let status = false
+
+      if (this.template === null) {
+        status = true
+      } else if (this.template.days.length <= 0) {
+        status = true
+      } else {
+        this.template.days.forEach(day => {
+          if ((day.resort.id === '' || day.resort.id === null) && day.free === false) {
+            status = true
+            return 0
+          }
+        })
+      }
+
+      return status
+    }
+  },
+  watch: {
+    template: {
+      handler: function (val) {
+        this.$parent.form.sample = val
+      },
+      deep: true
+    }
+  },
   mounted() {
     this.bus.$on('setTemplate', this.setTemplate)
-
-    if (this.template !== null) {
-      this.setTemplateFlag = true
+    if (this.sample !== null) {
+      this.setTemplate(this.sample)
     }
   },
   methods: {
     setTemplate (template) {
       if (template !== null)
         this.template = template
+      else {
+        this.template = {
+          days: [],
+          name: ''
+        }
+      }
       this.loading = true
       this.setTemplateFlag = true
 
@@ -123,7 +186,23 @@ export default {
         })
         this.$router.push({name: 'dashboard.invoice.index'})
       })
-    }
+    },
+
+    addDay () {
+      let day = {
+        id: '',
+        order: '',
+        resort: {
+          id: ''
+        },
+        free: false
+      }
+
+      this.template.days.push(day)
+    },
+    removeDay (index) {
+      this.template.days = this.template.days.filter((el, i) => i !== index)
+    },
   }
 }
 </script>

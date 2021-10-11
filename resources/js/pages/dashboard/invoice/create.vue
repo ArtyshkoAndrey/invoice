@@ -3,7 +3,6 @@
     <Loader v-if="$root.$loading.show" key="1" />
 
     <div v-else id="groupCollapse" key="2">
-
       <div class="row justify-content-center mb-5">
         <div class="col-12 col-mg-8 col-lg justify-content-center">
           <Stepper :bus="bus" :count="5" />
@@ -17,7 +16,7 @@
             <Step_2 v-if="stepForm === 2" key="2" />
             <Step_3 v-if="stepForm === 3" key="3" />
             <Step_4 v-if="stepForm === 4" key="4" />
-            <Step_5 v-if="stepForm === 5" key="5" />
+            <Step_5 v-if="stepForm === 5" key="5" :sample="form.sample" />
           </transition>
         </div>
       </div>
@@ -56,7 +55,8 @@ export default {
         nationality: ''
       },
       hotels: [],
-      transfer: {}
+      transfer: {},
+      sample: null
     }
   }),
   computed: {
@@ -172,10 +172,47 @@ export default {
           step: this.step,
           status: 'success'
         })
+      } else if (this.step === 5) {
+        this.createInvoice()
       }
       if (typeof callback === 'function') {
         callback()
       }
+    },
+
+    createInvoice () {
+      this.loading = true
+      axios.post("/api/invoices", {
+        ...this.form
+      })
+      .then(r => {
+        if (r.data.success) {
+          this.$router.push({name: 'dashboard.invoice.index'})
+        } else {
+          this.notifyError()
+        }
+      })
+      .catch(e => {
+        if (e.response.status === 422) {
+          this.$vs.notification({
+            title: 'Ошибка',
+            text: e.response.data.message
+          })
+
+          Object.keys(e.response.data.errors).forEach((key) => {
+            this.$vs.notification({
+              title: key.capitalize(),
+              text: e.response.data.errors[key]
+            })
+          })
+        }
+        else if (e.response.status === 404) {
+          this.$vs.notification({
+            title: 'Ошибка',
+            text: e.response.data.message
+          })
+        }
+      })
     }
   }
 }
