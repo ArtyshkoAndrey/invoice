@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -75,8 +76,8 @@ class Invoice extends Model
 
   protected $casts = [
     'gid' => 'boolean',
-    'departure_time'  => 'datetime:d.m.Y, H:i',
-    'arrival_time'    => 'datetime:d.m.Y, H:i',
+    'departure_time'  => 'datetime',
+    'arrival_time'    => 'datetime',
   ];
 
   /**
@@ -117,5 +118,10 @@ class Invoice extends Model
   public function bookings(): HasMany
   {
     return $this->hasMany(Booking::class);
+  }
+
+  public function days(): MorphMany
+  {
+    return $this->morphMany(Day::class, 'model');
   }
 }

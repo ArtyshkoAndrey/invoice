@@ -43,7 +43,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="row align-items-center mx-0">
-                  <div class="col-lg-1 col-sm-1 col-2 text-center">
+                  <div class="col-lg-1 col-sm-1 col-2 text-center" style="cursor: pointer" @click="$router.push({name: 'dashboard.invoice.show', params: { id: item.id } })">
                     <h6 class="mb-0">
                       {{ item.id }}
                     </h6>
@@ -65,10 +65,12 @@
                   </div>
                   <div class="col-lg-3 col-sm-8 mt-lg-0 mt-sm-3 col-auto mt-3">
                     <p class="mb-0 text-reset">
-                      <span class="opacity-50">Прибытие: </span>{{ item.arrival_time }}
+                      <span class="opacity-50">Прибытие: </span>
+                      {{ $formatDate(item.arrival_time) }} {{ $formatTime(item.arrival_time) }}
                     </p>
                     <p class="mb-0 text-reset">
-                      <span class="opacity-50">Отбытие: </span>{{ item.departure_time }}
+                      <span class="opacity-50">Отбытие: </span>
+                      {{ $formatDate(item.departure_time) }} {{ $formatTime(item.departure_time) }}
                     </p>
                   </div>
 
@@ -78,6 +80,7 @@
                                icon
                                border
                                danger
+                               @click="console.log(123)"
                     >
                       <em class="bx bxs-file-pdf h5 mb-0" />
                     </vs-button>

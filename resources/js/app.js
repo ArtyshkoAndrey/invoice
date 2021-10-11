@@ -18,6 +18,22 @@ String.prototype.capitalize = function () {
 Vue.use(Vuesax)
 Vue.use(Router)
 
+Vue.prototype.$formatDate = function (str) {
+  str = new Date(str)
+  return ((str.getDate() < 10) ? '0' : '') +
+    str.getDate() +
+    '.' +
+    ((str.getMonth() < 9) ? '0' : '') +
+    (str.getMonth() + 1) +
+    '.' +
+    str.getFullYear()
+}
+
+Vue.prototype.$formatTime = function (str) {
+  str = new Date(str)
+  return ((str.getUTCHours() < 10) ? '0' : '') + str.getUTCHours() + ':' + ((str.getUTCMinutes() < 9) ? '0' : '') + str.getUTCMinutes()
+}
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

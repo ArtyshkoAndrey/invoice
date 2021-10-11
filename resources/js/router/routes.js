@@ -21,6 +21,9 @@ export default [
           },
           {
             path: 'create', name: 'dashboard.invoice.create', component: page('dashboard/invoice/create.vue')
+          },
+          {
+            path: 'show/:id', name: 'dashboard.invoice.show', component: page('dashboard/invoice/show.vue')
           }
         ]
       },

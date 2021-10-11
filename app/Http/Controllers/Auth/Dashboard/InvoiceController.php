@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Query\Builder;
 use App\Http\Requests\InvoicesRequest;
 
 class InvoiceController extends Controller
@@ -35,7 +34,7 @@ class InvoiceController extends Controller
         ->orWhere('departure_flight_code', 'like', "%{$search}%")
         ->orWhere('driver_number', 'like', "%{$search}%")
         ->orWhere('driver_name', 'like', "%{$search}%")
-        ->orWhereHas('company', function ($q) use($search) {
+        ->orWhereHas('company', function ($q) use ($search) {
           $q->where('name', 'like', "%{$search}%")
             ->orWhere('code', 'like', "%{$search}%");
         });
@@ -75,8 +74,8 @@ class InvoiceController extends Controller
 
 //    Save Booking info
 
-    $bookings =  $request->input('hotels');
-    foreach ($bookings as  $booking) {
+    $bookings = $request->input('hotels');
+    foreach ($bookings as $booking) {
       $b = new Booking($booking);
       $b->hotel()->associate($booking['hotel_id']);
       $b->invoice()->associate($i);
@@ -105,11 +104,21 @@ class InvoiceController extends Controller
    *
    * @param Invoice $invoice
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function show(Invoice $invoice)
+  public function show(Invoice $invoice): \Illuminate\Http\JsonResponse
   {
-    //
+    $invoice->load([
+      'arrival_airport',
+      'departure_airport',
+      'company',
+      'bookings',
+      'days',
+      'days.resort',
+      'bookings.room',
+      'bookings.hotel',
+    ]);
+    return JsonResponse::success(['invoice' => $invoice]);
   }
 
   /**
