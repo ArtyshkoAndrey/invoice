@@ -15,8 +15,8 @@
                 <p class="mb-0">{{ $t('samples.edit.day', {number: index + 1}) }}</p>
               </div>
               <div class="col-lg-auto col-sm-4 col-8">
-                <vs-select v-model="day.resort.id" placeholder="Курорты">
-                  <vs-option v-for="resort in resorts" :key="resort.id" :label="resort.name" :value="resort.id">
+                <vs-select v-model="day.resort.id" placeholder="Курорты" :disabled="day.free">
+                  <vs-option v-for="resort in resorts" :key="resort.id" :label="resort.name" :disabled="day.free" :value="resort.id">
                     {{ resort.name }}
                   </vs-option>
                 </vs-select>
@@ -81,7 +81,9 @@ export default {
   },
   data: () => ({
     title: i18n.t('samples.edit.title'),
-    sample: {},
+    sample: {
+      days: []
+    },
     resorts: [],
     loading: true
   }),
@@ -93,7 +95,16 @@ export default {
   async mounted() {
     await axios.get('/api/samples/' + this.id)
     .then(r => {
-      this.sample = r.data.payload.sample
+      let sample = r.data.payload.sample
+      sample.days.forEach(day => {
+        if (day.resort === null) {
+          console.log(day)
+          day.resort = {
+            id: ''
+          }
+        }
+      })
+      this.sample = sample
     })
     .catch(e => {
       if (e.response.status === 404) {
