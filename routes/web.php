@@ -13,5 +13,8 @@ use App\Http\Controllers\Spa\SpaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/pdf', [SpaController::class, 'pdf']);
+Route::get('pdf/invoice/{id}', [SpaController::class, 'invoice'])->name('invoice.pdf');
 
 Route::get('{path}', [SpaController::class, 'index'])->where('path', '(.*)');
+
