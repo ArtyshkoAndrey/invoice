@@ -54,7 +54,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.theme)
     const unwatch = this.$watch(
       () => this.$route,
       (route) => {
