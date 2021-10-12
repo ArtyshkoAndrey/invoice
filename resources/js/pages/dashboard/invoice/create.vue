@@ -187,7 +187,7 @@ export default {
       })
       .then(r => {
         if (r.data.success) {
-          this.$router.push({name: 'dashboard.invoice.index'})
+          this.$router.push({name: 'dashboard.invoice.show', params:{id: r.data.invoice.id}})
         } else {
           this.notifyError()
         }

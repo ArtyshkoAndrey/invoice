@@ -7,7 +7,7 @@
     class="py-2"
   >
     <template #left>
-      <vs-navbar-item id="guide">
+      <vs-navbar-item id="guide" @click="$router.push({name: 'dashboard.invoice.index'})">
         Главная
       </vs-navbar-item>
     </template>
