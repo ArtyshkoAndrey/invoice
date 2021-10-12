@@ -24,7 +24,7 @@ class InvoiceController extends Controller
   {
     $query = invoice::query()->with(['company']);
 
-    $query = $query->orderByDesc('updated_at');
+    $query = $query->orderByDesc('created_at');
 
     if (($search = $request->get('search', '')) !== '') {
       $query = $query->where('id', 'like', "%{$search}%")
