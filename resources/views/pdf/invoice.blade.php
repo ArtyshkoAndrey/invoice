@@ -136,14 +136,6 @@
           улёта:</strong> {{ $invoice->departure_time->format('d.m.y H:s') }}</p>
     </td>
   </tr>
-  <tr>
-    <td style="padding-left: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Национальность:</strong> {{ $invoice->user_nationality }}</p>
-    </td>
-    <td style="padding-right: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Reference:</strong> {{ $invoice->company->code }}</p>
-    </td>
-  </tr>
 
   <tr>
     <td style="padding-left: 30px; width: 50%; vertical-align: top;">
