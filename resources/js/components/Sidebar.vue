@@ -58,7 +58,11 @@ export default {
     const unwatch = this.$watch(
       () => this.$route,
       (route) => {
-        this.active = route.name
+        if (typeof this.$route.matched[1] !== 'undefined') {
+          this.active = this.$route.matched[1].alias[0]
+        } else {
+          this.active = route.name
+        }
         // unwatch()
       })
 

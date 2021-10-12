@@ -14,6 +14,7 @@ export default [
       {
         path: 'invoice',
         component: { render: (c) => c('router-view') },
+        alias: 'dashboard.invoice.index',
         children: [
           { path: '', redirect: { name: 'dashboard.invoice.index' } },
           {
@@ -30,6 +31,7 @@ export default [
       {
         path: 'resorts',
         component: { render: (c) => c('router-view') },
+        alias: 'dashboard.resorts.index',
         children: [
           { path: '', redirect: { name: 'dashboard.resorts.index' } },
           {
@@ -40,6 +42,7 @@ export default [
       {
         path: 'airports',
         component: { render: (c) => c('router-view') },
+        alias: 'dashboard.airports.index',
         children: [
           { path: '', redirect: { name: 'dashboard.airports.index' } },
           {
@@ -50,6 +53,7 @@ export default [
       {
         path: 'room_types',
         component: { render: (c) => c('router-view') },
+        alias: 'dashboard.room_types.index',
         children: [
           { path: '', redirect: { name: 'dashboard.room_types.index' } },
           {
@@ -60,6 +64,7 @@ export default [
       {
         path: 'companies',
         component: { render: (c) => c('router-view') },
+        alias: 'dashboard.companies.index',
         children: [
           { path: '', redirect: { name: 'dashboard.companies.index' } },
           {
@@ -70,6 +75,7 @@ export default [
       {
         path: 'samples',
         component: { render: (c) => c('router-view') },
+        alias: 'dashboard.samples.index',
         children: [
           { path: '', redirect: { name: 'dashboard.samples.index' } },
           {
