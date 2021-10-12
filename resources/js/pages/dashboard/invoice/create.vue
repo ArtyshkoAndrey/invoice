@@ -14,8 +14,8 @@
           <transition name="slide-fade" appear mode="out-in">
             <Step_1 v-if="stepForm === 1" key="1" :companies="companies" />
             <Step_2 v-if="stepForm === 2" key="2" />
-            <Step_3 v-if="stepForm === 3" key="3" />
-            <Step_4 v-if="stepForm === 4" key="4" />
+            <Step_3 v-if="stepForm === 3" key="3" :hotels-own="form.hotels" />
+            <Step_4 v-if="stepForm === 4" key="4" :transfer-data="form.transfer" />
             <Step_5 v-if="stepForm === 5" key="5" :sample="form.sample" />
           </transition>
         </div>
@@ -55,7 +55,7 @@ export default {
         nationality: ''
       },
       hotels: [],
-      transfer: {},
+      transfer: null,
       sample: null
     }
   }),
@@ -187,7 +187,7 @@ export default {
       })
       .then(r => {
         if (r.data.success) {
-          this.$router.push({name: 'dashboard.invoice.show', params:{id: r.data.invoice.id}})
+          this.$router.push({name: 'dashboard.invoice.show', params:{id: r.data.payload.invoice.id}})
         } else {
           this.notifyError()
         }

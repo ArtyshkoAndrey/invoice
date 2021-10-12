@@ -142,6 +142,13 @@ export default {
   comments: {
     Loader
   },
+  props: {
+    transferData: {
+      required: false,
+      type: Object,
+      default: null
+    }
+  },
   data: () => ({
     airports: [],
     loading: true,
@@ -174,6 +181,11 @@ export default {
     }
   },
   mounted () {
+
+    if (this.transferData !== null) {
+      this.transfer = this.transferData
+    }
+
     axios.get('/api/airports')
     .then(r => {
       if (r.data.success) {

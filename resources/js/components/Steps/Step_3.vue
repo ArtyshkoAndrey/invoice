@@ -1,7 +1,9 @@
 <template>
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
-      <h6 class="fw-light text-reset">Шаг 3 из 5 <span class="fw-bolder">Данные отеля</span></h6>
+      <h6 class="fw-light text-reset">
+        Шаг 3 из 5 <span class="fw-bolder">Данные отеля</span>
+      </h6>
     </div>
 
     <div v-if="!loading" class="card-body p-0 pb-3">
@@ -10,9 +12,9 @@
           <div class="col-12">
             <div class="row">
               <div class="col-12 col-md-6 col-lg-4">
-                <vs-select :placeholder="$t('invoice.inputs.hotel_name')"
+                <vs-select v-model="hotel.hotel_id"
+                           :placeholder="$t('invoice.inputs.hotel_name')"
                            class="mw-100"
-                           v-model="hotel.hotel_id"
                 >
                   <vs-option v-for="some_hotel in hotels"
                              :key="some_hotel.id"
@@ -24,16 +26,18 @@
                 </vs-select>
               </div>
               <div class="d-none d-md-block col-auto">
-                <vs-button danger @click="removeHotel(index)">
+                <vs-button danger
+                           @click="removeHotel(index)"
+                >
                   {{ $t('form.delete') }}
                 </vs-button>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-12 col-md-6 col-lg-3">
-                <vs-select :placeholder="$t('invoice.inputs.room_type')"
+                <vs-select v-model="hotel.room_type_id"
+                           :placeholder="$t('invoice.inputs.room_type')"
                            class="mw-100"
-                           v-model="hotel.room_type_id"
                 >
                   <vs-option v-for="room in rooms"
                              :key="room.id"
@@ -45,8 +49,10 @@
                 </vs-select>
               </div>
               <div class="col col-md-6 col-lg-3">
-                <vs-input type="number" inputmode="numeric" pattern="[0-9]*"
-                          v-model.number="hotel.count"
+                <vs-input v-model.number="hotel.count"
+                          type="number"
+                          inputmode="numeric"
+                          pattern="[0-9]*"
                           :placeholder="$t('invoice.inputs.countable')"
                 />
               </div>
@@ -58,22 +64,26 @@
             </div>
             <div class="row mt-3">
               <div class="col-12 col-md-4 col-lg-3">
-                <vs-input type="number" inputmode="numeric" pattern="[0-9]*"
-                          v-model.number="hotel.adults"
+                <vs-input v-model.number="hotel.adults"
+                          type="number"
+                          inputmode="numeric"
+                          pattern="[0-9]*"
                           :placeholder="$t('invoice.inputs.adults')"
                 />
               </div>
               <div class="col-12 col-md-4 col-lg-3">
-                <vs-input type="number" inputmode="numeric" pattern="[0-9]*"
-                          v-model.number="hotel.children"
+                <vs-input v-model.number="hotel.children"
+                          type="number"
+                          inputmode="numeric"
+                          pattern="[0-9]*"
                           :placeholder="$t('invoice.inputs.children')"
                 />
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-12 col-md-6 col-lg-4">
-                <vs-select :placeholder="$t('invoice.inputs.bb')"
-                           v-model="hotel.bb"
+                <vs-select v-model="hotel.bb"
+                           :placeholder="$t('invoice.inputs.bb')"
                 >
                   <vs-option value="BB" label="BB">
                     {{ $t('invoice.inputs.bb') }}
@@ -83,35 +93,30 @@
             </div>
             <div class="row mt-5 mb-4">
               <div class="col-12">
-                <h6 class="text-reset">{{ $t('invoice.create.step_3.date_title') }}</h6>
+                <h6 class="text-reset">
+                  {{ $t('invoice.create.step_3.date_title') }}
+                </h6>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-6 col-md-4 col-lg-3">
-                <vs-input type="date"
+                <vs-input v-model="hotel.check_in"
+                          type="date"
                           :label="$t('invoice.inputs.check_in')"
-                          v-model="hotel.check_in"
-                >
-
-                </vs-input>
+                />
               </div>
               <div class="col-6 col-md-4 col-lg-3">
-                <vs-input type="date"
+                <vs-input v-model="hotel.check_out"
+                          type="date"
                           :label="$t('invoice.inputs.check_out')"
-                          v-model="hotel.check_out"
-                >
-
-                </vs-input>
+                />
               </div>
-
             </div>
             <div class="row mt-3">
               <div class="col-12 col-md-4 col-lg-3">
                 <vs-input v-model="hotel.booking_number"
                           :placeholder="$t('invoice.inputs.booking_number')"
-                >
-
-                </vs-input>
+                />
               </div>
             </div>
           </div>
@@ -122,7 +127,7 @@
               </vs-button>
             </div>
           </div>
-          <div class="col-12" v-if="h.length > 1 && index !== h.length - 1  ">
+          <div v-if="h.length > 1 && index !== h.length - 1 " class="col-12">
             <hr>
           </div>
         </div>
@@ -146,7 +151,7 @@
     </div>
 
     <div v-else class="card-body">
-      <Loader/>
+      <Loader />
     </div>
   </div>
 </template>
@@ -155,12 +160,12 @@
 import Loader from "~/components/Loader"
 import axios from "axios"
 export default {
-  name: "Step_3",
+  name: "Step3",
   components: {
     Loader
   },
   props: {
-    hotelsOnw: {
+    hotelsOwn: {
       type: Array,
       require: false,
       default: null
@@ -172,19 +177,6 @@ export default {
     loading: true,
     h: []
   }),
-  async mounted () {
-    await this.getHotels()
-    await this.getRooms()
-    if (this.hotelsOnw instanceof Array) {
-      if (this.hotelsOnw.length > 0) {
-        this.h = this.hotelsOnw
-      } else {
-        await this.createNewHotel()
-      }
-    } else {
-      await this.createNewHotel()
-    }
-  },
   computed: {
     disabledNext () {
       let status = false
@@ -206,6 +198,20 @@ export default {
       })
 
       return status
+    }
+  },
+  async mounted () {
+    await this.getHotels()
+    await this.getRooms()
+    if (this.hotelsOwn instanceof Array) {
+      if (this.hotelsOwn.length > 0) {
+        this.h = this.hotelsOwn
+        this.loading = false
+      } else {
+        await this.createNewHotel()
+      }
+    } else {
+      await this.createNewHotel()
     }
   },
   methods: {
