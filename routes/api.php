@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\Dashboard\AirportController;
 use App\Http\Controllers\Auth\Dashboard\CompanyController;
 use App\Http\Controllers\Auth\Dashboard\InvoiceController;
 use App\Http\Controllers\Auth\Dashboard\RoomTypeController;
+use App\Http\Controllers\Auth\Dashboard\TransportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     'samples' => SampleController::class,
     'invoices' => InvoiceController::class,
     'hotels' => HotelController::class,
+    'transports' => TransportController::class,
   ]);
 
   Route::put('days', [DayController::class, 'save']);

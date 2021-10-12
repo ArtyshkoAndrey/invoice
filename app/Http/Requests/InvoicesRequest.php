@@ -57,7 +57,7 @@ class InvoicesRequest extends FormRequest
           'transfer.driver_number'          => ['required', 'string'],
           'transfer.gid'                    => ['required', 'boolean'],
           'transfer.passengers'             => ['required', 'integer'],
-          'transfer.transport_id'           => ['required', 'string'],
+          'transfer.transport_id'           => ['required', 'exists:transports,id'],
         ];
       }
     }

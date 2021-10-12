@@ -257,9 +257,8 @@
                         <p class="opacity-50 fs-6 mb-0">
                           Транспорт
                         </p>
-<!--                        TODO: Сделать транспорт-->
                         <p class="fw-500">
-                          {{ invoice.transport_id }}
+                          {{ invoice.transport.name }}
                         </p>
                       </div>
                       <div class="col-4">

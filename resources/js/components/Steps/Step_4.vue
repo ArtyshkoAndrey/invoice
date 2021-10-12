@@ -18,8 +18,8 @@
           </div>
           <div class="col-12 col-md-4 col-lg-3">
             <vs-select v-model="transfer.arrival_airport_id"
-                       class="mw-100"
                        :placeholder="$t('invoice.inputs.airport')"
+                       class="mw-100"
             >
               <vs-option
                 v-for="airport in airports"
@@ -52,8 +52,8 @@
           <div class="col-12 col-md-4 col-lg-3">
             <vs-select
               v-model="transfer.departure_airport_id"
-              class="mw-100"
               :placeholder="$t('invoice.inputs.airport')"
+              class="mw-100"
             >
               <vs-option
                 v-for="airport in airports"
@@ -79,11 +79,15 @@
           <div class="col-12 col-md-4 col-lg-3">
             <vs-select
               v-model="transfer.transport_id"
-              class="mw-100"
               :placeholder="$t('invoice.inputs.transport')"
+              class="mw-100"
             >
-              <vs-option value="Минивен" label="Минивен">
-                Минивен
+              <vs-option v-for="transport in transports"
+                         :key="transport.id"
+                         :label="transport.name"
+                         :value="transport.id"
+              >
+                {{ transport.name }}
               </vs-option>
             </vs-select>
           </div>
@@ -137,6 +141,7 @@
 <script>
 import axios from "axios";
 import Loader from "~/components/Loader.vue"
+
 export default {
   name: "Step4",
   comments: {
@@ -151,6 +156,7 @@ export default {
   },
   data: () => ({
     airports: [],
+    transports: [],
     loading: true,
     transfer: {
       arrival_time: '',
@@ -167,7 +173,7 @@ export default {
     }
   }),
   computed: {
-    disabledNext () {
+    disabledNext() {
       let status = false
 
       Object.entries(this.transfer).forEach(([key, value]) => {
@@ -180,27 +186,38 @@ export default {
       return status
     }
   },
-  mounted () {
+  async mounted() {
 
     if (this.transferData !== null) {
       this.transfer = this.transferData
     }
 
-    axios.get('/api/airports')
-    .then(r => {
-      if (r.data.success) {
-        this.airports = r.data.payload.airports
-        this.loading = false
-      } else {
+    await axios.get('/api/airports')
+      .then(r => {
+        if (r.data.success) {
+          this.airports = r.data.payload.airports
+        } else {
+          this.$router.push({name: 'dashboard.invoice.index'})
+        }
+      })
+      .catch(e => {
         this.$router.push({name: 'dashboard.invoice.index'})
-      }
-    })
-    .catch(e => {
-      this.$router.push({name: 'dashboard.invoice.index'})
-    })
+      })
+    await axios.get("/api/transports")
+      .then(r => {
+        if (r.data.success) {
+          this.transports = r.data.payload.transports
+          this.loading = false
+        } else {
+          this.$router.push({name: 'dashboard.invoice.index'})
+        }
+      })
+      .catch(e => {
+        this.$router.push({name: 'dashboard.invoice.index'})
+      })
   },
   methods: {
-    next () {
+    next() {
       this.$parent.next(() => {
         this.$parent.form.transfer = this.transfer
       })

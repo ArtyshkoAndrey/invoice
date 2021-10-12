@@ -69,6 +69,7 @@ class InvoiceController extends Controller
     $i->company()->associate($request->input('company'));
     $i->arrival_airport()->associate($request->input('transfer.arrival_airport_id'));
     $i->departure_airport()->associate($request->input('transfer.departure_airport_id'));
+    $i->transport()->associate($request->input('transfer.transport_id'));
 
     $i->save();
 
@@ -117,6 +118,7 @@ class InvoiceController extends Controller
       'days.resort',
       'bookings.room',
       'bookings.hotel',
+      'transport'
     ]);
     return JsonResponse::success(['invoice' => $invoice]);
   }

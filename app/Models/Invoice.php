@@ -56,6 +56,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Invoice whereUserName($value)
  * @method static Builder|Invoice whereUserNationality($value)
  * @mixin Eloquent
+ * @property int                       $transport_id
+ * @property-read Collection|Day[]     $days
+ * @property-read int|null             $days_count
+ * @property-read Transport            $transport
+ * @method static Builder|Invoice whereTransportId($value)
  */
 class Invoice extends Model
 {
@@ -76,8 +81,8 @@ class Invoice extends Model
 
   protected $casts = [
     'gid' => 'boolean',
-    'departure_time'  => 'datetime',
-    'arrival_time'    => 'datetime',
+    'departure_time' => 'datetime',
+    'arrival_time' => 'datetime',
   ];
 
   /**
@@ -123,5 +128,10 @@ class Invoice extends Model
   public function days(): MorphMany
   {
     return $this->morphMany(Day::class, 'model');
+  }
+
+  public function transport(): BelongsTo
+  {
+    return $this->belongsTo(Transport::class);
   }
 }
