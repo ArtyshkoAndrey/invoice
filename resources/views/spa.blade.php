@@ -3,6 +3,7 @@
       'appName' => config('app.name'),
       'locale' => $locale = app()->getLocale(),
       'locales' => config('app.locales'),
+      'pdfUrl' => route('invoice.pdf', '')
   ]
 @endphp
 
@@ -17,15 +18,14 @@
   <link rel="stylesheet"
         href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
   <link href="{{ mix('dist/css/app.css') }}" type="text/css" rel="stylesheet"/>
+  <script defer>
+    window.config = @json($config);
+  </script>
 </head>
 <body>
 
   <div id="app">
   </div>
-
-  <script>
-    window.config = @json($config);
-  </script>
-  <script src="{{ mix('dist/js/app.js') }}"></script>
+  <script defer src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>

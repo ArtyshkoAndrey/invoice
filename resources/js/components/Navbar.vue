@@ -14,7 +14,7 @@
 
     <template v-if="user" #right>
       <vs-row justify="space-between" class="pointer" align="center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="fw-bolder me-3">{{ $t('menu.project.name') }}</span>
+        <span class="fw-bolder me-3">{{ appName }}</span>
         <vs-avatar>
           <img alt="" :src="user.photo_url">
         </vs-avatar>
@@ -37,9 +37,14 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
+  computed: {
+    ...mapGetters({
+      user: 'auth/user'
+    }),
+    appName () {
+      return window.config.appName
+    }
+  },
   methods: {
     async logout () {
       // Log out the user.

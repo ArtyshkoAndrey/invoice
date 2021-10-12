@@ -80,7 +80,7 @@
                                icon
                                border
                                danger
-                               @click="console.log(123)"
+                               @click="openPdf(item.id)"
                     >
                       <em class="bx bxs-file-pdf h5 mb-0" />
                     </vs-button>
@@ -130,6 +130,9 @@ export default {
 
     creating () {
       this.$router.push({name: 'dashboard.invoice.create'})
+    },
+    openPdf(id) {
+      window.open(window.config.pdfUrl + '/' + id, '_blank')
     },
 
     /**

@@ -24,14 +24,6 @@
       </template>
       {{ $t(item.title) }}
     </vs-sidebar-item>
-
-    <template #footer>
-      <vs-row justify="space-between">
-        <vs-avatar>
-          <img :alt="user.name" :src="user.photo_url">
-        </vs-avatar>
-      </vs-row>
-    </template>
   </vs-sidebar>
 </template>
 
