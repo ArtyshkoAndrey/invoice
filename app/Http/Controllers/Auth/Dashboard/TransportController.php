@@ -13,6 +13,8 @@ class TransportController extends Controller
   /**
    * Display a listing of the resource.
    *
+   * @param Request $request
+   *
    * @return \Illuminate\Http\JsonResponse
    */
   public function index(Request $request): \Illuminate\Http\JsonResponse
@@ -40,11 +42,18 @@ class TransportController extends Controller
    *
    * @param Request $request
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function store(Request $request)
+  public function store(Request $request): \Illuminate\Http\JsonResponse
   {
-    //
+    $request->validate([
+      'name' => 'required|string|unique:transports,name',
+    ]);
+    $t = new Transport();
+    $t->name = $request->name;
+    $t->save();
+
+    return JsonResponse::success(['transport' => $t]);
   }
 
   /**
@@ -65,11 +74,17 @@ class TransportController extends Controller
    * @param Request   $request
    * @param Transport $transport
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function update(Request $request, Transport $transport)
+  public function update(Request $request, Transport $transport): \Illuminate\Http\JsonResponse
   {
-    //
+    $request->validate([
+      'name' => 'required|string|unique:transports,name,' . $transport->id,
+    ]);
+    $transport->update($request->all());
+    $transport->save();
+
+    return JsonResponse::success(['transport' => $transport]);
   }
 
   /**
@@ -77,10 +92,12 @@ class TransportController extends Controller
    *
    * @param Transport $transport
    *
-   * @return Response
+   * @return \Illuminate\Http\JsonResponse
    */
-  public function destroy(Transport $transport)
+  public function destroy(Transport $transport): \Illuminate\Http\JsonResponse
   {
-    //
+    $transport->delete();
+
+    return JsonResponse::success(['transport' => $transport]);
   }
 }

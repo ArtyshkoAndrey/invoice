@@ -30,6 +30,9 @@
     },
     "project": {
       "name" : "Название компании"
+    },
+    "transports": {
+      "title" : "Транспорт"
     }
   },
 
@@ -117,6 +120,20 @@
     },
     "create-modal": {
       "title": "Создание курорта"
+    }
+  },
+
+  "comment_transport": "Transport pages",
+  "transports": {
+    "index": {
+      "title": "Список транспортов",
+      "filter_title": "Транспорт"
+    },
+    "edit-modal": {
+      "title": "Редактирование транспорта"
+    },
+    "create-modal": {
+      "title": "Создание транспорта"
     }
   },
 

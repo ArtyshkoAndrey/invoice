@@ -30,6 +30,9 @@
     },
     "project": {
       "name" : "Company name"
+    },
+    "transports": {
+      "title": "Transports"
     }
   },
 
@@ -103,6 +106,21 @@
         "title": "Error of entered data",
         "text": "You have not entered all the data to proceed to the next step"
       }
+    }
+  },
+
+
+  "comment_transport": "Transport pages",
+  "transports": {
+    "index": {
+      "title": "List of transport",
+      "filter_title": "Transport"
+    },
+    "edit-modal": {
+      "title": "Editing a Transport"
+    },
+    "create-modal": {
+      "title": "Create Transport"
     }
   },
 

@@ -77,6 +77,17 @@ items.add(
         name: 'compass'
     }
 )
+
+items.add(
+  'menu.transports.title',
+  'dashboard.transports.index',
+  '/transports/index',
+  {
+    type: 'solid',
+    name: 'car'
+  }
+)
+
 // items.add(
 //   'Создать',
 //   'create',

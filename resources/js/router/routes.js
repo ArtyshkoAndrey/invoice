@@ -85,6 +85,17 @@ export default [
             path: 'edit/:id', name: 'dashboard.samples.edit', component: page('dashboard/samples/edit.vue')
           }
         ]
+      },
+      {
+        path: 'transports',
+        component: { render: (c) => c('router-view') },
+        alias: 'dashboard.transports.index',
+        children: [
+          { path: '', redirect: { name: 'dashboard.transports.index' } },
+          {
+            path: 'index', name: 'dashboard.transports.index', component: page('dashboard/transports/index.vue')
+          }
+        ]
       }
     ]
   },
