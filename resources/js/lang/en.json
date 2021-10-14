@@ -33,6 +33,9 @@
     },
     "transports": {
       "title": "Transports"
+    },
+    "users": {
+      "title": "Users"
     }
   },
 
@@ -166,6 +169,20 @@
     }
   },
 
+  "comment_users": "Users pages",
+  "users": {
+    "index": {
+      "title": "List of users",
+      "filter_title": "Users"
+    },
+    "edit-modal": {
+      "title": "User "
+    },
+    "create-modal": {
+      "title": "Adding a new user"
+    }
+  },
+
   "comment_companies": "Companies pages",
   "companies": {
     "index": {
@@ -232,7 +249,8 @@
       },
       "danger": {
         "title": "Deleted error",
-        "text": "The server was unable to delete the selected data. Contact the administrator, or refresh the pages"
+        "text": "The server was unable to delete the selected data. Contact the administrator, or refresh the pages",
+        "user-delete": "You can't delete the sub yourself"
       }
     },
     "get": {
@@ -254,6 +272,12 @@
       },
       "code": {
         "placeholder": "Code"
+      },
+      "email": {
+        "placeholder": "Email"
+      },
+      "password": {
+        "placeholder": "Password"
       }
     },
     "title": {

@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     'invoices' => InvoiceController::class,
     'hotels' => HotelController::class,
     'transports' => TransportController::class,
+    'users' => App\Http\Controllers\Auth\Dashboard\UserController::class
   ]);
 
   Route::put('days', [DayController::class, 'save']);

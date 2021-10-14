@@ -99,6 +99,17 @@ export default [
             path: 'index', name: 'dashboard.transports.index', component: page('dashboard/transports/index.vue')
           }
         ]
+      },
+      {
+        path: 'users',
+        component: { render: (c) => c('router-view') },
+        alias: 'dashboard.users.index',
+        children: [
+          { path: '', redirect: { name: 'dashboard.users.index' } },
+          {
+            path: 'index', name: 'dashboard.users.index', component: page('dashboard/users/index.vue')
+          }
+        ]
       }
     ]
   },

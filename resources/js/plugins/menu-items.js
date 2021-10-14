@@ -88,6 +88,16 @@ items.add(
   }
 )
 
+items.add(
+  'menu.users.title',
+  'dashboard.users.index',
+  '/users/index',
+  {
+    type: 'solid',
+    name: 'user'
+  }
+)
+
 // items.add(
 //   'Создать',
 //   'create',

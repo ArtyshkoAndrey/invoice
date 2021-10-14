@@ -7,7 +7,7 @@
           <div v-for="(field, index) in fields"
                :key="field"
                class="col-auto"
-               :class="field === 'id' && hideId ? 'd-none' : ''"
+               :class="field === 'id' && hideId || field === 'password' ? 'd-none' : ''"
           >
             <h6 class="mb-0"
                 :style="checkTitleRouter ? 'cursor: pointer' : '' "
