@@ -19,8 +19,8 @@
           </div>
           <div class="col-12 col-md-auto">
             <vs-button
-              success
               flat
+              success
               @click="setTemplate(null)"
             >
               {{ $t('invoice.buttons.create_new_template') }}
@@ -36,8 +36,9 @@
               </p>
             </div>
             <div class="col-lg-auto col-sm-4 col-8">
-              <vs-select v-model="day.resort.id" placeholder="Курорты" :disabled="day.free">
-                <vs-option v-for="resort in resorts" :key="resort.id" :label="resort.name" :value="resort.id" :disabled="day.free">
+              <vs-select v-model="day.resort.id" :disabled="day.free" placeholder="Курорты">
+                <vs-option v-for="resort in resorts" :key="resort.id" :disabled="day.free" :label="resort.name"
+                           :value="resort.id">
                   {{ resort.name }}
                 </vs-option>
               </vs-select>
@@ -54,7 +55,7 @@
                 flat
                 @click="removeDay(index)"
               >
-                <em class="bx bx-trash-alt d-none d-lg-block" />
+                <em class="bx bx-trash-alt d-none d-lg-block"/>
                 <span class="d-block d-lg-none">{{ $t('form.delete') }}</span>
               </vs-button>
             </div>
@@ -85,9 +86,9 @@
       </div>
     </div>
     <div v-else class="card-body p-0 pb-3">
-      <Loader />
+      <Loader/>
     </div>
-    <ChooseTemplate :bus="bus" />
+    <ChooseTemplate :bus="bus"/>
   </div>
 </template>
 
@@ -96,6 +97,7 @@ import Loader from "~/components/Loader.vue"
 import Vue from "vue"
 import ChooseTemplate from "~/components/Steps/StepComponents/ChooseTemplate"
 import axios from "axios"
+
 export default {
   name: "Step5",
   components: {
@@ -117,7 +119,7 @@ export default {
     resorts: []
   }),
   computed: {
-    disabledNext () {
+    disabledNext() {
       let status = false
 
       if (this.template === null) {
@@ -151,10 +153,20 @@ export default {
     }
   },
   methods: {
-    setTemplate (template) {
-      if (template !== null)
+    setTemplate(template) {
+      if (template !== null) {
+        template.days.forEach(d => {
+          if (d.resort === null) {
+            d.resort = {
+              id: ''
+            }
+          }
+          if (typeof d.resort.id === 'undefined') {
+            d.resort.id = ''
+          }
+        })
         this.template = template
-      else {
+      } else {
         this.template = {
           days: [],
           name: ''
@@ -165,30 +177,30 @@ export default {
 
       this.getResorts()
     },
-    getResorts () {
+    getResorts() {
       axios.get("/api/resorts")
-      .then(r => {
-        if (r.data.success) {
-          this.resorts = r.data.payload.resorts
-          this.loading = false
-        } else {
+        .then(r => {
+          if (r.data.success) {
+            this.resorts = r.data.payload.resorts
+            this.loading = false
+          } else {
+            this.$vs.notification({
+              title: this.$t('notification.get.danger.title'),
+              text: this.$t('notification.get.danger.text')
+            })
+            this.$router.push({name: 'dashboard.invoice.index'})
+          }
+        })
+        .catch(e => {
           this.$vs.notification({
             title: this.$t('notification.get.danger.title'),
             text: this.$t('notification.get.danger.text')
           })
           this.$router.push({name: 'dashboard.invoice.index'})
-        }
-      })
-      .catch(e => {
-        this.$vs.notification({
-          title: this.$t('notification.get.danger.title'),
-          text: this.$t('notification.get.danger.text')
         })
-        this.$router.push({name: 'dashboard.invoice.index'})
-      })
     },
 
-    addDay () {
+    addDay() {
       let day = {
         id: '',
         order: '',
@@ -200,7 +212,7 @@ export default {
 
       this.template.days.push(day)
     },
-    removeDay (index) {
+    removeDay(index) {
       this.template.days = this.template.days.filter((el, i) => i !== index)
     },
   }

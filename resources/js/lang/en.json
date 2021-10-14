@@ -247,6 +247,7 @@
     "save": "Save",
     "cancel" : "Cancel",
     "delete": "Delete",
+    "edit": "Edit",
     "inputs": {
       "name": {
         "placeholder": "Name"

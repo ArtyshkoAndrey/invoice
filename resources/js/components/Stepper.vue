@@ -2,11 +2,11 @@
   <div class="row justify-content-center w-100">
     <div v-for="step in steps" class="d-flex w-auto wrapper_step">
       <div class="border some_step d-flex justify-content-center align-items-center rounded-circle"
-          :class="step.status"
-          @click="setStatusStep(step)"
+           :class="step.status"
+           @click="setStatusStep(step)"
       >
-        <i class="bx bx-check" aria-hidden="true" v-if="step.status === 'success'"></i>
-        <span class="d-flex" v-else>{{ step.step }}</span>
+        <i v-if="step.status === 'success'" class="bx bx-check" aria-hidden="true" />
+        <span v-else class="d-flex">{{ step.step }}</span>
       </div>
     </div>
   </div>
@@ -23,6 +23,11 @@ export default {
       required: false,
       default: 5
     },
+    successfully: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     bus: {
       type: Vue,
       required: true
@@ -36,12 +41,12 @@ export default {
     let s = 0
     let status
     while (s < this.count) {
-      status = 'default'
+      status = this.successfully ? 'success' : 'default'
       if (s === 0) {
         status = 'active'
         this.localStep = {
           step: s + 1,
-          status: 'default',
+          status: this.successfully  ? 'success' : 'default',
         }
       }
 

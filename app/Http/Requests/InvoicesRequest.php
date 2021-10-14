@@ -23,8 +23,7 @@ class InvoicesRequest extends FormRequest
      */
     public function rules(): array
     {
-      if ($this->routeIs('invoices.store')) {
-        return [
+      return [
           'company'                 => ['required', 'exists:companies,id'],
 
           'user.name'               => ['required', 'string'],
@@ -59,6 +58,5 @@ class InvoicesRequest extends FormRequest
           'transfer.passengers'             => ['required', 'integer'],
           'transfer.transport_id'           => ['required', 'exists:transports,id'],
         ];
-      }
     }
 }
