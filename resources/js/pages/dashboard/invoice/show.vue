@@ -311,6 +311,27 @@
             </div>
 
           </div>
+
+          <div class="col-12 mt-4 col-md-10 col-lg-auto col-xl-2">
+            <div class="row">
+              <div class="col-12">
+                <vs-button success
+                           class="w-100"
+                           @click="edit"
+                >
+                  {{ $t('form.edit') }}
+                </vs-button>
+              </div>
+              <div class="col-12">
+                <vs-button danger
+                           class="w-100"
+                           @click="pdf"
+                >
+                  <em class="bx bxs-file-pdf h5 m-0" />
+                </vs-button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </transition>
@@ -356,6 +377,14 @@ export default {
         this.$router.push({name: 'dashboard.invoice.index'})
       }
     })
+  },
+  methods: {
+    edit() {
+      this.$router.push({name: 'dashboard.invoice.edit', params:{id: this.id}})
+    },
+    pdf() {
+      window.open(window.config.pdfUrl + '/' + this.id, '_blank')
+    }
   }
 }
 </script>
