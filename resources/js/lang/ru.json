@@ -211,6 +211,9 @@
   "password_forgot": {
     "title": "Востановление пароля сотрудника"
   },
+  "reset_password": {
+    "title": "Востановление пароля сотрудника"
+  },
   "comment_auth": "Buttons and label in auth routes",
   "auth": {
     "login": "Вход",
@@ -227,6 +230,7 @@
           "max": "Более {length} символов"
         }
       },
+      "password_confirmation": "Пароли не совпадают",
       "email": {
         "valid": "Email введён неправильно"
       }
@@ -278,6 +282,9 @@
       },
       "password": {
         "placeholder": "Пароль"
+      },
+      "password_confirmation": {
+        "placeholder": "Повторите пароль"
       }
     },
     "title": {

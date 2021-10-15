@@ -211,6 +211,9 @@
   "password_forgot": {
     "title": "Employee Password Recovery"
   },
+  "password_reset": {
+    "title": "Employee Password Recovery"
+  },
   "comment_auth": "Buttons and label in auth routes",
   "auth": {
     "login": "Login",
@@ -221,6 +224,7 @@
       "reset_link": "Forgot your password?"
     },
     "errors": {
+      "password_confirmation": "Passwords don't match",
       "password": {
         "length": {
           "min": "Less than {length} characters",
@@ -278,6 +282,9 @@
       },
       "password": {
         "placeholder": "Password"
+      },
+      "password_confirmation": {
+        "placeholder": "Confirm password"
       }
     },
     "title": {

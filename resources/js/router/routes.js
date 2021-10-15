@@ -7,6 +7,7 @@ export default [
   {
     path: '/password/forgot', name: 'password_forgot', component: page('auth/password_forgot.vue')
   },
+  {path: '/password/reset/:token', name: 'password_reset', component: page('auth/password_reset.vue')},
   {
     path: '/',
     component: page('dashboard/auth.vue'),
