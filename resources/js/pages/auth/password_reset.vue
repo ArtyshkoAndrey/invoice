@@ -46,7 +46,7 @@ export default {
   name: "PasswordReset",
   middleware: 'guest',
   metaInfo() {
-    return {title: this.$t('reset_password.title')}
+    return {title: this.$t('password_reset.title')}
   },
   data: () => ({
     status: '',
@@ -75,7 +75,18 @@ export default {
       if (!this.validPassword && !this.validPasswordConfirmation) {
         const {data} = await this.form.post('/api/password/reset')
         this.status = data.status
-        this.form.reset()
+        if (this.form.successful) {
+          this.$vs.notification({
+            title: this.$t('notification.resetting_password.title'),
+            text: this.status
+          })
+          this.form.reset()
+        } else {
+          this.$vs.notification({
+            title: this.$t('notification.get.danger.title'),
+            text: this.status
+          })
+        }
       }
     }
   }

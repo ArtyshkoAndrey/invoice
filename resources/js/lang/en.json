@@ -263,6 +263,9 @@
     "email_send": {
       "title": "Look in the mailbox",
       "text": "To reset your password, go to your account mailbox. Follow the link and enter a new password."
+    },
+    "resetting_password": {
+      "title": "Password changed"
     }
   },
   "form": {
