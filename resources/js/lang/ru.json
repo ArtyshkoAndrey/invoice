@@ -7,7 +7,6 @@
     },
     "loading": "Загрузка..."
   },
-
   "comment_menu": "Items in menu",
   "menu": {
     "invoice": {
@@ -26,19 +25,18 @@
       "title": "Компании"
     },
     "samples": {
-      "title" : "Шаблоны"
+      "title": "Шаблоны"
     },
     "project": {
-      "name" : "Название компании"
+      "name": "Название компании"
     },
     "transports": {
-      "title" : "Транспорт"
+      "title": "Транспорт"
     },
     "users": {
       "title": "Пользователи"
     }
   },
-
   "comment_header_filter": "Header Filter components",
   "header_filter": {
     "length_label": "Показать по",
@@ -46,7 +44,6 @@
     "create_button": "Создать",
     "search_placeholder": "Поиск"
   },
-
   "comment_invoice": "Invoice pages",
   "invoice": {
     "history": "История",
@@ -111,7 +108,6 @@
       }
     }
   },
-
   "comment_resorts": "Resorts pages",
   "resorts": {
     "index": {
@@ -125,7 +121,6 @@
       "title": "Создание курорта"
     }
   },
-
   "comment_transport": "Transport pages",
   "transports": {
     "index": {
@@ -139,7 +134,6 @@
       "title": "Создание транспорта"
     }
   },
-
   "comment_airports": "Airports pages",
   "airports": {
     "index": {
@@ -153,7 +147,6 @@
       "title": "Добавление аэропорта"
     }
   },
-
   "comment_room_types": "Room Types pages",
   "room_types": {
     "index": {
@@ -167,7 +160,6 @@
       "title": "Добавление нового типа комнаты"
     }
   },
-
   "comment_users": "Users pages",
   "users": {
     "index": {
@@ -181,7 +173,6 @@
       "title": "Добавить пользователя"
     }
   },
-
   "comment_companies": "Companies pages",
   "companies": {
     "index": {
@@ -195,7 +186,6 @@
       "title": "Добавление новой компании"
     }
   },
-
   "comment_samples": "Companies pages",
   "samples": {
     "index": {
@@ -215,12 +205,21 @@
       "title": "Добавление нового шаблона"
     }
   },
-
+  "login": {
+    "title": "Вход в аккаунт сотрудника"
+  },
+  "password_forgot": {
+    "title": "Востановление пароля сотрудника"
+  },
   "comment_auth": "Buttons and label in auth routes",
   "auth": {
     "login": "Вход",
     "in_login": "Войти",
     "logout": "Выйти",
+    "reset": "Сбросить",
+    "reset_password": {
+      "reset_link": "Забыли пароль?"
+    },
     "errors": {
       "password": {
         "length": {
@@ -238,7 +237,6 @@
       }
     }
   },
-
   "comment_notification": "Translate Notify Text",
   "notification": {
     "delete": {
@@ -257,12 +255,15 @@
         "title": "Ошибка в получении данных",
         "text": "Сервер не смог ответить на ваш вопрос. Перезагрузите страницу"
       }
+    },
+    "email_send": {
+      "title": "Загляните в почтовый ящик",
+      "text": "Для сброса пороля, передите в ящик вашего аккаунта. Передите по ссылку и введите новый пароль."
     }
   },
-
   "form": {
     "save": "Сохранить",
-    "cancel" : "Отмена",
+    "cancel": "Отмена",
     "edit": "Изменить",
     "delete": "Удалить",
     "inputs": {

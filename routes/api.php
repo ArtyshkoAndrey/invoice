@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\Dashboard\DayController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Dashboard\HotelController;
 use App\Http\Controllers\Auth\Dashboard\ResortController;
 use App\Http\Controllers\Auth\Dashboard\SampleController;
@@ -37,11 +39,14 @@ Route::group(['middleware' => 'auth:api'], function () {
     'invoices' => InvoiceController::class,
     'hotels' => HotelController::class,
     'transports' => TransportController::class,
-    'users' => App\Http\Controllers\Auth\Dashboard\UserController::class
+    'users' => App\Http\Controllers\Auth\Dashboard\UserController::class,
   ]);
 
   Route::put('days', [DayController::class, 'save']);
 });
 Route::group(['middleware' => 'guest:api'], function () {
   Route::post('login', [LoginController::class, 'login']);
+
+  Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+  Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 });

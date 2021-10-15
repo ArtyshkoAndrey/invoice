@@ -1,7 +1,7 @@
 <template>
   <div class="row flex-row login-form align-items-center">
     <div class="col-12">
-      <div class="row justify-content-center">
+      <div class="row row-cols-2 justify-content-center">
         <div class="col-md-auto col-10">
           <vs-input v-model="form.email" class="w-100" placeholder="Email">
             <template v-if="validEmail" #message-success>
@@ -9,13 +9,6 @@
             </template>
             <template v-if="!validEmail && form.email !== ''" #message-danger>
               {{ $t('auth.errors.email.valid') }}
-            </template>
-          </vs-input>
-        </div>
-        <div class="col-md-auto col-10 mt-3 mt-md-0">
-          <vs-input v-model="form.password" :placeholder="$t('form.inputs.password.placeholder')" type="password">
-            <template v-if="validPassword" #message-danger>
-              {{ $t('auth.errors.password.length.min', {length: 6}) }}
             </template>
           </vs-input>
         </div>
@@ -27,20 +20,8 @@
             success
             @click="login"
           >
-            {{ $t('auth.in_login') }}
+            {{ $t('auth.reset') }}
           </vs-button>
-        </div>
-
-        <div class="col-12 mt-3">
-          <div class="row justify-content-center">
-            <div class="col-auto">
-              <router-link :to="{name: 'password_forgot'}"
-                           class="text-primary text-decoration-none"
-              >
-                {{ $t('auth.reset_password.reset_link') }}
-              </router-link>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -48,28 +29,23 @@
 </template>
 
 <script>
-import Form from 'vform'
-import Cookies from 'js-cookie'
+import Form from "vform";
 
 export default {
-  name: 'Login',
+  name: "ResetPassword",
   middleware: 'guest',
+  //TODO: language
   metaInfo() {
-    return {title: this.$t('login.title')}
+    return {title: this.$t('password_forgot.title')}
   },
   data: () => ({
     form: new Form({
-      email: '',
-      password: ''
+      email: ''
     }),
-    remember: false
   }),
   computed: {
     validEmail() {
       return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.form.email)
-    },
-    validPassword() {
-      return this.form.password.length < 6 && this.form.password !== ''
     }
   },
   mounted() {
@@ -92,17 +68,8 @@ export default {
     async login() {
       if (this.validEmail && !this.validPassword) {
         // Submit the form.
-        await this.form.post('/api/login')
+        await this.form.post('/api/password/email')
           .then(({data}) => {
-            // Save the token.
-            this.$store.dispatch('auth/saveToken', {
-              token: data.token,
-              remember: this.remember
-            })
-
-            // Fetch the user.
-            this.$store.dispatch('auth/fetchUser')
-            // Redirect home.
             this.redirect()
           })
           .catch(e => {
@@ -123,13 +90,11 @@ export default {
       }
     },
     redirect() {
-      const intendedUrl = Cookies.get('intended_url')
-      if (intendedUrl) {
-        Cookies.remove('intended_url')
-        this.$router.push({path: intendedUrl})
-      } else {
-        this.$router.push({name: 'dashboard.room_types.index'})
-      }
+      this.$vs.notification({
+        title: this.$t('notification.email_send.title'),
+        text: this.$t('notification.email_send.text')
+      })
+      this.$router.push({name: 'login'})
     }
   }
 }
