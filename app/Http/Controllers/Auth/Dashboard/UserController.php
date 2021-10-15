@@ -49,7 +49,7 @@ class UserController extends Controller
     $request->validate([
       'name' => 'required|string',
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|string|min:6'
+      'password' => 'required|string|min:6',
     ]);
     $user = new User($request->except('password'));
     $user->password = Hash::make($request->input('password'));
@@ -83,14 +83,13 @@ class UserController extends Controller
     $request->validate([
       'name' => 'required|string',
       'email' => 'required|email|unique:users,email,' . $user->id,
-      'password' => 'nullable|string'
+      'password' => 'nullable|string',
     ]);
 
     $user->update($request->except('password'));
     if ($request->has('password') ||
       $request->get('password') !== '' ||
-      $request->get('password') !== null)
-    {
+      $request->get('password') !== null) {
       $user->password = Hash::make($request->input('password'));
     }
     $user->save();
