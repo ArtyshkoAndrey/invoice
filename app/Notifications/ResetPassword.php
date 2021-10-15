@@ -21,6 +21,6 @@ class ResetPassword extends Notification
       ->greeting(__('Hello!'))
       ->line(__('You are receiving this email because we received a password reset request for your account.'))
       ->action(__('Reset Password'), url(config('app.url') . '/password/reset/' . $this->token) . '?email=' . urlencode($notifiable->email))
-      ->line('If you did not request a password reset, no further action is required.');
+      ->line(__('If you did not request a password reset, no further action is required.'));
   }
 }
