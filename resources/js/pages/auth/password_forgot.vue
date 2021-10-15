@@ -7,7 +7,10 @@
             <template v-if="validEmail" #message-success>
               {{ $t('auth.success.email.valid') }}
             </template>
-            <template v-if="!validEmail && form.email !== ''" #message-danger>
+            <template v-if="typeof form.errors.errors.email !== 'undefined'" #message-danger>
+              {{ form.errors.errors.email }}
+            </template>
+            <template v-else-if="!validEmail && form.email !== ''" #message-danger>
               {{ $t('auth.errors.email.valid') }}
             </template>
           </vs-input>
