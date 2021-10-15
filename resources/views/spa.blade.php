@@ -3,11 +3,11 @@
       'appName' => config('app.name'),
       'locale' => $locale = app()->getLocale(),
       'locales' => config('app.locales'),
-      'pdfUrl' => route('invoice.pdf', '')
+      'pdfUrl' => route('v2_invoice.pdf', '')
   ]
 @endphp
 
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
@@ -24,8 +24,8 @@
 </head>
 <body>
 
-  <div id="app">
-  </div>
-  <script defer src="{{ mix('dist/js/app.js') }}"></script>
+<div id="app">
+</div>
+<script defer src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>

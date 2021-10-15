@@ -16,5 +16,7 @@ use App\Http\Controllers\Spa\SpaController;
 Route::get('/pdf', [SpaController::class, 'pdf']);
 Route::get('pdf/invoice/{id}', [SpaController::class, 'invoice'])->name('invoice.pdf');
 
+Route::get('v2/pdf/invoice/{id}', [SpaController::class, 'v2_invoice'])->name('v2_invoice.pdf');
+
 Route::get('{path}', [SpaController::class, 'index'])->where('path', '(.*)')->name('index');
 
