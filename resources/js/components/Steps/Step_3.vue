@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
       <h6 class="fw-light text-reset">
-        Шаг 3 из 5 <span class="fw-bolder">Данные отеля</span>
+        Шаг 3 из 6 <span class="fw-bolder">Данные отеля</span>
       </h6>
     </div>
 
@@ -18,8 +18,8 @@
                 >
                   <vs-option v-for="some_hotel in hotels"
                              :key="some_hotel.id"
-                             :value="some_hotel.id"
                              :label="some_hotel.name"
+                             :value="some_hotel.id"
                   >
                     {{ some_hotel.name }}
                   </vs-option>
@@ -41,8 +41,8 @@
                 >
                   <vs-option v-for="room in rooms"
                              :key="room.id"
-                             :value="room.id"
                              :label="room.name"
+                             :value="room.id"
                   >
                     {{ room.name }}
                   </vs-option>
@@ -50,10 +50,10 @@
               </div>
               <div class="col col-md-6 col-lg-3">
                 <vs-input v-model.number="hotel.count"
-                          type="number"
+                          :placeholder="$t('invoice.inputs.countable')"
                           inputmode="numeric"
                           pattern="[0-9]*"
-                          :placeholder="$t('invoice.inputs.countable')"
+                          type="number"
                 />
               </div>
               <div class="col-auto">
@@ -65,18 +65,18 @@
             <div class="row mt-3">
               <div class="col-12 col-md-4 col-lg-3">
                 <vs-input v-model.number="hotel.adults"
-                          type="number"
+                          :placeholder="$t('invoice.inputs.adults')"
                           inputmode="numeric"
                           pattern="[0-9]*"
-                          :placeholder="$t('invoice.inputs.adults')"
+                          type="number"
                 />
               </div>
               <div class="col-12 col-md-4 col-lg-3">
                 <vs-input v-model.number="hotel.children"
-                          type="number"
+                          :placeholder="$t('invoice.inputs.children')"
                           inputmode="numeric"
                           pattern="[0-9]*"
-                          :placeholder="$t('invoice.inputs.children')"
+                          type="number"
                 />
               </div>
             </div>
@@ -85,7 +85,7 @@
                 <vs-select v-model="hotel.bb"
                            :placeholder="$t('invoice.inputs.bb')"
                 >
-                  <vs-option value="BB" label="BB">
+                  <vs-option label="BB" value="BB">
                     {{ $t('invoice.inputs.bb') }}
                   </vs-option>
                 </vs-select>
@@ -101,14 +101,14 @@
             <div class="row mt-3">
               <div class="col-6 col-md-4 col-lg-3">
                 <vs-input v-model="hotel.check_in"
-                          type="date"
                           :label="$t('invoice.inputs.check_in')"
+                          type="date"
                 />
               </div>
               <div class="col-6 col-md-4 col-lg-3">
                 <vs-input v-model="hotel.check_out"
-                          type="date"
                           :label="$t('invoice.inputs.check_out')"
+                          type="date"
                 />
               </div>
             </div>
@@ -159,6 +159,7 @@
 <script>
 import Loader from "~/components/Loader"
 import axios from "axios"
+
 export default {
   name: "Step3",
   components: {
@@ -171,27 +172,27 @@ export default {
       default: null
     }
   },
-  data: () =>({
+  data: () => ({
     hotels: [],
     rooms: [],
     loading: true,
     h: []
   }),
   computed: {
-    disabledNext () {
+    disabledNext() {
       let status = false
 
       this.h.length === 0 ? status = true : null;
 
       this.h.forEach(hotel => {
         if (hotel.hotel_id === '' ||
-            hotel.room_type_id === '' ||
-            hotel.count === '' ||
-            hotel.adults === '' ||
-            hotel.children === '' ||
-            hotel.check_in === '' ||
-            hotel.check_out === '' ||
-            hotel.booking_number === ''
+          hotel.room_type_id === '' ||
+          hotel.count === '' ||
+          hotel.adults === '' ||
+          hotel.children === '' ||
+          hotel.check_in === '' ||
+          hotel.check_out === '' ||
+          hotel.booking_number === ''
         ) {
           status = true
         }
@@ -200,7 +201,7 @@ export default {
       return status
     }
   },
-  async mounted () {
+  async mounted() {
     await this.getHotels()
     await this.getRooms()
     if (this.hotelsOwn instanceof Array) {
@@ -220,9 +221,9 @@ export default {
      *
      * @returns {Promise<void>}
      */
-    async getHotels () {
+    async getHotels() {
       await axios.get("/api/hotels")
-        .then (r => {
+        .then(r => {
           if (r.data.success) {
             this.hotels = r.data.payload.hotels
           } else {
@@ -245,9 +246,9 @@ export default {
      *
      * @returns {Promise<void>}
      */
-    async getRooms () {
+    async getRooms() {
       await axios.get("/api/room_types")
-        .then (r => {
+        .then(r => {
           if (r.data.success) {
             this.rooms = r.data.payload.room_types
           } else {
@@ -270,7 +271,7 @@ export default {
      * Create a new empty Booking
      *
      */
-    createNewHotel () {
+    createNewHotel() {
       this.h.push({
         hotel_id: '',
         room_type_id: '',
@@ -292,11 +293,11 @@ export default {
      *
      * @param index
      */
-    removeHotel (index) {
+    removeHotel(index) {
       this.h.splice(index, 1)
     },
 
-    next () {
+    next() {
       this.$parent.next(() => {
         this.$parent.form.hotels = this.h
       })

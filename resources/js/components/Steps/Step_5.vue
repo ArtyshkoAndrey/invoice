@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
       <h6 class="fw-light text-reset">
-        Шаг 5 из 5 <span class="fw-bolder">Программа</span>
+        Шаг 5 из 6 <span class="fw-bolder">Программа</span>
       </h6>
     </div>
 
@@ -38,7 +38,8 @@
             <div class="col-lg-auto col-sm-4 col-8">
               <vs-select v-model="day.resort.id" :disabled="day.free" placeholder="Курорты">
                 <vs-option v-for="resort in resorts" :key="resort.id" :disabled="day.free" :label="resort.name"
-                           :value="resort.id">
+                           :value="resort.id"
+                >
                   {{ resort.name }}
                 </vs-option>
               </vs-select>
@@ -55,7 +56,7 @@
                 flat
                 @click="removeDay(index)"
               >
-                <em class="bx bx-trash-alt d-none d-lg-block"/>
+                <em class="bx bx-trash-alt d-none d-lg-block" />
                 <span class="d-block d-lg-none">{{ $t('form.delete') }}</span>
               </vs-button>
             </div>
@@ -86,9 +87,9 @@
       </div>
     </div>
     <div v-else class="card-body p-0 pb-3">
-      <Loader/>
+      <Loader />
     </div>
-    <ChooseTemplate :bus="bus"/>
+    <ChooseTemplate :bus="bus" />
   </div>
 </template>
 

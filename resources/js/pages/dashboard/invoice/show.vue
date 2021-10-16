@@ -1,8 +1,8 @@
 <template>
   <div>
-    <transition name="fade" mode="out-in" appear>
+    <transition appear mode="out-in" name="fade">
       <Loader v-if="loading" key="1" />
-      
+
       <div v-else key="2">
         <div class="row">
           <div class="col-12 col-md-10 col-lg-6 col-xl-4">
@@ -95,21 +95,27 @@
                           <div class="col-4">
                             <div class="px-2 py-1 booking_badge mb-2">
                               <span class="small">Кол-во</span>
-                              <p class="mb-0">{{ booking.count }}</p>
+                              <p class="mb-0">
+                                {{ booking.count }}
+                              </p>
                             </div>
                           </div>
 
                           <div class="col-4">
                             <div class="px-2 py-1 booking_badge mb-2">
                               <span class="small">Взрослые</span>
-                              <p class="mb-0">{{ booking.adults }}</p>
+                              <p class="mb-0">
+                                {{ booking.adults }}
+                              </p>
                             </div>
                           </div>
 
                           <div class="col-4">
                             <div class="px-2 py-1 booking_badge mb-2">
                               <span class="small">Дети</span>
-                              <p class="mb-0">{{ booking.children }}</p>
+                              <p class="mb-0">
+                                {{ booking.children }}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -162,7 +168,7 @@
               </div>
               <!-- End Hotels -->
 
-<!--              Hot line-->
+              <!--              Hot line-->
               <div class="col-12 p-0">
                 <div class="card">
                   <div class="card-body px-3">
@@ -172,7 +178,7 @@
                           Хотлайн
                         </p>
                         <p class="fw-500">
-                          + 7 (777) 777-77-77
+                          {{ invoice.hotline.phone }}
                         </p>
                       </div>
                       <div class="col-6">
@@ -180,20 +186,19 @@
                           Цена
                         </p>
                         <p class="fw-500">
-                          10 000
+                          {{ invoice.hotline.cost }}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-<!--              End hot line-->
+              <!--              End hot line-->
             </div>
           </div>
 
           <div class="col-12 col-md-10 col-lg-6 col-xl-6">
             <div class="row gy-4  p-0 m-0">
-
               <div class="col-12 p-0">
                 <div class="card">
                   <div class="card-title px-3 pt-3">
@@ -309,22 +314,21 @@
                 </div>
               </div>
             </div>
-
           </div>
 
           <div class="col-12 mt-4 col-md-10 col-lg-auto col-xl-2">
             <div class="row">
               <div class="col-12">
-                <vs-button success
-                           class="w-100"
+                <vs-button class="w-100"
+                           success
                            @click="edit"
                 >
                   {{ $t('form.edit') }}
                 </vs-button>
               </div>
               <div class="col-12">
-                <vs-button danger
-                           class="w-100"
+                <vs-button class="w-100"
+                           danger
                            @click="pdf"
                 >
                   <em class="bx bxs-file-pdf h5 m-0" />
@@ -341,6 +345,7 @@
 <script>
 import Loader from "~/components/Loader.vue"
 import axios from "axios";
+
 export default {
   name: "Show",
   components: {
@@ -351,36 +356,36 @@ export default {
     invoice: null
   }),
   computed: {
-    id () {
+    id() {
       return this.$route.params.id
     }
   },
   mounted() {
     axios.get("/api/invoices/" + this.id)
-    .then(r => {
-      if (r.data.success)
-        this.invoice = r.data.payload.invoice
-      else
-        this.$router.push({name: 'dashboard.invoice.index'})
+      .then(r => {
+        if (r.data.success)
+          this.invoice = r.data.payload.invoice
+        else
+          this.$router.push({name: 'dashboard.invoice.index'})
 
-      this.loading = false
-      this.$root.$loading.finish()
-    })
-    .catch(e => {
-      if (e.response.status === 404) {
-        console.log(e.response.data)
-        this.$vs.notification({
-          title: 'Ошибка',
-          text: e.response.data.message
-        })
+        this.loading = false
+        this.$root.$loading.finish()
+      })
+      .catch(e => {
+        if (e.response.status === 404) {
+          console.log(e.response.data)
+          this.$vs.notification({
+            title: 'Ошибка',
+            text: e.response.data.message
+          })
 
-        this.$router.push({name: 'dashboard.invoice.index'})
-      }
-    })
+          this.$router.push({name: 'dashboard.invoice.index'})
+        }
+      })
   },
   methods: {
     edit() {
-      this.$router.push({name: 'dashboard.invoice.edit', params:{id: this.id}})
+      this.$router.push({name: 'dashboard.invoice.edit', params: {id: this.id}})
     },
     pdf() {
       window.open(window.config.pdfUrl + '/' + this.id, '_blank')

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
       <h6 class="fw-light text-reset">
-        Шаг 4 из 5 <span class="fw-bolder">Трансфер</span>
+        Шаг 4 из 6 <span class="fw-bolder">Трансфер</span>
       </h6>
     </div>
 

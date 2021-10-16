@@ -1,34 +1,34 @@
 <template>
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
-      <h6 class="fw-light text-reset">Шаг 1 из 5 <span class="fw-bolder">Компания</span></h6>
+      <h6 class="fw-light text-reset">
+        Шаг 1 из 6 <span class="fw-bolder">Компания</span>
+      </h6>
     </div>
 
     <div class="card-body p-0 pb-3">
       <div class="mx-3 my-2">
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4">
-
-            <vs-select class="mw-100" :placeholder="$t('invoice.inputs.company_name')" v-model="$parent.form.company">
-              <template #message-danger v-if="$parent.companyError">
+            <vs-select v-model="$parent.form.company" :placeholder="$t('invoice.inputs.company_name')" class="mw-100">
+              <template v-if="$parent.companyError" #message-danger>
                 {{ $parent.companyError }}
               </template>
               <vs-option v-for="c in companies"
+                         :key="c.id"
                          :label="c.name"
                          :value="c.id"
-                         :key="c.id"
               >
                 {{ c.name }}
               </vs-option>
             </vs-select>
-
           </div>
           <div class="col-12 col-md-6 col-lg-4">
-            <vs-select class="mw-100"
+            <vs-select v-model="$parent.form.company"
                        :placeholder="$t('invoice.inputs.company_ref')"
-                       v-model="$parent.form.company"
+                       class="mw-100"
             >
-              <template #message-danger v-if="$parent.companyError">
+              <template v-if="$parent.companyError" #message-danger>
                 {{ $parent.companyError }}
               </template>
               <vs-option v-for="c in companies" :key="c.id" :label="c.code" :value="c.id">
@@ -45,11 +45,11 @@
             >
               {{ $t('invoice.buttons.next') }}
 
-              <template #animate v-if="$parent.companyError === false">
-                <i class='bx bx-right-arrow-alt fs-2'  aria-hidden="true"></i>
+              <template v-if="$parent.companyError === false" #animate>
+                <i aria-hidden="true" class="bx bx-right-arrow-alt fs-2" />
               </template>
-              <template #animate v-else>
-                <i class='bx bx-x fs-2'  aria-hidden="true"></i>
+              <template v-else #animate>
+                <i aria-hidden="true" class="bx bx-x fs-2" />
               </template>
             </vs-button>
           </div>

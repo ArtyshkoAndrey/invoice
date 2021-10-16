@@ -94,7 +94,11 @@
       "passengers": "Passengers",
       "airport": "Airport",
       "gid": "Guide",
-      "transport": "Transport"
+      "transport": "Transport",
+      "hotline": {
+        "cost": "Cost",
+        "phone": "Phone number"
+      }
     },
     "errors": {
       "company": "You need to choose a company",

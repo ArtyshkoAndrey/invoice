@@ -1,7 +1,9 @@
 <template>
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
-      <h6 class="fw-light text-reset">Шаг 2 из 5 <span class="fw-bolder">Данные пользователя</span></h6>
+      <h6 class="fw-light text-reset">
+        Шаг 2 из 6 <span class="fw-bolder">Данные пользователя</span>
+      </h6>
     </div>
 
     <div class="card-body p-0 pb-3">
@@ -12,9 +14,9 @@
                       :placeholder="$t('invoice.inputs.user.name')"
             >
               <template #icon>
-                <i class='bx bx-user' aria-hidden="true"></i>
+                <i aria-hidden="true" class="bx bx-user" />
               </template>
-              <template #message-danger v-if="$parent.userNameError">
+              <template v-if="$parent.userNameError" #message-danger>
                 {{ $parent.userNameError }}
               </template>
             </vs-input>
@@ -25,9 +27,9 @@
                       :placeholder="$t('invoice.inputs.user.nationality')"
             >
               <template #icon>
-                <i class='bx bx-globe' aria-hidden="true"></i>
+                <i aria-hidden="true" class="bx bx-globe" />
               </template>
-              <template #message-danger v-if="$parent.userNationalityError">
+              <template v-if="$parent.userNationalityError" #message-danger>
                 {{ $parent.userNationalityError }}
               </template>
             </vs-input>
@@ -36,16 +38,16 @@
         <div class="row justify-content-end">
           <div class="col-auto">
             <vs-button
-                flat
-                @click="$parent.next"
+              flat
+              @click="$parent.next"
             >
-              {{ $t('invoice.buttons.next')}}
+              {{ $t('invoice.buttons.next') }}
 
-              <template #animate v-if="$parent.userNationalityError === false && $parent.userNameError === false ">
-                <i class='bx bx-right-arrow-alt fs-2'  aria-hidden="true"></i>
+              <template v-if="$parent.userNationalityError === false && $parent.userNameError === false " #animate>
+                <i aria-hidden="true" class="bx bx-right-arrow-alt fs-2" />
               </template>
-              <template #animate v-else>
-                <i class='bx bx-x fs-2'  aria-hidden="true"></i>
+              <template v-else #animate>
+                <i aria-hidden="true" class="bx bx-x fs-2" />
               </template>
             </vs-button>
           </div>
@@ -57,7 +59,7 @@
 
 <script>
 export default {
-  name: "Step_2",
+  name: "Step2",
 }
 </script>
 

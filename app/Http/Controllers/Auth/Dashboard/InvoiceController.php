@@ -66,6 +66,8 @@ class InvoiceController extends Controller
     $i->driver_name = $request->input('transfer.driver_name');
     $i->passengers = $request->input('transfer.passengers');
     $i->gid = $request->input('transfer.gid');
+    $i->phone = $request->input('hotline.phone');
+    $i->cost = $request->input('hotline.cost');
     $i->company()->associate($request->input('company'));
     $i->arrival_airport()->associate($request->input('transfer.arrival_airport_id'));
     $i->departure_airport()->associate($request->input('transfer.departure_airport_id'));
@@ -118,7 +120,7 @@ class InvoiceController extends Controller
       'days.resort',
       'bookings.room',
       'bookings.hotel',
-      'transport'
+      'transport',
     ]);
     return JsonResponse::success(['invoice' => $invoice]);
   }
@@ -143,6 +145,8 @@ class InvoiceController extends Controller
     $i->driver_name = $request->input('transfer.driver_name');
     $i->passengers = $request->input('transfer.passengers');
     $i->gid = $request->input('transfer.gid');
+    $i->phone = $request->input('hotline.phone');
+    $i->cost = $request->input('hotline.cost');
     $i->company()->associate($request->input('company'));
     $i->arrival_airport()->associate($request->input('transfer.arrival_airport_id'));
     $i->departure_airport()->associate($request->input('transfer.departure_airport_id'));
