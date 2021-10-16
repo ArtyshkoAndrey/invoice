@@ -3,7 +3,8 @@
       'appName' => config('app.name'),
       'locale' => $locale = app()->getLocale(),
       'locales' => config('app.locales'),
-      'pdfUrl' => route('v2_invoice.pdf', '')
+      'pdfUrl' => route('v2_invoice.pdf', ''),
+      'pdfUrlNoCost' => route('v2_invoice_no_cost.pdf', '')
   ]
 @endphp
 

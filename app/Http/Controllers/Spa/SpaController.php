@@ -41,4 +41,15 @@ class SpaController
     }
 
   }
+
+  public function v2_invoice_no_cost(int $id)
+  {
+    try {
+      $invoice = Invoice::findOrFail($id);
+      return PDF::loadView('pdf.invoice_no_cost', compact('invoice'))->stream(config('app.name') . ' - Invoice для пользователя ' . $invoice->user_name . '.pdf');
+    } catch (ModelNotFoundException $e) {
+      return redirect()->away('/');
+    }
+
+  }
 }

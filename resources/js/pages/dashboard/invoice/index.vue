@@ -43,7 +43,9 @@
             <div class="card">
               <div class="card-body">
                 <div class="row align-items-center mx-0">
-                  <div class="col-lg-1 col-sm-1 col-2 text-center" style="cursor: pointer" @click="$router.push({name: 'dashboard.invoice.show', params: { id: item.id } })">
+                  <div class="col-lg-1 col-sm-1 col-2 text-center" style="cursor: pointer"
+                       @click="$router.push({name: 'dashboard.invoice.show', params: { id: item.id } })"
+                  >
                     <h6 class="mb-0">
                       {{ item.id }}
                     </h6>
@@ -58,7 +60,7 @@
                       "{{ item.company.name }}"
                     </p>
                   </div>
-                  <div class="col-lg-4 col-sm-5 col-auto mt-3 mt-sm-0">
+                  <div class="col-lg-3 col-sm-5 col-auto mt-3 mt-sm-0">
                     <p class="mb-0 text-reset">
                       {{ item.user_name }}
                     </p>
@@ -74,12 +76,21 @@
                     </p>
                   </div>
 
-                  <div class="col-lg-1 col-sm-4 mt-lg-0 mt-sm-3 mt-3 justify-content-end">
-                    <vs-button class="ms-auto"
+                  <div class="col-lg-2 col-sm-4 mt-lg-0 mt-sm-3 mt-3 d-inline-flex justify-content-end">
+                    <vs-button border
                                circle
+                               class="ms-1"
                                icon
-                               border
+                               primary
+                               @click="openPdfNoCost(item.id)"
+                    >
+                      <em class="bx bxs-file-pdf h5 mb-0" />
+                    </vs-button>
+                    <vs-button border
+                               circle
+                               class="ms-2"
                                danger
+                               icon
                                @click="openPdf(item.id)"
                     >
                       <em class="bx bxs-file-pdf h5 mb-0" />
@@ -128,11 +139,15 @@ export default {
       this.viewLength = newLength
     },
 
-    creating () {
+    creating() {
       this.$router.push({name: 'dashboard.invoice.create'})
     },
     openPdf(id) {
       window.open(window.config.pdfUrl + '/' + id, '_blank')
+    },
+
+    openPdfNoCost(id) {
+      window.open(window.config.pdfUrlNoCost + '/' + id, '_blank')
     },
 
     /**
@@ -150,17 +165,17 @@ export default {
           search: settings.search
         }
       })
-          /**
-           * @var {object} r
-           * @var {object} r.data
-           * @var {object} r.data.payload
-           * @var {array} r.data.payload.invoices
-           */
-          .then(r => {
-            this.invoices = r.data.payload.invoices
-            this.filter.$emit('updateData', r.data.payload.invoices)
-            console.log('new data', r.data)
-          })
+        /**
+         * @var {object} r
+         * @var {object} r.data
+         * @var {object} r.data.payload
+         * @var {array} r.data.payload.invoices
+         */
+        .then(r => {
+          this.invoices = r.data.payload.invoices
+          this.filter.$emit('updateData', r.data.payload.invoices)
+          console.log('new data', r.data)
+        })
 
     },
   }

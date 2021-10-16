@@ -186,7 +186,7 @@
                           Цена
                         </p>
                         <p class="fw-500">
-                          {{ invoice.hotline.cost }}
+                          {{ invoice.hotline.cost }} тг.
                         </p>
                       </div>
                     </div>
@@ -334,6 +334,11 @@
                   <em class="bx bxs-file-pdf h5 m-0" />
                 </vs-button>
               </div>
+              <div class="col-12">
+                <vs-button class="w-100" primary @click="pdfNoCost">
+                  <em class="bx bxs-file-pdf h5 m-0" />
+                </vs-button>
+              </div>
             </div>
           </div>
         </div>
@@ -389,6 +394,9 @@ export default {
     },
     pdf() {
       window.open(window.config.pdfUrl + '/' + this.id, '_blank')
+    },
+    pdfNoCost() {
+      window.open(window.config.pdfUrlNoCost + '/' + this.id, '_blank')
     }
   }
 }

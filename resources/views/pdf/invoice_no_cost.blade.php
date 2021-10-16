@@ -44,22 +44,6 @@
 <body>
 <table style="padding: 25px; width: 800px">
   <tr>
-    <td colspan="2">
-      <table style="width: 100%; padding-right: 25px" class="top">
-        <tr>
-          {{--          TODO: Реквезиты--}}
-          <td style="width: 60%; font-size: 12px">
-            <p style="margin: 0;">Hotline: {{ $invoice->phone }}</p>
-            <p style="margin: 0;">Cost: {{ $invoice->cost }} тг.</p>
-          </td>
-          <td style="width: 40%">
-            <img src="{{ asset('images/logo_pdf.png') }}" style="width: 100%; height: auto;" alt="logo">
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
     <td colspan="2" style="font-weight: bold; font-size: 14px">
       <table style="width: 70%" class="p_m-0 top">
         <tr>
