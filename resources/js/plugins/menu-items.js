@@ -1,16 +1,16 @@
 class Items {
-  constructor () {
+  constructor() {
     this.links = []
   }
 
-  add (title, name, path, icon) {
+  add(title, name, path, icon) {
     const item = new Item(title, name, path, icon)
     this.links.push(item)
   }
 }
 
 class Item {
-  constructor (title, name, path, icon) {
+  constructor(title, name, path, icon) {
     this.title = title
     this.name = name
     this.path = path
@@ -49,6 +49,16 @@ items.add(
 )
 
 items.add(
+  'menu.hotels.title',
+  'dashboard.hotels.index',
+  '/hotels/index',
+  {
+    type: 'solid',
+    name: 'building-house'
+  }
+)
+
+items.add(
   'menu.room_types.title',
   'dashboard.room_types.index',
   '/room_types/index',
@@ -69,13 +79,13 @@ items.add(
 )
 
 items.add(
-    'menu.samples.title',
-    'dashboard.samples.index',
-    '/samples/index',
-    {
-        type: 'solid',
-        name: 'compass'
-    }
+  'menu.samples.title',
+  'dashboard.samples.index',
+  '/samples/index',
+  {
+    type: 'solid',
+    name: 'compass'
+  }
 )
 
 items.add(

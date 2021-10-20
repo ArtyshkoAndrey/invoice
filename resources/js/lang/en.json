@@ -18,6 +18,9 @@
     "airports": {
       "title": "Airports"
     },
+    "hotels": {
+      "title": "Hotels"
+    },
     "room_types": {
       "title": "Room Types"
     },
@@ -188,6 +191,19 @@
     },
     "create-modal": {
       "title": "Adding a new company"
+    }
+  },
+  "comment_hotels": "Companies pages",
+  "hotels": {
+    "index": {
+      "title": "List of hotels",
+      "filter_title": "Hotels"
+    },
+    "edit-modal": {
+      "title": "Hotel "
+    },
+    "create-modal": {
+      "title": "Adding a new hotel"
     }
   },
   "comment_samples": "Companies pages",

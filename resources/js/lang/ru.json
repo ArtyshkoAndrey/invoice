@@ -18,6 +18,9 @@
     "airports": {
       "title": "Аэропорты"
     },
+    "hotels": {
+      "title": "Отели"
+    },
     "room_types": {
       "title": "Типы комнат"
     },
@@ -188,6 +191,19 @@
     },
     "create-modal": {
       "title": "Добавление новой компании"
+    }
+  },
+  "comment_hotels": "Companies pages",
+  "hotels": {
+    "index": {
+      "title": "Список отелей",
+      "filter_title": "Отели"
+    },
+    "edit-modal": {
+      "title": "Отель "
+    },
+    "create-modal": {
+      "title": "Добавление нового отеля"
     }
   },
   "comment_samples": "Companies pages",

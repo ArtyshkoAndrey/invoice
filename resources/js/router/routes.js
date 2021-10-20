@@ -113,7 +113,18 @@ export default [
             path: 'index', name: 'dashboard.users.index', component: page('dashboard/users/index.vue')
           }
         ]
-      }
+      },
+      {
+        path: 'hotels',
+        component: {render: (c) => c('router-view')},
+        alias: 'dashboard.hotels.index',
+        children: [
+          {path: '', redirect: {name: 'dashboard.hotels.index'}},
+          {
+            path: 'index', name: 'dashboard.hotels.index', component: page('dashboard/hotels/index.vue')
+          }
+        ]
+      },
     ]
   },
 
