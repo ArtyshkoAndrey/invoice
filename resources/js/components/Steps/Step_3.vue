@@ -8,7 +8,7 @@
 
     <div v-if="!loading" class="card-body p-0 pb-3">
       <div class="mx-3 my-2">
-        <div v-for="(hotel, index) in h" class="row">
+        <div v-for="(hotel, index) in h" :key="index" class="row">
           <div class="col-12">
             <div class="row">
               <div class="col-12 col-md-6 col-lg-4">
@@ -277,8 +277,8 @@ export default {
         room_type_id: '',
         count: '',
         extra_bed: false,
-        adults: '',
-        children: '',
+        adults: '1',
+        children: '0',
         bb: 'BB',
         check_in: '',
         check_out: '',
