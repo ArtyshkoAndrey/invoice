@@ -334,11 +334,6 @@
                   <em class="bx bxs-file-pdf h5 m-0" />
                 </vs-button>
               </div>
-              <div class="col-12">
-                <vs-button class="w-100" primary @click="pdfNoCost">
-                  <em class="bx bxs-file-pdf h5 m-0" />
-                </vs-button>
-              </div>
             </div>
           </div>
         </div>

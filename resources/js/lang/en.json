@@ -216,6 +216,7 @@
       "title": "Editing sample",
       "day": "Day {number}",
       "free_day": "Free day",
+      "half_day": "Half day",
       "add_day": "Add Day"
     },
     "edit-modal": {

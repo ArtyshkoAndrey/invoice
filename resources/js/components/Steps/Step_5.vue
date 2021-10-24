@@ -49,6 +49,11 @@
                 {{ $t('samples.edit.free_day') }}
               </vs-checkbox>
             </div>
+            <div class="col-lg-auto col-sm-3 col-6 mt-2 mt-lg-0">
+              <vs-checkbox v-model="day.half_day">
+                {{ $t('samples.edit.half_day') }}
+              </vs-checkbox>
+            </div>
             <div class="col-lg-auto col-sm col-6 mt-2 mt-lg-0">
               <vs-button
                 circle
@@ -208,7 +213,9 @@ export default {
         resort: {
           id: ''
         },
-        free: false
+        half_day: false,
+        free: false,
+
       }
 
       this.template.days.push(day)

@@ -44,11 +44,22 @@
 <body>
 <table style="padding: 25px; width: 800px">
   <tr>
+    <td colspan="2">
+      <table style="width: 100%; padding-right: 25px" class="top">
+        <tr>
+          <td style="width: 60%; font-size: 12px">
+            <p style="margin: 0;">Hotline: {{ $invoice->phone }}</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
     <td colspan="2" style="font-weight: bold; font-size: 14px">
       <table style="width: 70%" class="p_m-0 top">
         <tr>
           <td style="width: 30%">
-            <p>Tour operator:</p>
+            <p>Client company:</p>
           </td>
           <td style="width: 70%">
             <p>{{ $invoice->company->name }}</p>
@@ -83,9 +94,10 @@
             <p>Booking No:</p>
           </td>
           <td>
-            @foreach($invoice->bookings()->pluck('booking_number') as $number)
-              <p>{{ $number }}{{ (count($invoice->bookings()->pluck('booking_number')) > 1 && !$loop->last) ? ',' : '' }}</p>
-            @endforeach
+            <p>{{ $invoice->id }}</p>
+            {{--            @foreach($invoice->bookings()->pluck('booking_number') as $number)--}}
+            {{--              <p>{{ $number }}{{ (count($invoice->bookings()->pluck('booking_number')) > 1 && !$loop->last) ? ',' : '' }}</p>--}}
+            {{--            @endforeach--}}
           </td>
         </tr>
         <tr>
@@ -232,12 +244,14 @@
         echo '<td colspan="2" style="width: 100%; vertical-align: top;">';
           echo '<table style="margin: 0; padding: 0; margin-top: 10px; width: 100%; border: 2px solid #eee" cellpadding="5">';
             echo '<tr style="font-size: 12px">';
-              echo '<th style="width: 80%">Supplier</th>';
-              echo '<th style="width: 20%; border-left: 2px solid #eee">From</th>';
+              echo '<th style="width: 80%">Tours</th>';
+              echo '<th style="width: 20%; border-left: 2px solid #eee">Time</th>';
+              echo '<th style="width: 20%; border-left: 2px solid #eee">Date</th>';
             echo '</tr>';
             foreach ($days as $index => $day) {
               echo '<tr style="font-size: 11px">';
                 echo '<td style="border-top: 2px solid #eee; width: 80% "><strong>' .  ($day->free ? '"Free day"' : $day->resort->name)  . '</strong></td>';
+                echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . ($day->half_day ? '10:00 - 14:00' : '10:00 - 19:00') . '</td>';
                 echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . $invoice->arrival_time->addDays($counter)->format('d.m.y') . '</td>';
               echo '</tr>';
               $counter++;

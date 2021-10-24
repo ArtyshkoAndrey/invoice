@@ -94,6 +94,7 @@ class InvoiceController extends Controller
         $d->resort()->associate($day['resort']['id']);
       }
       $d->free = $day['free'];
+      $d->half_day = $day['half_day'];
       $d->order = $index + 1;
       $d->model()->associate($i);
       $d->save();
@@ -175,6 +176,7 @@ class InvoiceController extends Controller
         $d->resort()->associate($day['resort']['id']);
       }
       $d->free = $day['free'];
+      $d->half_day = $day['half_day'];
       $d->order = $index + 1;
       $d->model()->associate($i);
       $d->save();

@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon|null         $updated_at
  * @property-read Model|Eloquent $model
  * @property-read Resort|null    $resort
+ * @property bool                $half_day
  * @method static Builder|Day newModelQuery()
  * @method static Builder|Day newQuery()
  * @method static Builder|Day query()
@@ -34,6 +35,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder|Day whereOrder($value)
  * @method static Builder|Day whereResortId($value)
  * @method static Builder|Day whereUpdatedAt($value)
+ * @method static Builder|Day whereHalfDay($value)
  * @mixin Eloquent
  */
 class Day extends Model
@@ -48,6 +50,7 @@ class Day extends Model
   protected $fillable = [
     'order',
     'free',
+    'half_day',
   ];
 
   /**
@@ -57,6 +60,7 @@ class Day extends Model
    */
   protected $casts = [
     'free' => 'boolean',
+    'half_day' => 'boolean',
   ];
 
   /**

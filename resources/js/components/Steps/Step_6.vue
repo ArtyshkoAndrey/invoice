@@ -20,7 +20,7 @@
                 />
               </div>
 
-              <div class="col-12 col-md-6 col-lg-4">
+              <div class="col-12 mt-2 mt-md-0 col-md-6 col-lg-4">
                 <vs-input v-model="h.cost"
                           :danger="costValid"
                           :placeholder="$t('invoice.inputs.hotline.cost')"

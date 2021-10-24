@@ -216,6 +216,7 @@
       "title": "Редактирование шаблона",
       "day": "День {number}",
       "free_day": "Free",
+      "half_day": "Half day",
       "add_day": "Добавить день"
     },
     "edit-modal": {

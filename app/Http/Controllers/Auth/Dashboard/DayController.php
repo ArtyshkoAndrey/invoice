@@ -18,7 +18,7 @@ class DayController extends Controller
       'sample.days' => 'required|array',
       'sample.days.*.free' => 'required|boolean',
       'sample.days.*.resort.id' => 'exclude_if:sample.days.*.free,true|required|exists:resorts,id',
-//      'sample.days.*.free1' => 'required|boolean',
+      'sample.days.*.half_day' => 'required|boolean',
     ]);
     $data = $request->all();
     $sample = Sample::findOrFail($data['sample']['id']);
@@ -27,6 +27,7 @@ class DayController extends Controller
     foreach ($data['sample']['days'] as $index => $d) {
       $day = new Day();
       $day->free = $d['free'];
+      $day->half_day = $d['half_day'];
       if (!$d['free']) {
         $day->resort()->associate($d['resort']['id']);
       }

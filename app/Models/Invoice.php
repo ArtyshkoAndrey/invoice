@@ -42,6 +42,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property-read int|null             $days_count
  * @property-read Airport              $departure_airport
  * @property-read Transport            $transport
+ * @property-read object               $hotline
  * @method static Builder|Invoice newModelQuery()
  * @method static Builder|Invoice newQuery()
  * @method static Builder|Invoice query()

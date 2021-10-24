@@ -22,7 +22,7 @@
             </vs-input>
           </div>
 
-          <div class="col-12 col-md-6 col-lg-4">
+          <div class="col-12 col-md-6 mt-2 mt-md-0 col-lg-4">
             <vs-input v-model="$parent.form.user.nationality"
                       :placeholder="$t('invoice.inputs.user.nationality')"
             >

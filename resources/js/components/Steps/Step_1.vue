@@ -23,7 +23,7 @@
               </vs-option>
             </vs-select>
           </div>
-          <div class="col-12 col-md-6 col-lg-4">
+          <div class="col-12 col-md-6 col-lg-4 mt-2 mt-md-0">
             <vs-select v-model="$parent.form.company"
                        :placeholder="$t('invoice.inputs.company_ref')"
                        class="mw-100"

@@ -48,7 +48,7 @@
                   </vs-option>
                 </vs-select>
               </div>
-              <div class="col col-md-6 col-lg-3">
+              <div class="col col-md-6 mt-2 mt-md-0 col-lg-3">
                 <vs-input v-model.number="hotel.count"
                           :placeholder="$t('invoice.inputs.countable')"
                           inputmode="numeric"
@@ -56,14 +56,14 @@
                           type="number"
                 />
               </div>
-              <div class="col-auto">
+              <div class="col-auto mt-2 mt-md-0">
                 <vs-checkbox v-model="hotel.extra_bed">
                   {{ $t('invoice.inputs.extra_bed') }}
                 </vs-checkbox>
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-12 col-md-4 col-lg-3">
+              <div class="col-12 mt-2 mt-md-0 col-md-4 col-lg-3">
                 <vs-input v-model.number="hotel.adults"
                           :placeholder="$t('invoice.inputs.adults')"
                           inputmode="numeric"
@@ -71,7 +71,7 @@
                           type="number"
                 />
               </div>
-              <div class="col-12 col-md-4 col-lg-3">
+              <div class="col-12 col-md-4 mt-2 mt-md-0 col-lg-3">
                 <vs-input v-model.number="hotel.children"
                           :placeholder="$t('invoice.inputs.children')"
                           inputmode="numeric"
@@ -102,13 +102,13 @@
               <div class="col-6 col-md-4 col-lg-3">
                 <vs-input v-model="hotel.check_in"
                           :label="$t('invoice.inputs.check_in')"
-                          type="date"
+                          type="datetime-local"
                 />
               </div>
               <div class="col-6 col-md-4 col-lg-3">
                 <vs-input v-model="hotel.check_out"
                           :label="$t('invoice.inputs.check_out')"
-                          type="date"
+                          type="datetime-local"
                 />
               </div>
             </div>

@@ -13,10 +13,10 @@
             <vs-input
               v-model="transfer.arrival_time"
               :placeholder="$t('invoice.inputs.arrival_time')"
-              type="date"
+              type="datetime-local"
             />
           </div>
-          <div class="col-12 col-md-4 col-lg-3">
+          <div class="col-12 col-md-4 mt-2 mt-md-0 col-lg-3">
             <vs-select v-model="transfer.arrival_airport_id"
                        :placeholder="$t('invoice.inputs.airport')"
                        class="mw-100"
@@ -46,10 +46,10 @@
             <vs-input
               v-model="transfer.departure_time"
               :placeholder="$t('invoice.inputs.departure_time')"
-              type="date"
+              type="datetime-local"
             />
           </div>
-          <div class="col-12 col-md-4 col-lg-3">
+          <div class="col-12 col-md-4 mt-2 mt-md-0 col-lg-3">
             <vs-select
               v-model="transfer.departure_airport_id"
               :placeholder="$t('invoice.inputs.airport')"
@@ -92,13 +92,13 @@
             </vs-select>
           </div>
 
-          <div class="col-12 col-md-4 col-lg-3">
+          <div class="col-12 col-md-4 mt-2 mt-md-0 col-lg-3">
             <vs-input
               v-model="transfer.driver_number"
               :placeholder="$t('invoice.inputs.driver_number')"
             />
           </div>
-          <div class="col-12 col-md-4 col-lg-3">
+          <div class="col-12 col-md-4 mt-2 mt-md-0 col-lg-3">
             <vs-input
               v-model="transfer.driver_name"
               :placeholder="$t('invoice.inputs.driver_name')"
