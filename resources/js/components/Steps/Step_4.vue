@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-title px-3 pb-2 pt-4">
       <h6 class="fw-light text-reset">
-        Шаг 4 из 6 <span class="fw-bolder">Трансфер</span>
+        {{ $t('invoice.create.words.step') }} 4 {{ $t('invoice.create.words.in') }} 6 <span
+          class="fw-bolder"
+        >{{ $t('invoice.create.step_4.title') }}</span>
       </h6>
     </div>
 

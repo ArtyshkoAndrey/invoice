@@ -52,17 +52,72 @@
     "history": "История",
     "index": {
       "title": "Список заявок",
-      "filter_title": "Заявки"
+      "filter_title": "Заявки",
+      "table": {
+        "titles": {
+          "company": "Компания",
+          "client": "Клиент",
+          "transfer": "Трансфер"
+        },
+        "arrival_time": "Прибытие",
+        "departure_time": "Отбытие"
+      }
+    },
+    "show": {
+      "title": {
+        "info_client": "Информация о клиенте",
+        "info_hotels": "Данные отеля",
+        "info_hotel": "Данные отелей",
+        "hotline": "Хотлайн",
+        "cost": "Цена",
+        "transfer": "Трансфер",
+        "schedule": "Расписание"
+      },
+      "hotel": "Отель",
+      "room": "Комната",
+      "count": "Кол-во",
+      "adults": "Взрослые",
+      "children": "Дети",
+      "check_in": "Чек ин",
+      "check_out": "Чек аут",
+      "number_booking": "Номер брони",
+      "transport": "Транспорт",
+      "from": "Откуда",
+      "where": "Куда",
+      "count_sits": "Кол-во мест",
+      "arrival_time": "Время прилёта",
+      "departure_time": "Время отлёта",
+      "flight_code": "Код рейса",
+      "gid": "Гид",
+      "day": "День"
     },
     "create": {
+      "words": {
+        "step": "Шаг",
+        "in": "из"
+      },
+      "step_1": {
+        "title": "Компания"
+      },
+      "step_2": {
+        "title": "Данные пользователя"
+      },
       "step_3": {
+        "title": "Данные отелей",
         "date_title": "Время проживания"
       },
+      "step_4": {
+        "title": "Трансфер"
+      },
       "step_5": {
+        "title": "Программа",
         "template": {
           "title": "Выберите шаблон",
           "done": "Готово"
         }
+      },
+      "step_6": {
+        "title": "Хотлайн"
       }
     },
     "buttons": {

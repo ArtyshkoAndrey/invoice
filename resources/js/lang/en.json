@@ -52,18 +52,73 @@
     "history": "History",
     "index": {
       "title": "Invoice list",
-      "filter_title": "Invoice"
+      "filter_title": "Invoice",
+      "table": {
+        "titles": {
+          "company": "Company",
+          "client": "Client",
+          "transfer": "Transfer"
+        },
+        "arrival_time": "Arrival",
+        "departure_time": "Departure"
+      }
     },
     "create": {
+      "words": {
+        "step": "Step",
+        "in": "in"
+      },
+      "step_1": {
+        "title": "Company"
+      },
+      "step_2": {
+        "title": "User data"
+      },
       "step_3": {
+        "title": "Hotels data",
         "date_title": "Time of stay"
       },
+      "step_4": {
+        "title": "Transfer"
+      },
       "step_5": {
+        "title": "Schedule",
         "template": {
           "title": "Select a template",
           "done": "Done"
         }
+      },
+      "step_6": {
+        "title": "Hotline"
       }
+    },
+    "show": {
+      "title": {
+        "info_client": "Customer Information",
+        "info_hotels": "Hotels details",
+        "info_hotel": "Hotel details",
+        "hotline": "Hotline",
+        "cost": "Cost",
+        "transfer": "Transfer",
+        "schedule": "Schedule"
+      },
+      "hotel": "Hotel",
+      "room": "Room",
+      "count": "Count",
+      "adults": "Adults",
+      "children": "Children",
+      "check_in": "Check in",
+      "check_out": "Check out",
+      "number_booking": "Number booking",
+      "transport": "Transport",
+      "from": "From",
+      "where": "Where",
+      "count_sits": "Number of seats",
+      "arrival_time": "Arrival time",
+      "departure_time": "Departure time",
+      "flight_code": "Flight code",
+      "gid": "Gid",
+      "day": "Day"
     },
     "buttons": {
       "next": "Next",

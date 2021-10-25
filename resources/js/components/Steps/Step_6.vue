@@ -3,7 +3,9 @@
     <div class="card">
       <div class="card-title px-3 pb-2 pt-4">
         <h6 class="fw-light text-reset">
-          Шаг 6 из 6 <span class="fw-bolder">Hotline</span>
+          {{ $t('invoice.create.words.step') }} 6 {{ $t('invoice.create.words.in') }} 6 <span
+            class="fw-bolder"
+          >{{ $t('invoice.create.step_6.title') }}</span>
         </h6>
       </div>
       <transition appea mode="out-in" name="fade">
@@ -17,7 +19,11 @@
                 <vs-input v-model="h.phone"
                           :danger="phoneValid"
                           :placeholder="$t('invoice.inputs.hotline.phone')"
-                />
+                >
+                  <template #icon>
+                    <i class="bx bx-phone" />
+                  </template>
+                </vs-input>
               </div>
 
               <div class="col-12 mt-2 mt-md-0 col-md-6 col-lg-4">
@@ -25,7 +31,11 @@
                           :danger="costValid"
                           :placeholder="$t('invoice.inputs.hotline.cost')"
                           type="number"
-                />
+                >
+                  <template #icon>
+                    <i>$</i>
+                  </template>
+                </vs-input>
               </div>
             </div>
             <div class="row justify-content-end">

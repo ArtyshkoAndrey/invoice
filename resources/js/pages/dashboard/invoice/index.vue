@@ -26,16 +26,16 @@
           </div>
           <div class="col-lg-2">
             <p class="mb-0 text-reset">
-              Компания
+              {{ $t('invoice.index.table.titles.company') }}
             </p>
           </div>
           <div class="col-lg-4">
             <p class="mb-0 text-reset">
-              Клиент
+              {{ $t('invoice.index.table.titles.client') }}
             </p>
           </div>
           <div class="col-lg-3">
-            Трансфер
+            {{ $t('invoice.index.table.titles.transfer') }}
           </div>
         </div>
         <div class="row gy-3 mt-lg-0 mt-3">
@@ -67,11 +67,11 @@
                   </div>
                   <div class="col-lg-3 col-sm-8 mt-lg-0 mt-sm-3 col-auto mt-3">
                     <p class="mb-0 text-reset">
-                      <span class="opacity-50">Прибытие: </span>
+                      <span class="opacity-50">{{ $t('invoice.index.table.arrival_time') }}: </span>
                       {{ $formatDate(item.arrival_time) }} {{ $formatTime(item.arrival_time) }}
                     </p>
                     <p class="mb-0 text-reset">
-                      <span class="opacity-50">Отбытие: </span>
+                      <span class="opacity-50">{{ $t('invoice.index.table.departure_time') }}: </span>
                       {{ $formatDate(item.departure_time) }} {{ $formatTime(item.departure_time) }}
                     </p>
                   </div>
