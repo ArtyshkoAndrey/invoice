@@ -170,7 +170,7 @@ export default {
               passengers: invoice.passengers,
               gid: invoice.gid,
             },
-            sample: invoice.days,
+            sample: {days: invoice.days},
             hotline: invoice.hotline
           }
         }
