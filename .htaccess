@@ -12,7 +12,7 @@
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ ^$1 [N]
     RewriteCond %{SERVER_PORT} 80
-    RewriteRule ^(.*)$ https://sinyar.kz.com/$1 [R,L]
+    RewriteRule ^(.*)$ https://sinyar.kz/$1 [R,L]
 
     RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
     RewriteRule ^(.*)$ public/$1
