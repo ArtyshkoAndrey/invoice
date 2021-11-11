@@ -42,6 +42,7 @@
   </style>
 </head>
 <body>
+
 <table style="padding: 25px; width: 800px">
   <tr>
     <td colspan="2">
@@ -203,7 +204,7 @@
       V
     </td>
     <td>{{ $invoice->arrival_time->format('d.m.y') }}</td>
-    <td>{{ $invoice->arrival_time->format('H:s') }}</td>
+    <td>{{ $invoice->arrival_time->format('H:i') }}</td>
     <td>{{ $invoice->arrival_flight_code }}</td>
     <td align="center">{{ $invoice->passengers }}</td>
     <td>{{ $invoice->arrival_airport->name }}</td>
@@ -221,7 +222,7 @@
       P
     </td>
     <td>{{ $invoice->departure_time->format('d.m.y') }}</td>
-    <td>{{ $invoice->departure_time->format('H:s') }}</td>
+    <td>{{ $invoice->departure_time->format('H:i') }}</td>
     <td>{{ $invoice->departure_flight_code }}</td>
     <td align="center">{{ $invoice->passengers }}</td>
     <td>{{ $invoice->departure_airport->name }}</td>
@@ -262,5 +263,6 @@
         })
   @endphp
 </table>
+
 </body>
 </html>

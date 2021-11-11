@@ -31,11 +31,12 @@ class SpaController
 
   }
 
+
   public function v2_invoice(int $id)
   {
     try {
       $invoice = Invoice::findOrFail($id);
-      return PDF::loadView('pdf.invoice_2', compact('invoice'))->stream(config('app.name') . ' - Invoice для пользователя ' . $invoice->user_name . '.pdf');
+      return PDF::loadView('pdf.invoice', compact('invoice'))->stream(config('app.name') . ' - Invoice для пользователя ' . $invoice->user_name . '.pdf');
     } catch (ModelNotFoundException $e) {
       return redirect()->away('/');
     }

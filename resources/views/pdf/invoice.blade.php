@@ -8,177 +8,253 @@
   <meta content="telephone=no" name="format-detection">
   <title>{{ config('app.name') . ' - Invoice для пользователя ' . $invoice->user_name . '.pdf' }}</title>
   <style>
-    @font-face {
-      font-family: "DejaVu Sans";
-      font-style: normal;
-      font-weight: 400;
-      src: url("/fonts/DejaVuSans.ttf");
-      /* IE9 Compat Modes */
-      src: local("DejaVu Sans"),
-      local("DejaVu Sans"),
-      url("/fonts/DejaVuSans.ttf") format("truetype");
-    }
+      @font-face {
+          font-family: "DejaVu Sans";
+          font-style: normal;
+          font-weight: 400;
+          src: url("/fonts/DejaVuSans.ttf");
+          /* IE9 Compat Modes */
+          src: local("DejaVu Sans"),
+          local("DejaVu Sans"),
+          url("/fonts/DejaVuSans.ttf") format("truetype");
+      }
 
-    body {
-        font-family: "DejaVu Sans", serif;
-    }
+      .p_m-0 p {
+          margin: 0;
+      }
+
+      .table-bordered tr, .table-bordered td {
+          border: 1px solid #000000;
+      }
+
+      .top tr, .top td {
+          vertical-align: top;
+      }
+
+      body {
+          font-family: "DejaVu Sans", serif;
+      }
   </style>
   <style>
-    .page-break {
-      page-break-after: always;
-    }
+      .page-break {
+          page-break-after: always;
+      }
   </style>
 </head>
 <body>
 <table style="padding: 25px; width: 800px">
-  <thead>
   <tr>
-    <td style="font-weight: bold; padding: 25px; font-size: 24px">{{ config('app.name') }}</td>
-  </tr>
-  </thead>
-  <tbody>
-  {{--  User info --}}
-  <tr>
-    <td style="padding-top: 30px;">
-      <span style="font-weight: bold; font-size: 18px">Информация о клиенте</span>
-    </td>
-  </tr>
-  <tr style="padding: 0; margin: 0">
-    <td style="padding-left: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; padding-bottom: 0;"><strong>Имя:</strong> {{ $invoice->user_name }}</p>
-    </td>
-    <td style="padding-right: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; padding-bottom: 0;"><strong>Компания:</strong> {{ $invoice->company->name }}</p>
+    <td colspan="2">
+      <table style="width: 100%; padding-right: 25px" class="top">
+        <tr>
+          <td style="width: 60%; font-size: 12px">
+            <p style="margin: 0;">Hotline: {{ $invoice->phone }}</p>
+          </td>
+          <td style="width: 40%">
+            <img src="{{ asset('images/logo_pdf.png') }}" style="width: 100%; height: auto;" alt="logo">
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
   <tr>
-    <td style="padding-left: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Национальность:</strong> {{ $invoice->user_nationality }}</p>
-    </td>
-    <td style="padding-right: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Reference:</strong> {{ $invoice->company->code }}</p>
+    <td colspan="2" style="font-weight: bold; font-size: 14px">
+      <table style="width: 70%" class="p_m-0 top">
+        <tr>
+          <td style="width: 30%">
+            <p>Client company:</p>
+          </td>
+          <td style="width: 70%">
+            <p>{{ $invoice->company->name }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Reference:</p>
+          </td>
+          <td>
+            <p>{{ $invoice->company->code }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Client:</p>
+          </td>
+          <td>
+            <p>{{ $invoice->user_name }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Nationality:</p>
+          </td>
+          <td>
+            <p>{{ $invoice->user_nationality }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Booking No:</p>
+          </td>
+          <td>
+            <p>{{ $invoice->id }}</p>
+            {{--            @foreach($invoice->bookings()->pluck('booking_number') as $number)--}}
+            {{--              <p>{{ $number }}{{ (count($invoice->bookings()->pluck('booking_number')) > 1 && !$loop->last) ? ',' : '' }}</p>--}}
+            {{--            @endforeach--}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Arrival: {{ $invoice->arrival_time->format('d.m.y') }}</p>
+          </td>
+          <td>
+            <p>Departure: {{ $invoice->departure_time->format('d.m.y') }}</p>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
-  {{-- End User info --}}
-
-  {{--  Hotels --}}
-  <tr style="padding-bottom: 0;">
-    <td style="padding-top: 30px; padding-bottom: 0;">
-      <span
-        style="font-weight: bold; font-size: 18px">{{ $invoice->bookings()->count() > 1 ? 'Информация об отелях' : 'Информация об отеле' }}</span>
+</table>
+<p style="padding-left: 26px; font-size: 16px; font-weight: bolder">Hotels</p>
+<table style="width: 750px; margin: 0; padding-left: 25px; padding-right: 25px;" cellspacing="0" border="1"
+       cellpadding="2">
+  <tr style="font-weight: bold; font-size: 12px">
+    <td align="center" style="">
+      Supplier
+    </td>
+    <td align="center">
+      Qty
+    </td>
+    <td align="center">
+      Services
+    </td>
+    <td align="center">
+      Check in
+    </td>
+    <td align="center">
+      Check out
+    </td>
+    <td align="center">
+      Night
+    </td>
+    <td align="center">
+      M.P.
+    </td>
+    <td align="center">
+      Adult
+    </td>
+    <td align="center">
+      Child
+    </td>
+    <td align="center">
+      CN
     </td>
   </tr>
-  {{--  Hotel some --}}
-  @foreach($invoice->bookings as $booking)
-    <tr>
-      <td style="width: 100%; padding-bottom: 20px" colspan="2">
-        <table style="width: 100%; margin: 0; padding: 0; padding-top: 10px;">
-          <tr style="">
-            <td style="padding-left: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Отель:</strong> {{ $booking->hotel->name }}</p>
-            </td>
-            <td style="padding-right: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Чек ин:</strong> {{ $booking->check_in->format('d.m.y') }}</p>
-            </td>
-          </tr>
-          <tr style="">
-            <td style=" padding-left: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Комната:</strong> {{ $booking->room->name }}</p>
-            </td>
-            <td style="padding-right: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Чек аут:</strong> {{ $booking->check_out->format('d.m.y') }}</p>
-            </td>
-          </tr>
-
-          <tr style="">
-            <td style=" padding-left: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Кол-во:</strong> {{ $booking->count }}</p>
-            </td>
-            <td style="padding-right: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Номер брони:</strong> {{ $booking->booking_number }}</p>
-            </td>
-          </tr>
-
-          <tr style="">
-            <td style=" padding-left: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Взрослые:</strong> {{ $booking->adults }}</p>
-            </td>
-            <td style="padding-right: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Meal Plan:</strong> {{ $booking->bb }}</p>
-            </td>
-          </tr>
-          <tr style="">
-            <td colspan="2"
-                style=" padding-left: 30px; width: 50%; vertical-align: top; padding-top: 0; padding-bottom: 0">
-              <p style="margin: 0; padding: 0"><strong>Дети:</strong> {{ $booking->children }}</p>
-            </td>
-          </tr>
-        </table>
-      </td>
+  @foreach($invoice->bookings as $b)
+    <tr style="font-size: 11px">
+      <td>{{ $b->hotel->name }}</td>
+      <td align="center">{{ $b->count }}</td>
+      <td>{{ $b->room->name }}</td>
+      <td>{{ $b->check_in->format('d.m.Y') }}</td>
+      <td>{{ $b->check_out->format('d.m.Y') }}</td>
+      <td align="center">{{ $b->check_in->diffInDays($b->check_out) }}</td>
+      <td>{{ $b->bb }}</td>
+      <td align="center">{{ $b->adults }}</td>
+      <td align="center">{{ $b->children }}</td>
+      <td>{{ $b->booking_number }}</td>
     </tr>
   @endforeach
-  {{--  Hotel some --}}
-  {{-- End Hotels --}}
+</table>
 
-  {{--  User info --}}
-  <tr>
-    <td style="">
-      <span style="font-weight: bold; font-size: 18px">Трансфер</span>
+<p style="padding-left: 26px; font-size: 16px; font-weight: bolder">Transfer</p>
+<table style="width: 800px; padding: 0 25px 25px;" cellspacing="0" border="1" cellpadding="3">
+  <tr style="font-weight: bold; font-size: 12px;">
+    <td align="center" colspan="2" style="">
+      Date
+    </td>
+    <td align="center">
+      Time
+    </td>
+    <td align="center">
+      Flight code
+    </td>
+    <td align="center">
+      Qty
+    </td>
+    <td align="center">
+      From
+    </td>
+    <td align="center">
+      To
+    </td>
+    <td align="center">
+      Pax
+    </td>
+    <td align="center">
+      Type
+    </td>
+    <td align="center">
+      Guide
     </td>
   </tr>
-  <tr style="padding: 0; margin: 0">
-    <td style="padding-left: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; padding-bottom: 0;"><strong>Время
-          прилёта:</strong> {{ $invoice->arrival_time->format('d.m.y H:s') }}</p>
+  <tr style="font-size: 11px">
+    <td>
+      A
+      <br>
+      R
+      <br>
+      V
     </td>
-    <td style="padding-right: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; padding-bottom: 0;"><strong>Время
-          улёта:</strong> {{ $invoice->departure_time->format('d.m.y H:s') }}</p>
-    </td>
+    <td>{{ $invoice->arrival_time->format('d.m.y') }}</td>
+    <td>{{ $invoice->arrival_time->format('H:i') }}</td>
+    <td>{{ $invoice->arrival_flight_code }}</td>
+    <td align="center">{{ $invoice->passengers }}</td>
+    <td>{{ $invoice->arrival_airport->name }}</td>
+    <td>{{ $invoice->departure_airport->name }}</td>
+    <td align="center">2</td>
+    <td>{{ $invoice->transport->name }}</td>
+    <td>{{ $invoice->gid ? "Yes" : "No" }}</td>
   </tr>
-
-  <tr>
-    <td style="padding-left: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Куда:</strong> {{ $invoice->arrival_airport->name }}</p>
+  <tr style="font-size: 11px">
+    <td>
+      D
+      <br>
+      E
+      <br>
+      P
     </td>
-    <td style="padding-right: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Откуда:</strong> {{ $invoice->departure_airport->name }}</p>
-    </td>
+    <td>{{ $invoice->departure_time->format('d.m.y') }}</td>
+    <td>{{ $invoice->departure_time->format('H:i') }}</td>
+    <td>{{ $invoice->departure_flight_code }}</td>
+    <td align="center">{{ $invoice->passengers }}</td>
+    <td>{{ $invoice->departure_airport->name }}</td>
+    <td>{{ $invoice->arrival_airport->name }}</td>
+    <td align="center">2</td>
+    <td>{{ $invoice->transport->name }}</td>
+    <td>{{ $invoice->gid ? "Yes" : "No" }}</td>
   </tr>
+</table>
 
-  <tr>
-    <td style="padding-left: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Код рейса:</strong> {{ $invoice->arrival_flight_code }}</p>
-    </td>
-    <td style="padding-right: 30px; width: 50%; vertical-align: top;">
-      <p style="margin-bottom: 0; margin-top: 0;"><strong>Код рейса:</strong> {{ $invoice->departure_flight_code }}</p>
-    </td>
-  </tr>
-  {{-- End User info --}}
-
-  {{--  Sample --}}
-
-  <tr>
-    <td style="padding-top: 30px;">
-      @if ($invoice->days()->count() > 5)
-        <div class="page-break"></div>
-      @endif
-      <span style="font-weight: bold; font-size: 18px">Расписание</span>
-    </td>
-  </tr>
+<p
+  style="padding-left: 26px; font-size: 16px; font-weight: bolder; margin-bottom: 0;padding-bottom: 0; margin-top: 10px;">
+  Excursion
+</p>
+<table style="width: 800px;padding-left: 25px; padding-right: 25px; margin-top: 0; padding-top: 0;">
   @php
     $counter = 1;
       $invoice->days()->chunkById(20, function ($days) use ($invoice, &$counter) {
       echo '<tr style="padding: 0; margin: 0">';
-        echo '<td colspan="2" style="padding-left: 30px; padding-right: 30px; width: 100%; vertical-align: top;">';
-          echo '<table style="margin: 0; padding: 0; margin-top: 30px; width: 100%; border: 2px solid #eee" cellpadding="5">';
-            echo '<tr>';
-              echo '<th style="width: 80%">Курорт</th>';
-              echo '<th style="width: 20%; border-left: 2px solid #eee">Дата</th>';
+        echo '<td colspan="2" style="width: 100%; vertical-align: top;">';
+          echo '<table style="margin: 0; padding: 0; margin-top: 10px; width: 100%; border: 2px solid #eee" cellpadding="5">';
+            echo '<tr style="font-size: 12px">';
+              echo '<th style="width: 80%">Tours</th>';
+              echo '<th style="width: 20%; border-left: 2px solid #eee">Time</th>';
+              echo '<th style="width: 20%; border-left: 2px solid #eee">Date</th>';
             echo '</tr>';
             foreach ($days as $index => $day) {
-              echo '<tr>';
-                echo '<td style="border-top: 2px solid #eee; width: 80% "><strong>' .  ($day->free ? 'Free day' : $day->resort->name)  . '</strong></td>';
+              echo '<tr style="font-size: 11px">';
+                echo '<td style="border-top: 2px solid #eee; width: 80% "><strong>' .  ($day->free ? '"Free day"' : $day->resort->name)  . '</strong></td>';
+                echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . ($day->half_day ? '10:00 - 14:00' : '10:00 - 19:00') . '</td>';
                 echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . $invoice->arrival_time->addDays($counter)->format('d.m.y') . '</td>';
               echo '</tr>';
               $counter++;
@@ -188,8 +264,15 @@
         echo '</tr>';
         })
   @endphp
-  {{-- End Sample --}}
-  </tbody>
 </table>
+
+<table style="width: 800px;padding-left: 25px; padding-right: 25px; margin-top: 0; padding-top: 0;">
+  <tr>
+    <td align="right">
+      <p style="font-weight: bold">Total price: {{ number_format($invoice->cost, 0, ',', ' ') }}$</p>
+    </td>
+  </tr>
+</table>
+
 </body>
 </html>

@@ -79,6 +79,15 @@
                   <div class="col-lg-2 col-sm-4 mt-lg-0 mt-sm-3 mt-3 d-inline-flex justify-content-end">
                     <vs-button border
                                circle
+                               class="ms-1"
+                               icon
+                               primary
+                               @click="openPdfNoCost(item.id)"
+                    >
+                      <em class="bx bxs-file-pdf h5 mb-0" />
+                    </vs-button>
+                    <vs-button border
+                               circle
                                class="ms-2"
                                danger
                                icon
