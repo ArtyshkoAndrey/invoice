@@ -252,7 +252,7 @@
             foreach ($days as $index => $day) {
               echo '<tr style="font-size: 11px">';
                 echo '<td style="border-top: 2px solid #eee; width: 80% "><strong>' .  ($day->free ? '"Free day"' : $day->resort->name)  . '</strong></td>';
-                echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . ($day->half_day ? '10:00 - 14:00' : '10:00 - 19:00') . '</td>';
+                echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . ($day->half_day ? '10:00 - 14:00' : '10:00 - 18:00') . '</td>';
                 echo '<td align="center" style="border-left: 2px solid #eee; border-top: 2px solid #eee; width: 20%">' . $invoice->arrival_time->addDays($counter)->format('d.m.y') . '</td>';
               echo '</tr>';
               $counter++;
